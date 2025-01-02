@@ -1,13 +1,56 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
-const theme = createTheme({
+export const lightTheme = createTheme({
   palette: {
-    primary: { main: '#3f51b5' },
-    secondary: { main: '#f50057' },
+    mode: 'light',
+    primary: {
+      main: '#1976d2', // Blue
+    },
+    secondary: {
+      main: '#dc004e', // Pink
+    },
+    background: {
+      default: '#fafafa', // Light gray
+    },
+    text: {
+      primary: '#000000', // Black text
+      secondary: '#757575', // Gray text
+    },
   },
-  typography: {
-    fontFamily: 'Roboto, Arial, sans-serif',
+   typography: {
+    h1: {
+      fontSize: "2rem",
+      fontWeight: 500,
+    },
+    h2: {
+      fontSize: "1.5rem",
+      fontWeight: 500,
+    },
   },
 });
 
-export default theme;
+export const darkTheme = createTheme({
+  palette: {
+    mode: "dark", // Enable dark mode
+    primary: {
+      main: "#010101",
+    },
+    secondary: {
+      main: "#03dac6",
+    },
+    text: {
+      primary: "#ffffff",
+      secondary: "#e0e0e0",
+    },
+  },
+  typography: {
+    h1: {
+      fontSize: "2rem",
+      fontWeight: 500,
+    },
+    h2: {
+      fontSize: "1.5rem",
+      fontWeight: 500,
+    },
+  },
+});

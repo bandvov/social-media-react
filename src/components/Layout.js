@@ -14,14 +14,29 @@ import {
   Menu,
   MenuItem,
   Avatar,
+  Switch,
 } from "@mui/material";
-import { Menu as MenuIcon, Search, AccountCircle } from "@mui/icons-material";
+import {
+  Menu as MenuIcon,
+  Search,
+  Brightness7,
+  Brightness4,
+} from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../features/theme/themeSlice";
 import { Link } from "react-router-dom";
 
 const Layout = ({ children }) => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [profileMenuAnchor, setProfileMenuAnchor] = React.useState(null);
 
+  const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.theme.darkMode);
+  const user = useSelector((state) => state.auth.user);
+
+  const handleThemeChange = () => {
+    dispatch(toggleTheme());
+  };
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
   };
@@ -68,9 +83,17 @@ const Layout = ({ children }) => {
               }
             />
           </Box>
+          <Switch
+            checked={darkMode}
+            color="secondary"
+            onChange={handleThemeChange}
+            icon={<Brightness7 />} // Icon for light mode
+            checkedIcon={<Brightness4 />} // Icon for dark mode
+          />
+
           {/* Profile Menu */}
           <IconButton color="inherit" onClick={handleProfileMenuOpen}>
-            <Avatar alt="User Avatar" src="/static/images/avatar/1.jpg" />
+            <Avatar alt="User Avatar" src={user?.profile_pic} />
           </IconButton>
           <Menu
             anchorEl={profileMenuAnchor}

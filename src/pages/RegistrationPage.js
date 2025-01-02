@@ -8,8 +8,8 @@ const RegistrationPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto", padding: "1rem" }}>
-      <h1>{t("registration")}</h1>
+    <Box style={{ maxWidth: 400, margin: "auto", padding: "1rem" }}>
+      <Typography variant="h1">{t("registration")}</Typography>
       <RegistrationForm />
       <Box
         sx={{
@@ -21,7 +21,7 @@ const RegistrationPage = () => {
         <Typography>Have account?</Typography>
         <Link to="/login">Login in</Link>
       </Box>
-    </div>
+    </Box>
   );
 };
 

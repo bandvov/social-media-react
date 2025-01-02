@@ -8,8 +8,8 @@ const LoginPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto", padding: "1rem" }}>
-      <h1>{t("login")}</h1>
+    <Box style={{ maxWidth: 400, margin: "auto", padding: "1rem" }}>
+      <Typography variant="h1">{t("login")}</Typography>
       <LoginForm />
       <Box
         sx={{
@@ -21,7 +21,7 @@ const LoginPage = () => {
         <Typography>Don't have account?</Typography>
         <Link to="/registration">Sign up</Link>
       </Box>
-    </div>
+    </Box>
   );
 };
 
