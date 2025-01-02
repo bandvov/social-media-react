@@ -21,6 +21,10 @@ import {
   Search,
   Brightness7,
   Brightness4,
+  TextSnippet,
+  People,
+  FollowTheSigns,
+  Person2,
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../features/theme/themeSlice";
@@ -122,12 +126,19 @@ const Layout = ({ children }) => {
           onKeyDown={toggleDrawer(false)}
         >
           <List>
-            {["Dashboard", "Settings", "About"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  <MenuIcon />
-                </ListItemIcon>
-                <ListItemText primary={text} />
+            {[
+              { label: "Profile", url: "/profile", icon: <Person2 /> },
+              { label: "Posts", url: "/posts", icon: <TextSnippet /> },
+              { label: "Followers", url: "/followers", icon: <People /> },
+              {
+                label: "Followees",
+                url: "/followees",
+                icon: <FollowTheSigns />,
+              },
+            ].map((item, index) => (
+              <ListItem button key={item.label}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <Link to={item.url}>{item.label}</Link>
               </ListItem>
             ))}
           </List>
