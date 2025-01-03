@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  AppBar,
-  Toolbar,
   Typography,
   Avatar,
   Box,
@@ -10,27 +8,30 @@ import {
   Menu,
   MenuItem,
   Container,
-  Button,
 } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { profileRequest } from "../features/profile/profileSlice";
+import { postsRequest } from "../features/posts/postsSlice";
 
-const ProfilePage = ({ userId }) => {
+const ProfilePage = () => {
   const dispatch = useDispatch();
-  const { user, posts, page, hasMorePosts } = useSelector(
-    (state) => state.profile
-  );
+  const { user, page, hasMorePosts } = useSelector((state) => state.auth);
+
+  const { posts } = useSelector((state) => state.post);
 
   const [menuAnchor, setMenuAnchor] = React.useState(null);
+  const [postMenuAnchor, setPostMenuAnchor] = React.useState(null);
 
   useEffect(() => {
-    dispatch(profileRequest(userId));
-    // dispatch(fetchUserPosts({ userId, page: 1 }));
-  }, [dispatch, userId]);
+    if (user?.id) {
+      dispatch(profileRequest(user?.id));
+      dispatch(postsRequest({ userId: user?.id, page: 1 }));
+    }
+  }, [dispatch, user?.id]);
 
   const loadMorePosts = () => {
-    // dispatch(fetchUserPosts({ userId, page }));
+    dispatch(postsRequest({ userId: user?.id, page }));
   };
 
   const handleMenuOpen = (event) => {
@@ -40,13 +41,18 @@ const ProfilePage = ({ userId }) => {
   const handleMenuClose = () => {
     setMenuAnchor(null);
   };
+  const handlePostMenuOpen = (event) => {
+    setPostMenuAnchor(event.currentTarget);
+  };
+
+  const handlePostMenuClose = () => {
+    setPostMenuAnchor(null);
+  };
 
   return (
     <Box>
-      {/* AppBar */}
-
       {/* Profile Info */}
-      <Container>
+      <Container maxWidth="md">
         {user && (
           <Box
             display="flex"
@@ -101,25 +107,55 @@ const ProfilePage = ({ userId }) => {
         )}
 
         {/* Posts Section */}
-        {/* <InfiniteScroll
+        <InfiniteScroll
           dataLength={posts.length}
           next={loadMorePosts}
           hasMore={hasMorePosts}
           loader={<Typography>Loading...</Typography>}
         >
           {posts.map((post) => (
-            <Box key={post.id} border={1} borderRadius={1} p={2} mb={2}>
-              <Typography variant="h6">{post.title}</Typography>
-              <Typography variant="body2">{post.content}</Typography>
-              <Typography variant="subtitle2">Author: {post.authorName}</Typography>
-              <Button size="small">See more</Button>
-              <Box mt={1}>
-                <Button size="small">Like</Button>
-                <Button size="small">Dislike</Button>
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: "1fr auto",
+              }}
+              key={post.id}
+              border={1}
+              borderRadius={1}
+              p={2}
+              mb={2}
+            >
+              <Box>
+                <Box
+                  display="grid"
+                  gridTemplateColumns={"auto 1fr"}
+                  alignItems="center"
+                  gap={2}
+                >
+                  <Typography variant="subtitle2">
+                    Author: {post.authorName}
+                  </Typography>
+                  <Typography variant="subtitle2">
+                    {new Date(post.dateCreated).toLocaleDateString()}
+                  </Typography>
+                </Box>
+
+                <Typography variant="body2">{post.content}</Typography>
               </Box>
+              {/* Action Menu */}
+              <IconButton onClick={handlePostMenuOpen}>
+                <MoreVertIcon />
+              </IconButton>
+              <Menu
+                anchorEl={postMenuAnchor}
+                open={Boolean(postMenuAnchor)}
+                onClose={handlePostMenuClose}
+              >
+                <MenuItem onClick={handlePostMenuClose}>Remove</MenuItem>
+              </Menu>
             </Box>
           ))}
-        </InfiniteScroll> */}
+        </InfiniteScroll>
       </Container>
     </Box>
   );

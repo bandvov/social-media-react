@@ -3,14 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const profileSlice = createSlice({
   name: "profile",
   initialState: {
-    user: {
-      image: "test",
-      dateCreated: Date.now(),
-      email: "bla@test.test",
-      followersCount: 22,
-      followeesCount: 122,
-      postsCount: 555,
-    },
+    user: null,
   },
   reducers: {
     profileRequest: (state) => {

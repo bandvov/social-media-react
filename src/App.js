@@ -8,6 +8,8 @@ import ProfilePage from "./pages/ProfilePage";
 import { useSelector } from "react-redux";
 import { ThemeProvider } from "@emotion/react";
 import { darkTheme, lightTheme } from "./styles/theme";
+import FollowersPage from "./pages/FollowersPage";
+import FolloweesPage from "./pages/FolloweesPage";
 
 const App = () => {
   const darkMode = useSelector((state) => state.theme.darkMode);
@@ -20,6 +22,8 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/followers" element={<FollowersPage />} />
+            <Route path="/followees" element={<FolloweesPage />} />
           </Routes>
         </Layout>
       </Router>

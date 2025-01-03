@@ -9,7 +9,6 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText,
   Box,
   Menu,
   MenuItem,
@@ -21,7 +20,6 @@ import {
   Search,
   Brightness7,
   Brightness4,
-  TextSnippet,
   People,
   FollowTheSigns,
   Person2,
@@ -128,7 +126,6 @@ const Layout = ({ children }) => {
           <List>
             {[
               { label: "Profile", url: "/profile", icon: <Person2 /> },
-              { label: "Posts", url: "/posts", icon: <TextSnippet /> },
               { label: "Followers", url: "/followers", icon: <People /> },
               {
                 label: "Followees",
