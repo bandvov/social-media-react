@@ -1,8 +1,7 @@
-import { data } from "react-router-dom";
 import { api } from "../api";
 
 export async function registration(credentials) {
-  return await api.post("/users", credentials);
+  return await api.post("/users", { data: credentials });
 }
 
 export async function login(credentials) {
