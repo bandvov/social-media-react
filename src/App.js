@@ -10,6 +10,8 @@ import { ThemeProvider } from "@emotion/react";
 import { darkTheme, lightTheme } from "./styles/theme";
 import FollowersPage from "./pages/FollowersPage";
 import FolloweesPage from "./pages/FolloweesPage";
+import HomePage from "./pages/HomePage";
+import PostsPage from "./pages/PostsPage";
 
 const App = () => {
   const darkMode = useSelector((state) => state.theme.darkMode);
@@ -20,6 +22,8 @@ const App = () => {
       <Router>
         <Layout userId={user.id}>
           <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/posts" element={<PostsPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
             <Route path="/profile" element={<ProfilePage userId={user.id} />} />
