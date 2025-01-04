@@ -12,6 +12,9 @@ export const lightTheme = createTheme({
     background: {
       default: "#fafafa", // Light gray
     },
+    border: {
+      main: "#ddd",
+    },
     text: {
       primary: "#000000", // Black text
       secondary: "#757575", // Gray text
@@ -40,6 +43,9 @@ export const darkTheme = createTheme({
     },
     background: {
       default: " #333333", // Light gray
+    },
+    border: {
+      main: "#cfcfcf",
     },
     text: {
       primary: "#fafafa",

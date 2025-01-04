@@ -62,6 +62,7 @@ const Layout = ({ userId, children }) => {
         backgroundColor: "background.default",
         display: "flex",
         height: "100vh",
+        overflowY: "scroll",
       }}
     >
       {/* Top Navigation */}
