@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { profileRequest } from "../features/profile/profileSlice";
+import { fetchProfileRequest } from "../features/profile/profileSlice";
 import { postsRequest } from "../features/posts/postsSlice";
 
 const ProfilePage = ({ userId }) => {
@@ -25,8 +25,8 @@ const ProfilePage = ({ userId }) => {
 
   useEffect(() => {
     if (userId) {
-      dispatch(profileRequest(userId));
-      dispatch(postsRequest({ userId, page: 1 }));
+      dispatch(fetchProfileRequest(userId));
+      // dispatch(postsRequest({ userId, page: 1 }));
     }
   }, [dispatch, userId]);
 

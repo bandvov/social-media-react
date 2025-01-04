@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { Button, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import loginSchema from "../schemas/loginSchema";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +17,7 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div>
+    <Box mt={2}>
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={loginSchema}
@@ -70,7 +70,7 @@ const RegistrationForm = () => {
       {loading && <div>loading...</div>}
       {/* Display error message */}
       {error && <div style={{ color: "red" }}>{error}</div>}
-    </div>
+    </Box>
   );
 };
 
