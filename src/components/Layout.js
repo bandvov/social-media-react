@@ -23,6 +23,8 @@ import {
   People,
   FollowTheSigns,
   Person2,
+  Home,
+  PostAdd,
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../features/theme/themeSlice";
@@ -131,6 +133,8 @@ const Layout = ({ userId, children }) => {
         >
           <List>
             {[
+              { label: "Home", url: "/", icon: <Home /> },
+              { label: "My posts", url: "/posts", icon: <PostAdd /> },
               { label: "Profile", url: "/profile", icon: <Person2 /> },
               { label: "Followers", url: "/followers", icon: <People /> },
               {
