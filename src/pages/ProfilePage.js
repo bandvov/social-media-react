@@ -14,18 +14,18 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { profileRequest } from "../features/profile/profileSlice";
 import { postsRequest } from "../features/posts/postsSlice";
 
-const ProfilePage = () => {
+const ProfilePage = ({ userId }) => {
   const dispatch = useDispatch();
-  const { user, page, hasMorePosts } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.profile);
 
-  const { posts } = useSelector((state) => state.post);
+  const { posts, page, hasMorePosts } = useSelector((state) => state.post);
 
   const [menuAnchor, setMenuAnchor] = React.useState(null);
   const [postMenuAnchor, setPostMenuAnchor] = React.useState(null);
 
   useEffect(() => {
     if (user?.id) {
-      dispatch(profileRequest(user?.id));
+      dispatch(profileRequest(userId));
       dispatch(postsRequest({ userId: user?.id, page: 1 }));
     }
   }, [dispatch, user?.id]);
@@ -73,7 +73,7 @@ const ProfilePage = () => {
               <Box>
                 <Typography variant="h6">{user.email}</Typography>
                 <Typography variant="body2">
-                  Joined: {new Date(user.dateCreated).toLocaleDateString()}
+                  Joined: {new Date(user.created_at).toLocaleDateString()}
                 </Typography>
               </Box>
             </Box>
@@ -81,13 +81,13 @@ const ProfilePage = () => {
             {/* Stats */}
             <Box display="flex" alignItems="center" gap={4}>
               <Typography variant="body2">
-                <strong>{user.postsCount}</strong> Posts
+                <strong>{user.posts_count}</strong> Posts
               </Typography>
               <Typography variant="body2">
-                <strong>{user.followersCount}</strong> Followers
+                <strong>{user.followers_count}</strong> Followers
               </Typography>
               <Typography variant="body2">
-                <strong>{user.followeesCount}</strong> Following
+                <strong>{user.followees_count}</strong> Following
               </Typography>
             </Box>
 
@@ -133,10 +133,10 @@ const ProfilePage = () => {
                   gap={2}
                 >
                   <Typography variant="subtitle2">
-                    Author: {post.authorName}
+                    Author: {post.author_name}
                   </Typography>
                   <Typography variant="subtitle2">
-                    {new Date(post.dateCreated).toLocaleDateString()}
+                    {new Date(post.created_at).toLocaleDateString()}
                   </Typography>
                 </Box>
 
