@@ -13,15 +13,16 @@ import FolloweesPage from "./pages/FolloweesPage";
 
 const App = () => {
   const darkMode = useSelector((state) => state.theme.darkMode);
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <Router>
-        <Layout>
+        <Layout userId={user.id}>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile" element={<ProfilePage userId={user.id} />} />
             <Route path="/followers" element={<FollowersPage />} />
             <Route path="/followees" element={<FolloweesPage />} />
           </Routes>

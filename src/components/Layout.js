@@ -28,7 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../features/theme/themeSlice";
 import { Link } from "react-router-dom";
 
-const Layout = ({ children }) => {
+const Layout = ({ userId, children }) => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [profileMenuAnchor, setProfileMenuAnchor] = React.useState(null);
 
@@ -102,15 +102,21 @@ const Layout = ({ children }) => {
             open={isProfileMenuOpen}
             onClose={handleProfileMenuClose}
           >
-            <MenuItem onClick={handleProfileMenuClose}>
-              <Link to="/profile">Profile</Link>
-            </MenuItem>
-            <MenuItem onClick={handleProfileMenuClose}>
-              <Link to="/login">Log in</Link>
-            </MenuItem>
-            <MenuItem onClick={handleProfileMenuClose}>
-              <Link to="/"> Logout</Link>
-            </MenuItem>
+            {userId && (
+              <MenuItem onClick={handleProfileMenuClose}>
+                <Link to="/profile">Profile</Link>
+              </MenuItem>
+            )}
+            {!userId && (
+              <MenuItem onClick={handleProfileMenuClose}>
+                <Link to="/login">Log in</Link>
+              </MenuItem>
+            )}
+            {userId && (
+              <MenuItem onClick={handleProfileMenuClose}>
+                <Link to="/"> Logout</Link>
+              </MenuItem>
+            )}
           </Menu>
         </Toolbar>
       </AppBar>
