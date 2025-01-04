@@ -2,20 +2,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import { TextField } from "@mui/material";
 import { Button, CircularProgress, Box, Typography } from "@mui/material";
 import { updateProfileRequest } from "../features/profile/profileSlice";
-
-const validationSchema = Yup.object({
-  username: Yup.string().min(3, "Username must be at least 3 characters"),
-  email: Yup.string()
-    .email("Invalid email format")
-    .required("Email is required"),
-  password: Yup.string().min(6, "Password must be at least 6 characters"),
-  first_name: Yup.string().min(3, "Username must be at least 3 characters"),
-  last_name: Yup.string().min(3, "Username must be at least 3 characters"),
-});
+import { profileSchema } from "../schemas/profile";
 
 const fields = [
   { name: "username" },
@@ -36,7 +26,7 @@ const ProfileForm = () => {
   return (
     <Formik
       initialValues={user}
-      validationSchema={validationSchema}
+      validationSchema={profileSchema}
       onSubmit={handleSubmit}
       enableReinitialize
     >
