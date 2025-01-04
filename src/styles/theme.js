@@ -42,7 +42,7 @@ export const darkTheme = createTheme({
       main: "#03dac6",
     },
     background: {
-      default: " #333333", // Light gray
+      default: "#242124",
     },
     border: {
       main: "#cfcfcf",

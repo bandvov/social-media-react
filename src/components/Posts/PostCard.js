@@ -65,12 +65,16 @@ export default function BasicCard({ post }) {
           p: 2,
         }}
       >
-        {post.reactions_count && (
-          <Typography color="text.primary">
-            {post.reactions_count} reactions
-          </Typography>
-        )}
-        <Box display="grid" gap={2} gridTemplateColumns="1fr auto">
+        <Typography color="text.primary">
+          {post.reactions_count} reactions
+        </Typography>
+
+        <Box
+          display="grid"
+          gap={2}
+          gridTemplateColumns="1fr auto"
+          alignSelf="end"
+        >
           {post.comments_count && (
             <Typography color="text.primary">
               {post.comments_count} comments
