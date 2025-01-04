@@ -20,6 +20,9 @@ const profileSlice = createSlice({
           "test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test",
         author_name: "test test",
         created_at: Date.now(),
+        reactions_count: 44,
+        comments_count: 8,
+        share_count: 33,
       },
       {
         id: 2,

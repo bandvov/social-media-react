@@ -15,7 +15,6 @@ export default function PostCard({ post }) {
   return (
     <Box
       display="grid"
-      borderColor="border.main"
       gridTemplateColumns="1fr auto"
       key={post.id}
       border={1}
@@ -41,6 +40,25 @@ export default function PostCard({ post }) {
         <Typography color="text.secondary" variant="body2">
           {post.content}
         </Typography>
+        <Box display="grid" gridTemplateColumns="1fr auto">
+          {post.reactions_count && (
+            <Typography color="text.primary">
+              {post.reactions_count} reactions
+            </Typography>
+          )}
+          <Box display="grid" gap={2} gridTemplateColumns="1fr auto">
+            {post.comments_count && (
+              <Typography color="text.primary">
+                {post.comments_count} comments
+              </Typography>
+            )}
+            {post.share_count && (
+              <Typography color="text.primary">
+                {post.share_count} share:
+              </Typography>
+            )}
+          </Box>
+        </Box>
       </Box>
       {/* Action Menu */}
       <IconButton onClick={handleMenuOpen}>
