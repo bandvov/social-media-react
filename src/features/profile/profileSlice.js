@@ -10,6 +10,7 @@ const profileSlice = createSlice({
       followers_count: 122,
       followees_count: 342,
       posts_count: 88,
+      bio: "bla bla some bio",
     },
     posts: [
       {

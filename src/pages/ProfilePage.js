@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { fetchProfileRequest } from "../features/profile/profileSlice";
-import { postsRequest } from "../features/posts/postsSlice";
 import ProfileForm from "../components/profileForm";
 
 const ProfilePage = ({ userId }) => {
@@ -39,58 +38,58 @@ const ProfilePage = ({ userId }) => {
       {/* Profile Info */}
       <Container maxWidth="md">
         {user && (
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            mb={2}
-            borderBottom={1}
-            borderColor="divider"
-            pb={2}
-          >
-            {/* Avatar and Name */}
-            <Box display="flex" alignItems="center">
-              <Avatar
-                src={user.image}
-                alt={user.email}
-                sx={{ width: 64, height: 64, mr: 2 }}
-              />
-              <Box>
-                <Typography variant="h6">{user.email}</Typography>
+          <Box borderBottom={1} borderColor="divider" mb={2}>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              pb={2}
+            >
+              {/* Avatar and Name */}
+              <Box display="flex" alignItems="center">
+                <Avatar
+                  src={user.image}
+                  alt={user.email}
+                  sx={{ width: 64, height: 64, mr: 2 }}
+                />
+                <Box>
+                  <Typography variant="h6">{user.email}</Typography>
+                  <Typography variant="body2">
+                    Joined: {new Date(user.created_at).toLocaleDateString()}
+                  </Typography>
+                </Box>
+              </Box>
+
+              {/* Stats */}
+              <Box display="flex" alignItems="center" gap={4}>
                 <Typography variant="body2">
-                  Joined: {new Date(user.created_at).toLocaleDateString()}
+                  <strong>{user.posts_count}</strong> Posts
+                </Typography>
+                <Typography variant="body2">
+                  <strong>{user.followers_count}</strong> Followers
+                </Typography>
+                <Typography variant="body2">
+                  <strong>{user.followees_count}</strong> Following
                 </Typography>
               </Box>
-            </Box>
 
-            {/* Stats */}
-            <Box display="flex" alignItems="center" gap={4}>
-              <Typography variant="body2">
-                <strong>{user.posts_count}</strong> Posts
-              </Typography>
-              <Typography variant="body2">
-                <strong>{user.followers_count}</strong> Followers
-              </Typography>
-              <Typography variant="body2">
-                <strong>{user.followees_count}</strong> Following
-              </Typography>
+              {/* Action Menu */}
+              <IconButton onClick={handleMenuOpen}>
+                <MoreVertIcon />
+              </IconButton>
+              <Menu
+                anchorEl={menuAnchor}
+                open={Boolean(menuAnchor)}
+                onClose={handleMenuClose}
+              >
+                {userId && (
+                  <MenuItem onClick={handleMenuClose}>Edit profile</MenuItem>
+                )}
+                <MenuItem onClick={handleMenuClose}>Follow</MenuItem>
+                <MenuItem onClick={handleMenuClose}>Unfollow</MenuItem>
+              </Menu>
             </Box>
-
-            {/* Action Menu */}
-            <IconButton onClick={handleMenuOpen}>
-              <MoreVertIcon />
-            </IconButton>
-            <Menu
-              anchorEl={menuAnchor}
-              open={Boolean(menuAnchor)}
-              onClose={handleMenuClose}
-            >
-              {userId && (
-                <MenuItem onClick={handleMenuClose}>Edit profile</MenuItem>
-              )}
-              <MenuItem onClick={handleMenuClose}>Follow</MenuItem>
-              <MenuItem onClick={handleMenuClose}>Unfollow</MenuItem>
-            </Menu>
+            {user?.bio && <Box pb={2}>Bio: {user.bio}</Box>}
           </Box>
         )}
         <ProfileForm />
