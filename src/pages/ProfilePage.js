@@ -24,11 +24,11 @@ const ProfilePage = ({ userId }) => {
   const [postMenuAnchor, setPostMenuAnchor] = React.useState(null);
 
   useEffect(() => {
-    if (user?.id) {
+    if (userId) {
       dispatch(profileRequest(userId));
-      dispatch(postsRequest({ userId: user?.id, page: 1 }));
+      dispatch(postsRequest({ userId, page: 1 }));
     }
-  }, [dispatch, user?.id]);
+  }, [dispatch, userId]);
 
   const loadMorePosts = () => {
     dispatch(postsRequest({ userId: user?.id, page }));
@@ -100,6 +100,9 @@ const ProfilePage = ({ userId }) => {
               open={Boolean(menuAnchor)}
               onClose={handleMenuClose}
             >
+              {userId && (
+                <MenuItem onClick={handleMenuClose}>Edit profile</MenuItem>
+              )}
               <MenuItem onClick={handleMenuClose}>Follow</MenuItem>
               <MenuItem onClick={handleMenuClose}>Unfollow</MenuItem>
             </Menu>
