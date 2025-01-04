@@ -10,7 +10,7 @@ export async function updateUser(userId, data) {
   });
 }
 export async function fetchUserPosts(userId, data) {
-  return await api.put(`/users/${userId}/posts`, {
+  return await api.get(`/users/${userId}/posts`, {
     data,
     withCredentials: true,
   });

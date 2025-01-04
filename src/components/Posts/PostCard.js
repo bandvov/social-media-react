@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   CardActions,
   CardContent,
@@ -95,6 +96,11 @@ export default function BasicCard({ post }) {
             </Typography>
           )}
         </Box>
+      </CardActions>
+      <CardActions>
+        <Button>Add reaction</Button>
+        <Button>Comment</Button>
+        <Button>Repost</Button>
       </CardActions>
       <Menu
         anchorEl={menuAnchor}
