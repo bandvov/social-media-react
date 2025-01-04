@@ -1,10 +1,8 @@
 import { api } from "../api";
 
-export async function fetchPosts({ userId, page }) {
-  return await api.get(`/users/${userId}/posts`, {
-    params: {
-      page,
-    },
+export async function fetchPosts(userId, params) {
+  return await api.get(`/posts/${userId}`, {
+    params,
     mwithCredentials: true,
   });
 }

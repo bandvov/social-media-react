@@ -1,6 +1,9 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import {
   failure,
+  fetchProfilePostsfailure,
+  fetchProfilePostsRequest,
+  fetchProfilePostssuccess,
   fetchProfileRequest,
   success,
   updateProfileRequest,
@@ -27,8 +30,19 @@ function* handleUpdatePfofile(action) {
     yield put(failure(error.message));
   }
 }
+function* handleFetchfofilePosts(action) {
+  try {
+    // clear error message
+    yield put(fetchProfilePostsfailure(""));
+    const user = yield call(fetch, action.payload);
+    yield put(fetchProfilePostssuccess(user.data));
+  } catch (error) {
+    yield put(fetchProfilePostsfailure(error.message));
+  }
+}
 
 export default function* profileSaga() {
   yield takeLatest(fetchProfileRequest.type, handlePfofileInfo);
   yield takeLatest(updateProfileRequest.type, handleUpdatePfofile);
+  yield takeLatest(fetchProfilePostsRequest.type, handleFetchfofilePosts);
 }

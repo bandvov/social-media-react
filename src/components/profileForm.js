@@ -30,7 +30,7 @@ const ProfileForm = () => {
   const { user, loading, error } = useSelector((state) => state.profile);
 
   const handleSubmit = (values) => {
-    dispatch(updateProfileRequest({ userId: user.id, user: values }));
+    dispatch(updateProfileRequest(user.id, values));
   };
 
   return (

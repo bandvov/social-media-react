@@ -9,30 +9,22 @@ import {
   MenuItem,
   Container,
 } from "@mui/material";
-import InfiniteScroll from "react-infinite-scroll-component";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { fetchProfileRequest } from "../features/profile/profileSlice";
 import { postsRequest } from "../features/posts/postsSlice";
+import ProfileForm from "../components/profileForm";
 
 const ProfilePage = ({ userId }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.profile);
 
-  const { posts, page, hasMorePosts } = useSelector((state) => state.post);
-
   const [menuAnchor, setMenuAnchor] = React.useState(null);
-  const [postMenuAnchor, setPostMenuAnchor] = React.useState(null);
 
   useEffect(() => {
     if (userId) {
       dispatch(fetchProfileRequest(userId));
-      // dispatch(postsRequest({ userId, page: 1 }));
     }
   }, [dispatch, userId]);
-
-  const loadMorePosts = () => {
-    dispatch(postsRequest({ userId: user?.id, page }));
-  };
 
   const handleMenuOpen = (event) => {
     setMenuAnchor(event.currentTarget);
@@ -40,13 +32,6 @@ const ProfilePage = ({ userId }) => {
 
   const handleMenuClose = () => {
     setMenuAnchor(null);
-  };
-  const handlePostMenuOpen = (event) => {
-    setPostMenuAnchor(event.currentTarget);
-  };
-
-  const handlePostMenuClose = () => {
-    setPostMenuAnchor(null);
   };
 
   return (
@@ -108,57 +93,7 @@ const ProfilePage = ({ userId }) => {
             </Menu>
           </Box>
         )}
-
-        {/* Posts Section */}
-        <InfiniteScroll
-          dataLength={posts.length}
-          next={loadMorePosts}
-          hasMore={hasMorePosts}
-          loader={<Typography>Loading...</Typography>}
-        >
-          {posts.map((post) => (
-            <Box
-              sx={{
-                display: "grid",
-                gridTemplateColumns: "1fr auto",
-              }}
-              key={post.id}
-              border={1}
-              borderRadius={1}
-              p={2}
-              mb={2}
-            >
-              <Box>
-                <Box
-                  display="grid"
-                  gridTemplateColumns={"auto 1fr"}
-                  alignItems="center"
-                  gap={2}
-                >
-                  <Typography variant="subtitle2">
-                    Author: {post.author_name}
-                  </Typography>
-                  <Typography variant="subtitle2">
-                    {new Date(post.created_at).toLocaleDateString()}
-                  </Typography>
-                </Box>
-
-                <Typography variant="body2">{post.content}</Typography>
-              </Box>
-              {/* Action Menu */}
-              <IconButton onClick={handlePostMenuOpen}>
-                <MoreVertIcon />
-              </IconButton>
-              <Menu
-                anchorEl={postMenuAnchor}
-                open={Boolean(postMenuAnchor)}
-                onClose={handlePostMenuClose}
-              >
-                <MenuItem onClick={handlePostMenuClose}>Remove</MenuItem>
-              </Menu>
-            </Box>
-          ))}
-        </InfiniteScroll>
+        <ProfileForm />
       </Container>
     </Box>
   );
