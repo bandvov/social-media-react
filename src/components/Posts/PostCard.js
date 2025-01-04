@@ -31,6 +31,10 @@ export default function BasicCard({ post }) {
       }}
     >
       <CardHeader
+        sx={{
+          pt: 0,
+          pb: 0,
+        }}
         title={
           <Box
             display="grid"
@@ -53,7 +57,12 @@ export default function BasicCard({ post }) {
         }
       />
 
-      <CardContent>
+      <CardContent
+        sx={{
+          pt: 0,
+          pb: 0,
+        }}
+      >
         <Typography color="text.secondary" variant="body2">
           {post.content}
         </Typography>
@@ -65,7 +74,7 @@ export default function BasicCard({ post }) {
           p: 2,
         }}
       >
-        <Typography color="text.primary">
+        <Typography variant="body2" color="text.primary">
           {post.reactions_count} reactions
         </Typography>
 
@@ -76,12 +85,12 @@ export default function BasicCard({ post }) {
           alignSelf="end"
         >
           {post.comments_count && (
-            <Typography color="text.primary">
+            <Typography variant="body2" color="text.primary">
               {post.comments_count} comments
             </Typography>
           )}
           {post.share_count && (
-            <Typography color="text.primary">
+            <Typography variant="body2" color="text.primary">
               {post.share_count} shares
             </Typography>
           )}

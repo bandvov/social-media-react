@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -15,6 +15,7 @@ import {
   Avatar,
   Switch,
   Link,
+  FormControlLabel,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -30,10 +31,14 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../features/theme/themeSlice";
 import { Link as RouterLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Layout = ({ userId, children }) => {
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
-  const [profileMenuAnchor, setProfileMenuAnchor] = React.useState(null);
+  const { t, i18n } = useTranslation();
+  const [checked, setChecked] = useState(i18n.language === "ua"); // Default state based on current language
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [profileMenuAnchor, setProfileMenuAnchor] = useState(null);
 
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.theme.darkMode);
@@ -52,6 +57,12 @@ const Layout = ({ userId, children }) => {
 
   const handleProfileMenuClose = () => {
     setProfileMenuAnchor(null);
+  };
+
+  const handleLanguageChange = (event) => {
+    const newLanguage = event.target.checked ? "ua" : "en";
+    i18n.changeLanguage(newLanguage);
+    setChecked(event.target.checked);
   };
 
   const isProfileMenuOpen = Boolean(profileMenuAnchor);
@@ -95,6 +106,17 @@ const Layout = ({ userId, children }) => {
               }
             />
           </Box>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={checked}
+                color="primar"
+                onChange={handleLanguageChange}
+                icon={<Typography variant="body2">EN</Typography>}
+                checkedIcon={<Typography variant="body2">UA</Typography>}
+              />
+            }
+          />
           <Switch
             checked={darkMode}
             color="secondary"
@@ -102,7 +124,6 @@ const Layout = ({ userId, children }) => {
             icon={<Brightness7 />} // Icon for light mode
             checkedIcon={<Brightness4 />} // Icon for dark mode
           />
-
           {/* Profile Menu */}
           <IconButton color="inherit" onClick={handleProfileMenuOpen}>
             <Avatar alt="User Avatar" src={user?.profile_pic} />
@@ -148,15 +169,9 @@ const Layout = ({ userId, children }) => {
         >
           <List>
             {[
-              { label: "Home", url: "/", icon: <Home /> },
-              { label: "My posts", url: "/posts", icon: <PostAdd /> },
-              { label: "Profile", url: "/profile", icon: <Person2 /> },
-              { label: "Followers", url: "/followers", icon: <People /> },
-              {
-                label: "Followees",
-                url: "/followees",
-                icon: <FollowTheSigns />,
-              },
+              { label: t("homePage"), url: "/", icon: <Home /> },
+              { label: t("myPosts"), url: "/posts", icon: <PostAdd /> },
+              { label: t("profile"), url: "/profile", icon: <Person2 /> },
             ].map((item, index) => (
               <ListItem button key={item.label}>
                 <ListItemIcon>{item.icon}</ListItemIcon>

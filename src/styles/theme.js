@@ -7,7 +7,7 @@ export const lightTheme = createTheme({
       main: "#1976d2", // Blue
     },
     secondary: {
-      main: "#dc004e", // Pink
+      main: "#cfcfff", 
     },
     background: {
       default: "#fafafa", // Light gray

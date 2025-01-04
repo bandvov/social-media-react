@@ -9,7 +9,7 @@ const LoginPage = () => {
 
   return (
     <Box style={{ maxWidth: 400, margin: "auto", padding: "1rem" }}>
-      <Typography color="text.primary" variant="h1">
+      <Typography color="primary" variant="h1">
         {t("login")}
       </Typography>
       <LoginForm />
@@ -20,9 +20,9 @@ const LoginPage = () => {
           gridTemplateColumns: "1fr auto",
         }}
       >
-        <Typography color="text.primary">Don't have account?</Typography>
+        <Typography color="text.primary">{t("dontHaveAccount")}</Typography>
         <Link component={RouterLink} to="/registration">
-          Sign up
+          {t("signup")}
         </Link>
       </Box>
     </Box>

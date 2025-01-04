@@ -1,31 +1,41 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
 
 const resources = {
   en: {
     translation: {
-      email: 'Email',
-      password: 'Password',
-      login: 'Login',
-      registration: 'Registration',
-      submit: "submit"
+      homePage: "Home",
+      myPosts: "My Posts",
+      profile: "Profile",
+      email: "Email",
+      password: "Password",
+      login: "Login",
+      signup: "Sign Up",
+      submit: "submit",
+      haveAccount: "Have account?",
+      dontHaveAccount: "Don't have account?",
     },
   },
   ua: {
     translation: {
-      email: 'email',
-      password: 'пароль',
-      login: 'Увійти',
-      registration: 'Реєстрація',
-      submit: "відправити"
+      homePage: "Головна",
+      myPosts: "Мої пости",
+      profile: "Профіль",
+      email: "Email",
+      password: "Пароль",
+      login: "Увійти",
+      signup: "Реєстрація",
+      submit: "відправити",
+      haveAccount: "Маєте акаунт?",
+      dontHaveAccount: "Не маєте акаунта?",
     },
   },
 };
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: 'en',
-  fallbackLng: 'en',
+  lng: "en",
+  fallbackLng: "en",
   interpolation: { escapeValue: false },
 });
 
