@@ -4,6 +4,7 @@ const profileSlice = createSlice({
   name: "profile",
   initialState: {
     user: {
+      first_name: "",
       created_at: Date.now(),
       email: "bla@bla.test",
       followers_count: 122,
@@ -12,9 +13,12 @@ const profileSlice = createSlice({
     },
   },
   reducers: {
-    profileRequest: (state) => {
+    fetchProfileRequest: (state) => {
       state.loading = true;
       state.error = false;
+    },
+    updateProfileRequest: (state) => {
+      state.loading = true;
     },
     success: (state, action) => {
       state.loading = false;
@@ -27,5 +31,6 @@ const profileSlice = createSlice({
   },
 });
 
-export const { profileRequest, success, failure } = profileSlice.actions;
+export const { fetchProfileRequest, updateProfileRequest, success, failure } =
+  profileSlice.actions;
 export default profileSlice.reducer;
