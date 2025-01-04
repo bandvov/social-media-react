@@ -1,15 +1,15 @@
 import { api } from "../api";
 
-export async function fetchProfileInfo(userId) {
+export async function fetchUserProfile(userId) {
   return await api.get(`/users/${userId}/profile`, { withCredentials: true });
 }
-export async function fetchUpdateProfile(userId, data) {
+export async function updateUser(userId, data) {
   return await api.put(`/users/${userId}`, {
     data,
     withCredentials: true,
   });
 }
-export async function fetchProfilePosts(userId, data) {
+export async function fetchUserPosts(userId, data) {
   return await api.put(`/users/${userId}/posts`, {
     data,
     withCredentials: true,

@@ -1,11 +1,11 @@
 // src/components/EditProfile.js
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { TextField } from "@mui/material";
 import { Button, CircularProgress, Box, Typography } from "@mui/material";
-import { updateProfileRequest } from "../features/profile/profileSlice";
 import { profileSchema } from "../schemas/profile";
+import { updateUserRequest } from "../features/user/userSlice";
 
 const fields = [
   { name: "username" },
@@ -16,61 +16,69 @@ const fields = [
 ];
 
 const ProfileForm = () => {
+  const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
-  const { user, loading, error } = useSelector((state) => state.profile);
+  const { profile, loading, error } = useSelector((state) => state.user);
 
   const handleSubmit = (values) => {
-    dispatch(updateProfileRequest(user.id, values));
+    dispatch(updateUserRequest(profile.id, values));
   };
 
   return (
-    <Formik
-      initialValues={user}
-      validationSchema={profileSchema}
-      onSubmit={handleSubmit}
-      enableReinitialize
-    >
-      {({
-        values,
-        touched,
-        errors,
-        handleChange,
-        handleBlur,
-        isSubmitting,
-      }) => (
-        <Form>
-          <Box display="flex" flexDirection="column" gap={2}>
-            <Typography variant="h5">Edit Profile</Typography>
-            {error && <Typography color="error">{error}</Typography>}
+    <Box>
+      <Formik
+        initialValues={profile}
+        validationSchema={profileSchema}
+        onSubmit={handleSubmit}
+        enableReinitialize
+      >
+        {({ touched, errors, isSubmitting }) => (
+          <Form>
+            <Box display="flex" flexDirection="column" gap={2}>
+              <Typography variant="h5">Edit Profile</Typography>
 
-            {fields.map((field) => {
-              return (
-                <Field
-                  key={field.name}
-                  name={field.name}
-                  type={field?.type ?? "text"}
-                  as={TextField}
-                  label={field.name}
-                  variant="outlined"
-                  fullWidth
-                  error={touched[field.name] && !!errors[field.name]}
-                  helperText={<ErrorMessage name={field.name} />}
-                />
-              );
-            })}
+              {fields.map((field) => {
+                return (
+                  <Field
+                    key={field.name}
+                    name={field.name}
+                    type={field?.type ?? "text"}
+                    as={TextField}
+                    label={field.name}
+                    variant="outlined"
+                    fullWidth
+                    disabled={!edit}
+                    error={touched[field.name] && !!errors[field.name]}
+                    helperText={<ErrorMessage name={field.name} />}
+                  />
+                );
+              })}
 
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              disabled={isSubmitting}
-            >
-              {loading ? <CircularProgress size={24} /> : "Save Changes"}
-            </Button>
-          </Box>
-        </Form>
-      )}
-    </Formik>
+              <Box display={"grid"} gap={4} gridTemplateColumns="1fr 1fr">
+                <Button
+                  onClick={() => {
+                    setEdit(!edit);
+                  }}
+                >
+                  Edit
+                </Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitting}
+                >
+                  {loading ? <CircularProgress size={24} /> : "Save Changes"}
+                </Button>
+              </Box>
+            </Box>
+          </Form>
+        )}
+      </Formik>
+      {loading && <div>loading...</div>}
+      {/* Display error message */}
+      {error && <Typography color="error">{error}</Typography>}
+    </Box>
   );
 };
 

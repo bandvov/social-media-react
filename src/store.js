@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import authReducer from "./features/auth/authSlice";
-import themeReducer from "./features/theme/themeSlice";
-import profileReducer from "./features/profile/profileSlice";
-import postReducer from "./features/posts/postsSlice";
 import authSaga from "./features/auth/authSaga";
-import profileSaga from "./features/profile/profileSaga";
+import themeReducer from "./features/theme/themeSlice";
+import postReducer from "./features/posts/postsSlice";
+import userReducer from "./features/user/userSlice";
+import userSaga from "./features/user/userSaga";
 import postsSaga from "./features/posts/postsSaga";
 
 const sagaMiddleware = createSagaMiddleware();
@@ -14,7 +14,7 @@ const store = configureStore({
   reducer: {
     auth: authReducer,
     theme: themeReducer,
-    profile: profileReducer,
+    user: userReducer,
     post: postReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -22,7 +22,7 @@ const store = configureStore({
 });
 
 sagaMiddleware.run(authSaga);
-sagaMiddleware.run(profileSaga);
+sagaMiddleware.run(userSaga);
 sagaMiddleware.run(postsSaga);
 
 export default store;

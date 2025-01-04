@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const profileSlice = createSlice({
-  name: "profile",
+  name: "user",
   initialState: {
-    user: {
+    profile: {
       first_name: "",
       created_at: Date.now(),
       email: "bla@bla.test",
@@ -35,32 +35,42 @@ const profileSlice = createSlice({
     ],
   },
   reducers: {
-    fetchProfileRequest: (state) => {
+    fetchUserProfileRequest: (state) => {
       state.loading = true;
       state.error = false;
     },
-    fetchProfilePostsRequest: (state) => {
+    fetchUserProfileSuccess: (state, action) => {
+      state.loading = false;
+      state.profile = action.payload;
+    },
+    fetchUserProfileFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    fetchUserPostsRequest: (state) => {
       state.loading = true;
       state.error = false;
     },
-    fetchProfilePostssuccess: (state, action) => {
+    fetchUserPostsSuccess: (state, action) => {
       state.loading = false;
       state.posts = [...state.posts, ...action.payload.posts];
       state.hasMorePosts = action.payload.hasMore;
       state.page += 1;
     },
-    fetchProfilePostsfailure: (state, action) => {
+    fetchUserPostsFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
-    updateProfileRequest: (state) => {
+    updateUserRequest: (state) => {
       state.loading = true;
     },
-    success: (state, action) => {
+    updateUserSuccess: (state, action) => {
       state.loading = false;
-      state.user = action.payload;
+      state.posts = [...state.posts, ...action.payload.posts];
+      state.hasMorePosts = action.payload.hasMore;
+      state.page += 1;
     },
-    failure: (state, action) => {
+    updateUserFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
@@ -68,12 +78,14 @@ const profileSlice = createSlice({
 });
 
 export const {
-  fetchProfileRequest,
-  updateProfileRequest,
-  success,
-  failure,
-  fetchProfilePostsRequest,
-  fetchProfilePostssuccess,
-  fetchProfilePostsfailure,
+  fetchUserPostsFailure,
+  fetchUserPostsRequest,
+  fetchUserPostsSuccess,
+  fetchUserProfileFailure,
+  fetchUserProfileRequest,
+  fetchUserProfileSuccess,
+  updateUserFailure,
+  updateUserRequest,
+  updateUserSuccess,
 } = profileSlice.actions;
 export default profileSlice.reducer;

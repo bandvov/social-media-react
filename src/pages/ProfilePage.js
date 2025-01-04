@@ -10,18 +10,26 @@ import {
   Container,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { fetchProfileRequest } from "../features/profile/profileSlice";
 import ProfileForm from "../components/profileForm";
+import { fetchUserProfileRequest } from "../features/user/userSlice";
 
 const ProfilePage = ({ userId }) => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.profile);
-
+  const { profile } = useSelector((state) => state.user);
+  const {
+    email,
+    posts_count,
+    profile_pic,
+    followees_count,
+    followers_count,
+    created_at,
+    bio,
+  } = profile;
   const [menuAnchor, setMenuAnchor] = React.useState(null);
 
   useEffect(() => {
     if (userId) {
-      dispatch(fetchProfileRequest(userId));
+      dispatch(fetchUserProfileRequest(userId));
     }
   }, [dispatch, userId]);
 
@@ -34,67 +42,64 @@ const ProfilePage = ({ userId }) => {
   };
 
   return (
-    <Box>
-      {/* Profile Info */}
-      <Container maxWidth="md">
-        {user && (
-          <Box borderBottom={1} borderColor="divider" mb={2}>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
-              pb={2}
-            >
-              {/* Avatar and Name */}
-              <Box display="flex" alignItems="center">
-                <Avatar
-                  src={user.image}
-                  alt={user.email}
-                  sx={{ width: 64, height: 64, mr: 2 }}
-                />
-                <Box>
-                  <Typography variant="h6">{user.email}</Typography>
-                  <Typography variant="body2">
-                    Joined: {new Date(user.created_at).toLocaleDateString()}
-                  </Typography>
-                </Box>
-              </Box>
-
-              {/* Stats */}
-              <Box display="flex" alignItems="center" gap={4}>
+    <Container maxWidth="md">
+      {profile && (
+        <Box borderBottom={1} borderColor="divider" mb={2}>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            pb={2}
+          >
+            {/* Avatar and Name */}
+            <Box display="flex" alignItems="center">
+              <Avatar
+                src={profile_pic}
+                alt={email}
+                sx={{ width: 64, height: 64, mr: 2 }}
+              />
+              <Box>
+                <Typography variant="h6">{email}</Typography>
                 <Typography variant="body2">
-                  <strong>{user.posts_count}</strong> Posts
-                </Typography>
-                <Typography variant="body2">
-                  <strong>{user.followers_count}</strong> Followers
-                </Typography>
-                <Typography variant="body2">
-                  <strong>{user.followees_count}</strong> Following
+                  Joined: {new Date(created_at).toLocaleDateString()}
                 </Typography>
               </Box>
-
-              {/* Action Menu */}
-              <IconButton onClick={handleMenuOpen}>
-                <MoreVertIcon />
-              </IconButton>
-              <Menu
-                anchorEl={menuAnchor}
-                open={Boolean(menuAnchor)}
-                onClose={handleMenuClose}
-              >
-                {userId && (
-                  <MenuItem onClick={handleMenuClose}>Edit profile</MenuItem>
-                )}
-                <MenuItem onClick={handleMenuClose}>Follow</MenuItem>
-                <MenuItem onClick={handleMenuClose}>Unfollow</MenuItem>
-              </Menu>
             </Box>
-            {user?.bio && <Box pb={2}>Bio: {user.bio}</Box>}
+
+            {/* Stats */}
+            <Box display="flex" alignItems="center" gap={4}>
+              <Typography variant="body2">
+                <strong>{posts_count}</strong> Posts
+              </Typography>
+              <Typography variant="body2">
+                <strong>{followers_count}</strong> Followers
+              </Typography>
+              <Typography variant="body2">
+                <strong>{followees_count}</strong> Following
+              </Typography>
+            </Box>
+
+            {/* Action Menu */}
+            <IconButton onClick={handleMenuOpen}>
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
+              anchorEl={menuAnchor}
+              open={Boolean(menuAnchor)}
+              onClose={handleMenuClose}
+            >
+              {userId && (
+                <MenuItem onClick={handleMenuClose}>Edit profile</MenuItem>
+              )}
+              <MenuItem onClick={handleMenuClose}>Follow</MenuItem>
+              <MenuItem onClick={handleMenuClose}>Unfollow</MenuItem>
+            </Menu>
           </Box>
-        )}
-        <ProfileForm />
-      </Container>
-    </Box>
+          {bio && <Box pb={2}>Bio: {bio}</Box>}
+        </Box>
+      )}
+      <ProfileForm />
+    </Container>
   );
 };
 
