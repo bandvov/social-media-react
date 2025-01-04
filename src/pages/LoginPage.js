@@ -1,7 +1,7 @@
 import React from "react";
 import LoginForm from "../components/LoginForm";
-import { Box, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, Link, Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
@@ -9,7 +9,9 @@ const LoginPage = () => {
 
   return (
     <Box style={{ maxWidth: 400, margin: "auto", padding: "1rem" }}>
-      <Typography variant="h1">{t("login")}</Typography>
+      <Typography color="text.primary" variant="h1">
+        {t("login")}
+      </Typography>
       <LoginForm />
       <Box
         sx={{
@@ -18,8 +20,10 @@ const LoginPage = () => {
           gridTemplateColumns: "1fr auto",
         }}
       >
-        <Typography>Don't have account?</Typography>
-        <Link to="/registration">Sign up</Link>
+        <Typography color="text.primary">Don't have account?</Typography>
+        <Link component={RouterLink} to="/registration">
+          Sign up
+        </Link>
       </Box>
     </Box>
   );

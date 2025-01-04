@@ -1,7 +1,7 @@
 import React from "react";
 import RegistrationForm from "../components/RegistrationForm";
-import { Box, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, Link, Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const RegistrationPage = () => {
@@ -9,7 +9,9 @@ const RegistrationPage = () => {
 
   return (
     <Box style={{ maxWidth: 400, margin: "auto", padding: "1rem" }}>
-      <Typography variant="h1">{t("registration")}</Typography>
+      <Typography color="primary" variant="h1">
+        {t("registration")}
+      </Typography>
       <RegistrationForm />
       <Box
         sx={{
@@ -19,7 +21,9 @@ const RegistrationPage = () => {
         }}
       >
         <Typography>Have account?</Typography>
-        <Link to="/login">Login in</Link>
+        <Link color="primary" component={RouterLink} to="/login">
+          Login in
+        </Link>
       </Box>
     </Box>
   );

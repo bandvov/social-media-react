@@ -35,7 +35,9 @@ const ProfileForm = () => {
         {({ touched, errors, isSubmitting }) => (
           <Form>
             <Box display="flex" flexDirection="column" gap={2}>
-              <Typography variant="h5">Edit Profile</Typography>
+              <Typography color="primary" variant="h5">
+                Edit Profile
+              </Typography>
 
               {fields.map((field) => {
                 return (
@@ -56,6 +58,8 @@ const ProfileForm = () => {
 
               <Box display={"grid"} gap={4} gridTemplateColumns="1fr 1fr">
                 <Button
+                  color="primary"
+                  variant="contained"
                   onClick={() => {
                     setEdit(!edit);
                   }}

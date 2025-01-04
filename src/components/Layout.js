@@ -14,6 +14,7 @@ import {
   MenuItem,
   Avatar,
   Switch,
+  Link,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -28,7 +29,7 @@ import {
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../features/theme/themeSlice";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 const Layout = ({ userId, children }) => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -56,7 +57,13 @@ const Layout = ({ userId, children }) => {
   const isProfileMenuOpen = Boolean(profileMenuAnchor);
 
   return (
-    <Box sx={{ display: "flex", height: "100vh" }}>
+    <Box
+      sx={{
+        backgroundColor: "background.default",
+        display: "flex",
+        height: "100vh",
+      }}
+    >
       {/* Top Navigation */}
       <AppBar position="fixed">
         <Toolbar>
@@ -106,17 +113,24 @@ const Layout = ({ userId, children }) => {
           >
             {userId && (
               <MenuItem onClick={handleProfileMenuClose}>
-                <Link to="/profile">Profile</Link>
+                <Link component={RouterLink} to="/profile">
+                  Profile
+                </Link>
               </MenuItem>
             )}
             {!userId && (
               <MenuItem onClick={handleProfileMenuClose}>
-                <Link to="/login">Log in</Link>
+                <Link component={RouterLink} to="/login">
+                  Log in
+                </Link>
               </MenuItem>
             )}
             {userId && (
               <MenuItem onClick={handleProfileMenuClose}>
-                <Link to="/"> Logout</Link>
+                <Link component={RouterLink} to="/">
+                  {" "}
+                  Logout
+                </Link>
               </MenuItem>
             )}
           </Menu>
@@ -145,7 +159,9 @@ const Layout = ({ userId, children }) => {
             ].map((item, index) => (
               <ListItem button key={item.label}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <Link to={item.url}>{item.label}</Link>
+                <Link component={RouterLink} to={item.url}>
+                  {item.label}
+                </Link>
               </ListItem>
             ))}
           </List>

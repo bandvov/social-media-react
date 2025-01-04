@@ -11,6 +11,7 @@ const profileSlice = createSlice({
       followees_count: 342,
       posts_count: 88,
       bio: "bla bla some bio",
+      profile_pic: "https://i.mydramalist.com/4Jjdk_5c.jpg",
     },
     posts: [
       {

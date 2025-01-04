@@ -14,10 +14,9 @@ export default function PostCard({ post }) {
   };
   return (
     <Box
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "1fr auto",
-      }}
+      display="grid"
+      borderColor="border.main"
+      gridTemplateColumns="1fr auto"
       key={post.id}
       border={1}
       borderRadius={1}
@@ -31,15 +30,17 @@ export default function PostCard({ post }) {
           alignItems="center"
           gap={2}
         >
-          <Typography variant="subtitle2">
+          <Typography color="text.secondary" variant="subtitle2">
             Author: {post.author_name}
           </Typography>
-          <Typography variant="subtitle2">
+          <Typography color="text.secondary" variant="subtitle2">
             {new Date(post.created_at).toLocaleDateString()}
           </Typography>
         </Box>
 
-        <Typography variant="body2">{post.content}</Typography>
+        <Typography color="text.secondary" variant="body2">
+          {post.content}
+        </Typography>
       </Box>
       {/* Action Menu */}
       <IconButton onClick={handleMenuOpen}>

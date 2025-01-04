@@ -8,10 +8,12 @@ import {
   Menu,
   MenuItem,
   Container,
+  Link,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ProfileForm from "../components/profileForm";
 import { fetchUserProfileRequest } from "../features/user/userSlice";
+import { Link as RouterLink } from "react-router-dom";
 
 const ProfilePage = ({ userId }) => {
   const dispatch = useDispatch();
@@ -59,8 +61,10 @@ const ProfilePage = ({ userId }) => {
                 sx={{ width: 64, height: 64, mr: 2 }}
               />
               <Box>
-                <Typography variant="h6">{email}</Typography>
-                <Typography variant="body2">
+                <Typography color="text.primary" variant="h6">
+                  {email}
+                </Typography>
+                <Typography color="text.primary" variant="body2">
                   Joined: {new Date(created_at).toLocaleDateString()}
                 </Typography>
               </Box>
@@ -68,14 +72,18 @@ const ProfilePage = ({ userId }) => {
 
             {/* Stats */}
             <Box display="flex" alignItems="center" gap={4}>
-              <Typography variant="body2">
+              <Typography color="text.primary" variant="body2">
                 <strong>{posts_count}</strong> Posts
               </Typography>
-              <Typography variant="body2">
-                <strong>{followers_count}</strong> Followers
+              <Typography color="text.primary" variant="body2">
+                <Link component={RouterLink} to="/followers">
+                  <strong>{followers_count}</strong> Followers
+                </Link>
               </Typography>
-              <Typography variant="body2">
-                <strong>{followees_count}</strong> Following
+              <Typography color="text.primary" variant="body2">
+                <Link component={RouterLink} to="/followees">
+                  <strong>{followees_count}</strong> Following
+                </Link>
               </Typography>
             </Box>
 
@@ -95,7 +103,11 @@ const ProfilePage = ({ userId }) => {
               <MenuItem onClick={handleMenuClose}>Unfollow</MenuItem>
             </Menu>
           </Box>
-          {bio && <Box pb={2}>Bio: {bio}</Box>}
+          {bio && (
+            <Box pb={2}>
+              <Typography color="text.primary">Bio: {bio}</Typography>
+            </Box>
+          )}
         </Box>
       )}
       <ProfileForm />
