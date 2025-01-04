@@ -4,8 +4,9 @@ import {
   success,
   failure,
   registrationRequest,
+  logoutRequest,
 } from "./authSlice";
-import { login, registration } from "./authApi";
+import { login, Logout, registration } from "./authApi";
 function* handleLogin(action) {
   try {
     // clear error message
@@ -25,8 +26,19 @@ function* handleRegistration(action) {
     yield put(failure(error.message));
   }
 }
+function* handleLogout(action) {
+  try {
+    // clear error message
+    yield put(failure(""));
+    yield call(Logout);
+    yield put(success(null));
+  } catch (error) {
+    yield put(failure(error.message));
+  }
+}
 
 export default function* authSaga() {
   yield takeLatest(loginRequest.type, handleLogin);
+  yield takeLatest(logoutRequest.type, handleLogout);
   yield takeLatest(registrationRequest.type, handleRegistration);
 }
