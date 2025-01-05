@@ -12,9 +12,12 @@ import {
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { removePostsRequest } from "../../features/posts/postsSlice";
 
 export default function BasicCard({ post }) {
   const [menuAnchor, setMenuAnchor] = React.useState(null);
+  const dispatch = useDispatch();
 
   const handleMenuOpen = (event) => {
     setMenuAnchor(event.currentTarget);
@@ -22,6 +25,10 @@ export default function BasicCard({ post }) {
 
   const handleMenuClose = () => {
     setMenuAnchor(null);
+  };
+  const handleRemovePost = () => {
+    handleMenuClose();
+    dispatch(removePostsRequest(post.id));
   };
   return (
     <Card
@@ -106,7 +113,7 @@ export default function BasicCard({ post }) {
         open={Boolean(menuAnchor)}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleMenuClose}>Remove</MenuItem>
+        <MenuItem onClick={handleRemovePost}>Remove</MenuItem>
       </Menu>
     </Card>
   );

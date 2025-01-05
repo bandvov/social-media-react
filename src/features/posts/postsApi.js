@@ -6,3 +6,8 @@ export async function fetchPosts(userId, params) {
     mwithCredentials: true,
   });
 }
+export async function removePost(postId) {
+  return await api.delete(`/posts/${postId}`, {
+    mwithCredentials: true,
+  });
+}

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const postsSlice = createSlice({
-  name: "posts",
+  name: "post",
   initialState: {
     posts: [
       {
@@ -26,22 +26,45 @@ const postsSlice = createSlice({
     ],
   },
   reducers: {
-    postsRequest: (state) => {
+    fetchPostsRequest: (state) => {
       state.loading = true;
       state.error = false;
     },
-    success: (state, action) => {
+    fetchPostsSuccess: (state, action) => {
       state.loading = false;
       state.posts = [...state.posts, ...action.payload.posts];
       state.hasMorePosts = action.payload.hasMore;
       state.page += 1;
     },
-    failure: (state, action) => {
+    fetchPostsFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    removePostsRequest: (state) => {
+      state.loading = true;
+      state.error = false;
+    },
+    removePostSuccess: (state, action) => {
+      state.loading = false;
+      state.posts = [
+        ...state.posts.filter((post) => {
+          return post.id !== action.payload;
+        }),
+      ];
+    },
+    removePostFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
   },
 });
 
-export const { postsRequest, success, failure } = postsSlice.actions;
+export const {
+  fetchPostsFailure,
+  fetchPostsRequest,
+  fetchPostsSuccess,
+  removePostFailure,
+  removePostSuccess,
+  removePostsRequest,
+} = postsSlice.actions;
 export default postsSlice.reducer;
