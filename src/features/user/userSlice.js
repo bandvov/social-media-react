@@ -4,6 +4,7 @@ const profileSlice = createSlice({
   name: "user",
   initialState: {
     profile: {
+      id: 1,
       first_name: "",
       created_at: Date.now(),
       email: "bla@bla.test",
@@ -86,7 +87,7 @@ const profileSlice = createSlice({
     updateUserFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },    
+    },
   },
 });
 

@@ -5,7 +5,7 @@ import ProfileForm from "../components/profileForm";
 import { fetchUserProfileRequest } from "../features/user/userSlice";
 import ProfileInfo from "../components/ProfileInfo";
 
-const ProfilePage = ({ userId }) => {
+const EditProfilePage = ({ userId }) => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
 
@@ -23,4 +23,4 @@ const ProfilePage = ({ userId }) => {
   );
 };
 
-export default ProfilePage;
+export default EditProfilePage;

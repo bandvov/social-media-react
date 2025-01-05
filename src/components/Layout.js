@@ -22,8 +22,6 @@ import {
   Search,
   Brightness7,
   Brightness4,
-  People,
-  FollowTheSigns,
   Person2,
   Home,
   PostAdd,
@@ -135,7 +133,10 @@ const Layout = ({ userId, children }) => {
           >
             {userId && (
               <MenuItem onClick={handleProfileMenuClose}>
-                <Link component={RouterLink} to="/profile">
+                <Link
+                  component={RouterLink}
+                  to={`/user/${user?.id}/profile`}
+                >
                   Profile
                 </Link>
               </MenuItem>
@@ -149,7 +150,7 @@ const Layout = ({ userId, children }) => {
             )}
             {userId && (
               <MenuItem onClick={handleProfileMenuClose}>
-                <Link component={RouterLink} to="/">
+                <Link component={RouterLink} to="/login">
                   {" "}
                   Logout
                 </Link>
@@ -170,8 +171,16 @@ const Layout = ({ userId, children }) => {
           <List>
             {[
               { label: t("homePage"), url: "/", icon: <Home /> },
-              { label: t("myPosts"), url: "/posts", icon: <PostAdd /> },
-              { label: t("profile"), url: "/profile", icon: <Person2 /> },
+              {
+                label: t("myPosts"),
+                url: `/user/${user?.id}/posts/`,
+                icon: <PostAdd />,
+              },
+              {
+                label: t("profile"),
+                url: `/user/${user?.id}/profile`,
+                icon: <Person2 />,
+              },
             ].map((item, index) => (
               <ListItem button key={item.label}>
                 <ListItemIcon>{item.icon}</ListItemIcon>

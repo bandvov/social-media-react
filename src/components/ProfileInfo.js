@@ -70,17 +70,23 @@ export default function ProfileInfo({ userId }) {
           {/* Stats */}
           <Box display="flex" alignItems="center" gap={4}>
             <Typography color="text.primary" variant="body2">
-              <Link component={RouterLink} to="/posts">
+              <Link component={RouterLink} to={`/user/${profile?.id}/posts`}>
                 <strong>{posts_count}</strong> Posts
               </Link>
             </Typography>
             <Typography color="text.primary" variant="body2">
-              <Link component={RouterLink} to="/followers">
+              <Link
+                component={RouterLink}
+                to={`/user/${profile?.id}/followers`}
+              >
                 <strong>{followers_count}</strong> Followers
               </Link>
             </Typography>
             <Typography color="text.primary" variant="body2">
-              <Link component={RouterLink} to="/followees">
+              <Link
+                component={RouterLink}
+                to={`/user/${profile?.id}/followees`}
+              >
                 <strong>{followees_count}</strong> Following
               </Link>
             </Typography>
@@ -96,7 +102,11 @@ export default function ProfileInfo({ userId }) {
             onClose={handleMenuClose}
           >
             {userId && (
-              <MenuItem onClick={handleMenuClose}>Edit profile</MenuItem>
+              <MenuItem onClick={handleMenuClose}>
+                <Link component={RouterLink} to="/login">
+                  Edit profile
+                </Link>
+              </MenuItem>
             )}
             <MenuItem onClick={handleMenuClose}>Follow</MenuItem>
             <MenuItem onClick={handleMenuClose}>Unfollow</MenuItem>

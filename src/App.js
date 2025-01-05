@@ -4,7 +4,6 @@ import LoginPage from "./pages/LoginPage";
 import "./i18n";
 import RegistrationPage from "./pages/RegistrationPage";
 import Layout from "./components/Layout";
-import ProfilePage from "./pages/ProfilePage";
 import { useSelector } from "react-redux";
 import { ThemeProvider } from "@emotion/react";
 import { darkTheme, lightTheme } from "./styles/theme";
@@ -12,6 +11,7 @@ import FollowersPage from "./pages/FollowersPage";
 import FolloweesPage from "./pages/FolloweesPage";
 import HomePage from "./pages/HomePage";
 import PostsPage from "./pages/PostsPage";
+import EditProfilePage from "./pages/EditProfilePage";
 
 const App = () => {
   const darkMode = useSelector((state) => state.theme.darkMode);
@@ -23,16 +23,16 @@ const App = () => {
         <Layout userId={user.id}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/posts" element={<PostsPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
-            <Route path="/profile" element={<PostsPage />} />
+            <Route path="/user/:id/posts" element={<PostsPage />} />
+            <Route path="/user/:id/profile" element={<PostsPage />} />
             <Route
-              path="/profile/:id"
-              element={<ProfilePage userId={user.id} />}
+              path="/user/:id/edit-profile"
+              element={<EditProfilePage />}
             />
-            <Route path="/followers" element={<FollowersPage />} />
-            <Route path="/followees" element={<FolloweesPage />} />
+            <Route path="/user/:id/followers" element={<FollowersPage />} />
+            <Route path="/user/:id/followees" element={<FolloweesPage />} />
           </Routes>
         </Layout>
       </Router>
