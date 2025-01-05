@@ -43,7 +43,7 @@ function* handleFetchUserPosts(action) {
   }
 }
 
-export default function* profileSaga() {
+export default function* userSaga() {
   yield takeLatest(fetchUserProfileRequest.type, handleFetchUserPfofile);
   yield takeLatest(updateUserRequest.type, handleUpdateUser);
   yield takeLatest(fetchUserPostsRequest.type, handleFetchUserPosts);

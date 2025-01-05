@@ -60,8 +60,7 @@ export default function BasicCard({ post }) {
 
       <CardContent
         sx={{
-          pt: 0,
-          pb: 0,
+          py: 0,
         }}
       >
         <Typography color="text.secondary" variant="body2">

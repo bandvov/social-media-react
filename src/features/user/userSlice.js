@@ -86,7 +86,7 @@ const profileSlice = createSlice({
     updateUserFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
+    },    
   },
 });
 
