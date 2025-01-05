@@ -9,11 +9,11 @@ import {
 } from "@mui/material";
 import React from "react";
 
-export default function FollowerCard({ follower }) {
+export default function FollowerCard({ user, action }) {
   return (
     <Paper>
       <Card
-        key={follower.id}
+        key={user.id}
         variant="outlined"
         sx={{
           mb: 2,
@@ -22,24 +22,24 @@ export default function FollowerCard({ follower }) {
       >
         <CardHeader
           avatar={
-            <Avatar src={follower.profile_pic} aria-label="recipe">
-              {follower.username}
+            <Avatar src={user.profile_pic} aria-label="recipe">
+              {user.username}
             </Avatar>
           }
           title={
             <>
-              <Typography variant="h6">{follower.username}</Typography>
-              <Typography variant="body2">{follower.email}</Typography>
+              <Typography variant="h6">{user.username}</Typography>
+              <Typography variant="body2">{user.email}</Typography>
             </>
           }
-          action={<Button variant="outlined">Follow</Button>}
+          action={action}
         />
         <CardContent
           sx={{
             py: 0,
           }}
         >
-          <Typography variant="body2">{follower.bio}</Typography>
+          <Typography variant="body2">{user.bio}</Typography>
         </CardContent>
       </Card>
     </Paper>

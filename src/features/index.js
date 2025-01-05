@@ -3,7 +3,14 @@ import authSaga from "./auth/authSaga";
 import userSaga from "./user/userSaga";
 import postsSaga from "./posts/postsSaga";
 import followersSaga from "./followers/followersSaga";
+import followeesSaga from "./followees/followeesSaga";
 
 export default function* rootSaga() {
-  yield all([authSaga(), userSaga(), postsSaga(), followersSaga()]);
+  yield all([
+    authSaga(),
+    userSaga(),
+    postsSaga(),
+    followersSaga(),
+    followeesSaga(),
+  ]);
 }

@@ -4,8 +4,9 @@ import {
   fetchFollowersSuccess,
   fetchFollowersFailure,
 } from "./followersSlice";
+import { fetchFollowers } from "./followersApi";
 
-function* fetchFollowers() {
+function* handleFetchFollowers() {
   try {
     const { page } = yield select((state) => state.followers);
     const data = yield call(fetchFollowers, page);
@@ -22,5 +23,5 @@ function* fetchFollowers() {
 }
 
 export default function* followersSaga() {
-  yield takeLatest(fetchFollowersRequest.type, fetchFollowers);
+  yield takeLatest(fetchFollowersRequest.type, handleFetchFollowers);
 }

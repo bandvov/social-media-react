@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const followersSlice = createSlice({
-  name: "followers",
+const followeesSlice = createSlice({
+  name: "followees",
   initialState: {
     data: [
       {
@@ -9,7 +9,7 @@ const followersSlice = createSlice({
         username: "test",
         email: "bla@bla.bla",
         profile_pic:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Elon_Musk_Royal_Society_crop.jpg/440px-Elon_Musk_Royal_Society_crop.jpg",
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Aespa_Karina_%EC%B9%B4%EB%A6%AC%EB%82%98_20240618_03.png/800px-Aespa_Karina_%EC%B9%B4%EB%A6%AC%EB%82%98_20240618_03.png",
         bio: "test test test bio",
       },
       {
@@ -31,16 +31,16 @@ const followersSlice = createSlice({
     error: null,
   },
   reducers: {
-    fetchFollowersRequest: (state) => {
+    fetchFolloweesRequest: (state) => {
       state.isLoading = true;
     },
-    fetchFollowersSuccess: (state, action) => {
+    fetchFolloweesSuccess: (state, action) => {
       state.isLoading = false;
-      state.data = [...state.data, ...action.payload.followers];
+      state.data = [...state.data, ...action.payload.followees];
       state.page = action.payload.nextPage;
       state.hasMore = action.payload.hasMore;
     },
-    fetchFollowersFailure: (state, action) => {
+    fetchFolloweesFailure: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -48,9 +48,9 @@ const followersSlice = createSlice({
 });
 
 export const {
-  fetchFollowersRequest,
-  fetchFollowersSuccess,
-  fetchFollowersFailure,
-} = followersSlice.actions;
+  fetchFolloweesRequest,
+  fetchFolloweesSuccess,
+  fetchFolloweesFailure,
+} = followeesSlice.actions;
 
-export default followersSlice.reducer;
+export default followeesSlice.reducer;

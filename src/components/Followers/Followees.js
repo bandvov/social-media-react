@@ -2,38 +2,38 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Typography, CircularProgress, Button } from "@mui/material";
-import { fetchFollowersRequest } from "../../features/followers/followersSlice";
 import FollowerCard from "./FollowerCard";
+import { fetchFolloweesRequest } from "../../features/followees/followeesSlice";
 
-const Followers = () => {
+const Followees = () => {
   const dispatch = useDispatch();
-  const { data, isLoading, hasMore } = useSelector((state) => state.followers);
+  const { data, isLoading, hasMore } = useSelector((state) => state.followees);
 
   useEffect(() => {
     if (data.length === 0) {
-      dispatch(fetchFollowersRequest());
+      dispatch(fetchFolloweesRequest());
     }
   }, [dispatch, data]);
 
-  const fetchMoreFollowers = () => {
+  const fetchMoreFollowees = () => {
     if (!isLoading && hasMore) {
-      dispatch(fetchFollowersRequest());
+      dispatch(fetchFolloweesRequest());
     }
   };
 
   return (
     <InfiniteScroll
       dataLength={data.length}
-      next={fetchMoreFollowers}
+      next={fetchMoreFollowees}
       hasMore={hasMore}
       loader={<CircularProgress />}
-      endMessage={<Typography align="center">No more followers</Typography>}
+      endMessage={<Typography align="center">No more followees</Typography>}
     >
-      {data.map((follower) => (
-        <FollowerCard user={follower} action={<Button>Follow</Button>} />
+      {data.map((followee) => (
+        <FollowerCard user={followee} action={<Button>Unfollow</Button>} />
       ))}
     </InfiniteScroll>
   );
 };
 
-export default Followers;
+export default Followees;
