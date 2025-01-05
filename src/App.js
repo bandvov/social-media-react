@@ -26,7 +26,11 @@ const App = () => {
             <Route path="/posts" element={<PostsPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
-            <Route path="/profile" element={<ProfilePage userId={user.id} />} />
+            <Route path="/profile" element={<PostsPage />} />
+            <Route
+              path="/profile/:id"
+              element={<ProfilePage userId={user.id} />}
+            />
             <Route path="/followers" element={<FollowersPage />} />
             <Route path="/followees" element={<FolloweesPage />} />
           </Routes>

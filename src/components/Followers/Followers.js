@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Typography, CircularProgress, Button } from "@mui/material";
+import { Typography, CircularProgress, Button, Container } from "@mui/material";
 import { fetchFollowersRequest } from "../../features/followers/followersSlice";
 import FollowerCard from "./FollowerCard";
 
@@ -22,17 +22,19 @@ const Followers = () => {
   };
 
   return (
-    <InfiniteScroll
-      dataLength={data.length}
-      next={fetchMoreFollowers}
-      hasMore={hasMore}
-      loader={<CircularProgress />}
-      endMessage={<Typography align="center">No more followers</Typography>}
-    >
-      {data.map((follower) => (
-        <FollowerCard user={follower} action={<Button>Follow</Button>} />
-      ))}
-    </InfiniteScroll>
+    <Container maxWidth="md">
+      <InfiniteScroll
+        dataLength={data.length}
+        next={fetchMoreFollowers}
+        hasMore={hasMore}
+        loader={<CircularProgress />}
+        endMessage={<Typography align="center">No more followers</Typography>}
+      >
+        {data.map((follower) => (
+          <FollowerCard user={follower} action={<Button>Follow</Button>} />
+        ))}
+      </InfiniteScroll>
+    </Container>
   );
 };
 

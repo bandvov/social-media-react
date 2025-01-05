@@ -4,6 +4,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: {
+      id: 1,
       created_at: Date.now(),
       email: "bla@bla.test",
     },
