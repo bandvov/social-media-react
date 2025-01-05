@@ -14,8 +14,10 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { removePostsRequest } from "../../features/posts/postsSlice";
+import { useTranslation } from "react-i18next";
 
 export default function BasicCard({ post }) {
+  const { t } = useTranslation();
   const [menuAnchor, setMenuAnchor] = React.useState(null);
   const dispatch = useDispatch();
 
@@ -104,16 +106,16 @@ export default function BasicCard({ post }) {
         </Box>
       </CardActions>
       <CardActions>
-        <Button>Add reaction</Button>
-        <Button>Comment</Button>
-        <Button>Repost</Button>
+        <Button>{t("addReaction")}</Button>
+        <Button>{t("addComment")}</Button>
+        <Button>{t("repost")}</Button>
       </CardActions>
       <Menu
         anchorEl={menuAnchor}
         open={Boolean(menuAnchor)}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleRemovePost}>Remove</MenuItem>
+        <MenuItem onClick={handleRemovePost}>{t("removePost")}</MenuItem>
       </Menu>
     </Card>
   );

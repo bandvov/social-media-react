@@ -13,8 +13,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfileRequest } from "../features/user/userSlice";
 import { Link as RouterLink } from "react-router-dom";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useTranslation } from "react-i18next";
 
 export default function ProfileInfo({ userId }) {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
   const {
@@ -108,8 +111,8 @@ export default function ProfileInfo({ userId }) {
                 </Link>
               </MenuItem>
             )}
-            <MenuItem onClick={handleMenuClose}>Follow</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Unfollow</MenuItem>
+            <MenuItem onClick={handleMenuClose}>{t("follow")}</MenuItem>
+            <MenuItem onClick={handleMenuClose}>{t("unfollow")}</MenuItem>
           </Menu>
         </Box>
         {bio && (

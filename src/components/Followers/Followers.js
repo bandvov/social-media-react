@@ -4,8 +4,11 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Typography, CircularProgress, Button, Container } from "@mui/material";
 import { fetchFollowersRequest } from "../../features/followers/followersSlice";
 import FollowerCard from "./FollowerCard";
+import { useTranslation } from "react-i18next";
 
 const Followers = () => {
+    const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
   const { data, isLoading, hasMore } = useSelector((state) => state.followers);
 
@@ -31,7 +34,7 @@ const Followers = () => {
         endMessage={<Typography align="center">No more followers</Typography>}
       >
         {data.map((follower) => (
-          <FollowerCard user={follower} action={<Button>Follow</Button>} />
+          <FollowerCard user={follower} action={<Button>{t("follow")}</Button>} />
         ))}
       </InfiniteScroll>
     </Container>
