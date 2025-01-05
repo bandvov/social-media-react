@@ -3,8 +3,11 @@ import {
   fetchFollowersRequest,
   fetchFollowersSuccess,
   fetchFollowersFailure,
+  removeFollowerFailure,
+  removeFollowerRequest,
+  removeFollowerSuccess,
 } from "./followersSlice";
-import { fetchFollowers } from "./followersApi";
+import { fetchFollowers, removeFollower } from "./followersApi";
 
 function* handleFetchFollowers() {
   try {
@@ -21,7 +24,16 @@ function* handleFetchFollowers() {
     yield put(fetchFollowersFailure(error.message));
   }
 }
+function* handleRemoveFollower(action) {
+  try {
+    yield call(removeFollower, action.payload);
+    yield put(removeFollowerSuccess(action.payload));
+  } catch (error) {
+    yield put(removeFollowerFailure(error.message));
+  }
+}
 
 export default function* followersSaga() {
   yield takeLatest(fetchFollowersRequest.type, handleFetchFollowers);
+  yield takeLatest(removeFollowerRequest.type, handleRemoveFollower);
 }

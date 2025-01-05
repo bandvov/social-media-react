@@ -44,6 +44,22 @@ const followersSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    removeFollowerRequest: (state) => {
+      state.loading = true;
+      state.error = false;
+    },
+    removeFollowerSuccess: (state, action) => {
+      state.loading = false;
+      state.followers = [
+        ...state.followers.filter((f) => {
+          return f.id !== action.payload;
+        }),
+      ];
+    },
+    removeFollowerFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -51,6 +67,9 @@ export const {
   fetchFollowersRequest,
   fetchFollowersSuccess,
   fetchFollowersFailure,
+  removeFollowerFailure,
+  removeFollowerRequest,
+  removeFollowerSuccess,
 } = followersSlice.actions;
 
 export default followersSlice.reducer;

@@ -14,6 +14,7 @@ import { fetchUserProfileRequest } from "../features/user/userSlice";
 import { Link as RouterLink } from "react-router-dom";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useTranslation } from "react-i18next";
+import { removeFollowerRequest } from "../features/followers/followersSlice";
 
 export default function ProfileInfo({ userId }) {
   const { t } = useTranslation();
@@ -44,6 +45,12 @@ export default function ProfileInfo({ userId }) {
   const handleMenuClose = () => {
     setMenuAnchor(null);
   };
+
+  const handleRemoveFollower = () => {
+    handleMenuClose();
+    dispatch(removeFollowerRequest(userId));
+  };
+
   return (
     <Container maxWidth="md">
       <Box borderBottom={1} borderColor="divider" mb={2}>
@@ -112,7 +119,7 @@ export default function ProfileInfo({ userId }) {
               </MenuItem>
             )}
             <MenuItem onClick={handleMenuClose}>{t("follow")}</MenuItem>
-            <MenuItem onClick={handleMenuClose}>{t("unfollow")}</MenuItem>
+            <MenuItem onClick={handleRemoveFollower}>{t("unfollow")}</MenuItem>
           </Menu>
         </Box>
         {bio && (
