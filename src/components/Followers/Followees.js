@@ -6,23 +6,22 @@ import FollowerCard from "./FollowerCard";
 import { fetchFolloweesRequest } from "../../features/followees/followeesSlice";
 import { useTranslation } from "react-i18next";
 
-const Followees = () => {
+const Followees = ({ userId }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { data, isLoading, hasMore } = useSelector((state) => state.followees);
 
   useEffect(() => {
     if (data.length === 0) {
-      dispatch(fetchFolloweesRequest());
+      dispatch(fetchFolloweesRequest(userId));
     }
-  }, [dispatch, data]);
+  }, [dispatch, data, userId]);
 
   const fetchMoreFollowees = () => {
     if (!isLoading && hasMore) {
-      dispatch(fetchFolloweesRequest());
+      dispatch(fetchFolloweesRequest(userId));
     }
   };
-
   return (
     <Container maxWidth="md">
       <InfiniteScroll

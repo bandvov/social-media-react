@@ -21,6 +21,8 @@ export default function ProfileInfo({ userId }) {
 
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
+  const user = useSelector((state) => state.auth.user);
+
   const {
     email,
     posts_count,
@@ -65,7 +67,7 @@ export default function ProfileInfo({ userId }) {
             <Avatar
               src={profile_pic}
               alt={email}
-              sx={{ width: 64, height: 64, mr: 2 }}
+              sx={{ width: 64, height: 64, mr: 2, border: "4px solid white" }}
             />
             <Box>
               <Typography color="text.primary" variant="h6">
@@ -111,9 +113,12 @@ export default function ProfileInfo({ userId }) {
             open={Boolean(menuAnchor)}
             onClose={handleMenuClose}
           >
-            {userId && (
+            {user.id === profile.id && (
               <MenuItem onClick={handleMenuClose}>
-                <Link component={RouterLink} to="/login">
+                <Link
+                  component={RouterLink}
+                  to={`/user/${userId}/edit-profile`}
+                >
                   Edit profile
                 </Link>
               </MenuItem>

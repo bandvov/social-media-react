@@ -5,7 +5,7 @@ const followeesSlice = createSlice({
   initialState: {
     data: [
       {
-        id: 1,
+        id: 166,
         username: "test",
         email: "bla@bla.bla",
         profile_pic:
@@ -13,14 +13,14 @@ const followeesSlice = createSlice({
         bio: "test test test bio",
       },
       {
-        id: 2,
+        id: 28,
         username: "test",
         email: "bla@bla.bla",
         profile_pic:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Giselle_of_Aespa%2C_July_25%2C_2024_%282%29.png/526px-Giselle_of_Aespa%2C_July_25%2C_2024_%282%29.png",
+          "https://ellesg-prod.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2024/04/ellesg-bai-lu-feature.png",
       },
       {
-        id: 3,
+        id: 93,
         username: "test",
         email: "bla@bla.bla",
       },
@@ -33,6 +33,7 @@ const followeesSlice = createSlice({
   reducers: {
     fetchFolloweesRequest: (state) => {
       state.isLoading = true;
+      state.error = "";
     },
     fetchFolloweesSuccess: (state, action) => {
       state.isLoading = false;

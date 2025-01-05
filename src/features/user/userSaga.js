@@ -15,7 +15,6 @@ import { fetchUserPosts, fetchUserProfile, updateUser } from "./userApi";
 function* handleFetchUserPfofile(action) {
   try {
     // clear error message
-    yield put(fetchUserProfileFailure(""));
     const user = yield call(fetchUserProfile, action.payload);
     yield put(fetchUserProfileSuccess(user.data));
   } catch (error) {
@@ -25,7 +24,6 @@ function* handleFetchUserPfofile(action) {
 function* handleUpdateUser(action) {
   try {
     // clear error message
-    yield put(updateUserFailure(""));
     const user = yield call(updateUser, action.payload);
     yield put(updateUserSuccess(user.data));
   } catch (error) {
@@ -35,7 +33,6 @@ function* handleUpdateUser(action) {
 function* handleFetchUserPosts(action) {
   try {
     // clear error message
-    yield put(fetchUserPostsFailure(""));
     const user = yield call(fetchUserPosts, action.payload);
     yield put(fetchUserPostsSuccess(user.data));
   } catch (error) {

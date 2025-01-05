@@ -1,11 +1,10 @@
 // src/components/EditProfile.js
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { TextField } from "@mui/material";
 import { Button, CircularProgress, Box, Typography } from "@mui/material";
 import { profileSchema } from "../schemas/profile";
-import { updateUserRequest } from "../features/user/userSlice";
 
 const fields = [
   { name: "username" },
@@ -15,14 +14,9 @@ const fields = [
   { name: "password", type: "password" },
 ];
 
-const ProfileForm = () => {
+const ProfileForm = ({ profile, loading, error, handleSubmit }) => {
   const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
-  const { profile, loading, error } = useSelector((state) => state.user);
-
-  const handleSubmit = (values) => {
-    dispatch(updateUserRequest(profile.id, values));
-  };
 
   return (
     <Box>

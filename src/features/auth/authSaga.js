@@ -10,7 +10,6 @@ import { login, Logout, registration } from "./authApi";
 function* handleLogin(action) {
   try {
     // clear error message
-    yield put(failure(""));
     const user = yield call(login, action.payload);
     yield put(success(user.data));
   } catch (error) {
@@ -29,7 +28,6 @@ function* handleRegistration(action) {
 function* handleLogout(action) {
   try {
     // clear error message
-    yield put(failure(""));
     yield call(Logout);
     yield put(success(null));
   } catch (error) {

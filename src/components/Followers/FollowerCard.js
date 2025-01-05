@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Button,
   Card,
   CardContent,
   CardHeader,
@@ -22,7 +21,13 @@ export default function FollowerCard({ user, action }) {
       >
         <CardHeader
           avatar={
-            <Avatar src={user.profile_pic} aria-label="recipe">
+            <Avatar
+              sx={{
+                border: "2px solid white",
+              }}
+              src={user.profile_pic}
+              aria-label="recipe"
+            >
               {user.username}
             </Avatar>
           }

@@ -12,7 +12,6 @@ import { fetchPosts, removePost } from "./postsApi";
 function* handleFetchPosts(action) {
   try {
     // clear error message
-    yield put(fetchPostsFailure(""));
     const posts = yield call(fetchPosts, action.payload);
     yield put(fetchPostsSuccess(posts.data));
   } catch (error) {
@@ -20,11 +19,8 @@ function* handleFetchPosts(action) {
   }
 }
 function* handleRemovePost(action) {
-  console.log(action);
-
   try {
     // clear error message
-    yield put(removePostFailure(""));
     yield call(removePost, action.payload);
     yield put(removePostSuccess(action.payload));
   } catch (error) {

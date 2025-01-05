@@ -4,8 +4,10 @@ import ProfileInfo from "../components/ProfileInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserPostsRequest } from "../features/user/userSlice";
 import Posts from "../components/Posts/Posts";
+import { useParams } from "react-router-dom";
 
-export default function PostsPage({ userId = 1 }) {
+export default function PostsPage() {
+  const { userId } = useParams();
   const dispatch = useDispatch();
   const { posts, page, hasMorePosts } = useSelector((state) => state.user);
 
@@ -18,7 +20,7 @@ export default function PostsPage({ userId = 1 }) {
   };
   return (
     <Box>
-      <ProfileInfo />
+      <ProfileInfo userId={userId} />
       <Posts
         posts={posts}
         hasMorePosts={hasMorePosts}

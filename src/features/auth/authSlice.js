@@ -14,6 +14,7 @@ const authSlice = createSlice({
   reducers: {
     loginRequest: (state) => {
       state.loading = true;
+      state.error = false;
     },
     registrationRequest: (state) => {
       state.loading = true;

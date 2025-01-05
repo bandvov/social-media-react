@@ -2,12 +2,17 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Container } from "@mui/material";
 import ProfileForm from "../components/profileForm";
-import { fetchUserProfileRequest } from "../features/user/userSlice";
+import {
+  fetchUserProfileRequest,
+  updateUserRequest,
+} from "../features/user/userSlice";
 import ProfileInfo from "../components/ProfileInfo";
+import { useParams } from "react-router-dom";
 
-const EditProfilePage = ({ userId }) => {
+const EditProfilePage = () => {
+  const { userId } = useParams();
   const dispatch = useDispatch();
-  const { profile } = useSelector((state) => state.user);
+  const { profile, loading, error } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (userId) {
@@ -15,10 +20,18 @@ const EditProfilePage = ({ userId }) => {
     }
   }, [dispatch, userId]);
 
+  const handleSubmit = (values) => {
+    dispatch(updateUserRequest(profile.id, values));
+  };
   return (
     <Container maxWidth="md">
-      {profile && <ProfileInfo />}
-      <ProfileForm />
+      {profile && <ProfileInfo userId={profile.id} />}
+      <ProfileForm
+        profile={profile}
+        loading={loading}
+        error={error}
+        handleSubmit={handleSubmit}
+      />
     </Container>
   );
 };

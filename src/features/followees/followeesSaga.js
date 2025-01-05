@@ -6,10 +6,10 @@ import {
 } from "./followeesSlice";
 import { fetchFollowees } from "./followeesApi";
 
-function* handleFetchFollowees() {
+function* handleFetchFollowees(action) {
   try {
     const { page } = yield select((state) => state.followers);
-    const data = yield call(fetchFollowees, page);
+    const data = yield call(fetchFollowees, { page, ...action.payload });
     yield put(
       fetchFolloweesSuccess({
         followers: data.followers,
