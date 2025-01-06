@@ -67,7 +67,7 @@ const profileSlice = createSlice({
     },
     fetchUserPostsSuccess: (state, action) => {
       state.loading = false;
-      state.posts = [...state.posts, ...action.payload.posts];
+      state.posts = [...state.posts, ...action.payload];
       state.hasMorePosts = action.payload.hasMore;
       state.page += 1;
     },
