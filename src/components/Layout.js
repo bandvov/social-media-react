@@ -178,7 +178,7 @@ const Layout = ({ userId, children }) => {
               },
               {
                 label: t("profile"),
-                url: `/user/${user?.id}/profile`,
+                url: `/user/${user?.id}`,
                 icon: <Person2 />,
               },
             ].map((item, index) => (

@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import { Box } from "@mui/material";
-import ProfileInfo from "../components/ProfileInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserPostsRequest } from "../features/user/userSlice";
 import Posts from "../components/Posts/Posts";
@@ -19,14 +17,10 @@ export default function PostsPage() {
     dispatch(fetchUserPostsRequest(userId, { page }));
   };
   return (
-    <Box>
-      <ProfileInfo userId={userId} />
-      <Posts
-        posts={posts}
-        hasMorePosts={hasMorePosts}
-        loadMorePosts={loadMorePosts}
-      />
-      ;
-    </Box>
+    <Posts
+      posts={posts}
+      hasMorePosts={hasMorePosts}
+      loadMorePosts={loadMorePosts}
+    />
   );
 }

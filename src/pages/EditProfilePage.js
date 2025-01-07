@@ -6,7 +6,6 @@ import {
   fetchUserProfileRequest,
   updateUserRequest,
 } from "../features/user/userSlice";
-import ProfileInfo from "../components/ProfileInfo";
 import { useParams } from "react-router-dom";
 
 const EditProfilePage = () => {
@@ -25,7 +24,6 @@ const EditProfilePage = () => {
   };
   return (
     <Container maxWidth="md">
-      {profile && <ProfileInfo userId={profile.id} />}
       <ProfileForm
         profile={profile}
         loading={loading}
