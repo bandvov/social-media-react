@@ -12,6 +12,7 @@ import FolloweesPage from "./pages/FolloweesPage";
 import HomePage from "./pages/HomePage";
 import PostsPage from "./pages/PostsPage";
 import EditProfilePage from "./pages/EditProfilePage";
+import UserPage from "./pages/UserPage";
 
 const App = () => {
   const darkMode = useSelector((state) => state.theme.darkMode);
@@ -25,14 +26,12 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
-            <Route path="/user/:userId/posts" element={<PostsPage />} />
-            <Route path="/user/:userId/profile" element={<PostsPage />} />
-            <Route
-              path="/user/:userId/edit-profile"
-              element={<EditProfilePage />}
-            />
-            <Route path="/user/:userId/followers" element={<FollowersPage />} />
-            <Route path="/user/:userId/followees" element={<FolloweesPage />} />
+            <Route path="/user/:userId" element={<UserPage />}>
+              <Route path="posts" element={<PostsPage />} />
+              <Route path="edit" element={<EditProfilePage />} />
+              <Route path="followers" element={<FollowersPage />} />
+              <Route path="followees" element={<FolloweesPage />} />
+            </Route>
           </Routes>
         </Layout>
       </Router>
