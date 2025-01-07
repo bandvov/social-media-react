@@ -9,7 +9,8 @@ const resources = {
       profile: "Profile",
       email: "Email",
       password: "Password",
-      login: "Login",
+      login: "Log in",
+      logout: "Log out",
       signup: "Sign Up",
       submit: "submit",
       haveAccount: "Have account?",
@@ -20,6 +21,7 @@ const resources = {
       removePost: "Remove",
       follow: "Follow",
       unfollow: "Unfollow",
+      following: "Unfollowin",
     },
   },
   ua: {
@@ -30,6 +32,7 @@ const resources = {
       email: "Email",
       password: "Пароль",
       login: "Увійти",
+      logout: "Вийти",
       signup: "Реєстрація",
       submit: "відправити",
       haveAccount: "Маєте акаунт?",
@@ -40,6 +43,7 @@ const resources = {
       removePost: "Видалити",
       follow: "Підписатися",
       unfollow: "Відписатися",
+      following: "Підписаний",
     },
   },
 };

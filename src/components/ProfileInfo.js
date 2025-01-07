@@ -113,7 +113,7 @@ export default function ProfileInfo({ userId }) {
             open={Boolean(menuAnchor)}
             onClose={handleMenuClose}
           >
-            {user.id === profile.id && (
+            {user?.id === profile.id && (
               <MenuItem onClick={handleMenuClose}>
                 <Link
                   component={RouterLink}

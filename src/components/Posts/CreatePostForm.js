@@ -69,7 +69,6 @@ const CreatePostForm = () => {
                 variant="contained"
                 color="primary"
                 disabled={loading}
-                sx={{ mt: 2 }}
               >
                 Submit
               </Button>

@@ -16,7 +16,7 @@ function* handleFetchUserPfofile(action) {
   try {
     // clear error message
     const user = yield call(fetchUserProfile, action.payload);
-    yield put(fetchUserProfileSuccess(user.data));
+    yield put(fetchUserProfileSuccess(user?.data));
   } catch (error) {
     yield put(fetchUserProfileFailure(error.message));
   }
@@ -25,7 +25,7 @@ function* handleUpdateUser(action) {
   try {
     // clear error message
     const user = yield call(updateUser, action.payload);
-    yield put(updateUserSuccess(user.data));
+    yield put(updateUserSuccess(user?.data));
   } catch (error) {
     yield put(updateUserFailure(error.message));
   }
@@ -34,7 +34,7 @@ function* handleFetchUserPosts(action) {
   try {
     // clear error message
     const user = yield call(fetchUserPosts, action.payload);
-    yield put(fetchUserPostsSuccess(user.data));
+    yield put(fetchUserPostsSuccess(user?.data));
   } catch (error) {
     yield put(fetchUserPostsFailure(error.message));
   }
