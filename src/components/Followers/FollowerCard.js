@@ -8,11 +8,11 @@ import {
 } from "@mui/material";
 import React from "react";
 
-export default function FollowerCard({ user, action }) {
+export default function FollowerCard({ user, action, key }) {
   return (
-    <Paper>
+    <Paper key={key}>
       <Card
-        key={user.id}
+        key={user?.id}
         variant="outlined"
         sx={{
           mb: 2,
@@ -25,16 +25,16 @@ export default function FollowerCard({ user, action }) {
               sx={{
                 border: "2px solid white",
               }}
-              src={user.profile_pic}
+              src={user?.profile_pic}
               aria-label="recipe"
             >
-              {user.username}
+              {user?.username}
             </Avatar>
           }
           title={
             <>
-              <Typography variant="h6">{user.username}</Typography>
-              <Typography variant="body2">{user.email}</Typography>
+              <Typography variant="h6">{user?.username}</Typography>
+              <Typography variant="body2">{user?.email}</Typography>
             </>
           }
           action={action}
@@ -44,7 +44,7 @@ export default function FollowerCard({ user, action }) {
             py: 0,
           }}
         >
-          <Typography variant="body2">{user.bio}</Typography>
+          <Typography variant="body2">{user?.bio}</Typography>
         </CardContent>
       </Card>
     </Paper>

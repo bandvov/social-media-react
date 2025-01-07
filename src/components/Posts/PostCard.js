@@ -13,7 +13,7 @@ import {
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removePostsRequest } from "../../features/posts/postsSlice";
+import { removePostRequest } from "../../features/posts/postsSlice";
 import { useTranslation } from "react-i18next";
 
 export default function BasicCard({ post }) {
@@ -30,7 +30,7 @@ export default function BasicCard({ post }) {
   };
   const handleRemovePost = () => {
     handleMenuClose();
-    dispatch(removePostsRequest(post.id));
+    dispatch(removePostRequest(post.id));
   };
   return (
     <Card

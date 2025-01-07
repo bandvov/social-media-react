@@ -31,7 +31,7 @@ import { toggleTheme } from "../features/theme/themeSlice";
 import { Link as RouterLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const Layout = ({ userId, children }) => {
+const Layout = ({ children }) => {
   const { t, i18n } = useTranslation();
   const [checked, setChecked] = useState(i18n.language === "ua"); // Default state based on current language
 
@@ -131,28 +131,24 @@ const Layout = ({ userId, children }) => {
             open={isProfileMenuOpen}
             onClose={handleProfileMenuClose}
           >
-            {userId && (
+            {user?.id && (
               <MenuItem onClick={handleProfileMenuClose}>
-                <Link
-                  component={RouterLink}
-                  to={`/user/${user?.id}/profile`}
-                >
-                  Profile
+                <Link component={RouterLink} to={`/user/${user?.id}/profile`}>
+                  {t("Profile")}
                 </Link>
               </MenuItem>
             )}
-            {!userId && (
+            {!user?.id && (
               <MenuItem onClick={handleProfileMenuClose}>
                 <Link component={RouterLink} to="/login">
-                  Log in
+                  {t("login")}
                 </Link>
               </MenuItem>
             )}
-            {userId && (
+            {user?.id && (
               <MenuItem onClick={handleProfileMenuClose}>
                 <Link component={RouterLink} to="/login">
-                  {" "}
-                  Logout
+                  {t("logout")}
                 </Link>
               </MenuItem>
             )}

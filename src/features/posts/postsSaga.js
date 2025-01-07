@@ -4,10 +4,13 @@ import {
   fetchPostsRequest,
   fetchPostsSuccess,
   removePostFailure,
-  removePostsRequest,
+  removePostRequest,
   removePostSuccess,
+  createPostFailure,
+  createPostRequest,
+  createPostSuccess,
 } from "./postsSlice";
-import { fetchPosts, removePost } from "./postsApi";
+import { createPost, fetchPosts, removePost } from "./postsApi";
 
 function* handleFetchPosts(action) {
   try {
@@ -16,6 +19,16 @@ function* handleFetchPosts(action) {
     yield put(fetchPostsSuccess(posts.data));
   } catch (error) {
     yield put(fetchPostsFailure(error.message));
+  }
+}
+
+function* handleCreatePost(action) {
+  try {
+    // clear error message
+    yield call(createPost, action.payload);
+    yield put(createPostSuccess(action.payload));
+  } catch (error) {
+    yield put(createPostFailure(error.message));
   }
 }
 function* handleRemovePost(action) {
@@ -30,5 +43,6 @@ function* handleRemovePost(action) {
 
 export default function* postsSaga() {
   yield takeLatest(fetchPostsRequest.type, handleFetchPosts);
-  yield takeLatest(removePostsRequest.type, handleRemovePost);
+  yield takeLatest(createPostRequest.type, handleCreatePost);
+  yield takeLatest(removePostRequest.type, handleRemovePost);
 }

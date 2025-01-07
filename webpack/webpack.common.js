@@ -11,6 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, "../dist"), // Directory for output files
     filename: "[name].[contenthash].js", // File name with content hash for caching
     clean: true, // Clean the output directory before each build
+    publicPath: "/", // Ensure this matches your server's public path
   },
 
   // File extensions to resolve without specifying in imports

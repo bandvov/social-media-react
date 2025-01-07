@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Typography, CircularProgress, Button, Container } from "@mui/material";
@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 
 const Followers = ({ userId }) => {
   const { t } = useTranslation();
+  const [hovered, setHovered] = useState(false);
 
   const dispatch = useDispatch();
   const { data, isLoading, hasMore } = useSelector((state) => state.followers);
@@ -34,16 +35,33 @@ const Followers = ({ userId }) => {
         loader={<CircularProgress />}
         endMessage={<Typography align="center">No more followers</Typography>}
       >
-        {data.map((o) => (
-          <FollowerCard
-            user={o}
-            action={
-              <Button>
-                {user.id === o.followee_id ? "following" : t("follow")}
-              </Button>
-            }
-          />
-        ))}
+        {data.map((o) => {
+          const isFollowing = user?.id === o?.id;
+          return (
+            <FollowerCard
+              key={o.id}
+              user={o}
+              action={
+                <Button
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: hovered && isFollowing ? "pink" : "",
+                      color: hovered && isFollowing ? "red" : "",
+                    },
+                  }}
+                  onMouseEnter={() => setHovered(true)}
+                  onMouseLeave={() => setHovered(false)}
+                >
+                  {hovered && isFollowing
+                    ? t("unfollow")
+                    : isFollowing
+                      ? t("following")
+                      : t("follow")}
+                </Button>
+              }
+            />
+          );
+        })}
       </InfiniteScroll>
     </Container>
   );

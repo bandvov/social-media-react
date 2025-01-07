@@ -11,7 +11,7 @@ function* handleLogin(action) {
   try {
     // clear error message
     const user = yield call(login, action.payload);
-    yield put(success(user.data));
+    yield put(success(user?.data));
   } catch (error) {
     yield put(failure(error.message));
   }

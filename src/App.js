@@ -16,12 +16,11 @@ import UserPage from "./pages/UserPage";
 
 const App = () => {
   const darkMode = useSelector((state) => state.theme.darkMode);
-  const { user } = useSelector((state) => state.auth);
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <Router>
-        <Layout userId={user.id}>
+        <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
