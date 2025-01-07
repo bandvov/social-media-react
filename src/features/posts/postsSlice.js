@@ -41,7 +41,7 @@ const postsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    removePostsRequest: (state) => {
+    removePostRequest: (state) => {
       state.loading = true;
       state.error = false;
     },
@@ -57,6 +57,18 @@ const postsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    createPostRequest: (state) => {
+      state.loading = true;
+      state.error = false;
+    },
+    createPostSuccess: (state, action) => {
+      state.loading = false;
+      state.posts = state.posts.unshift(action.payload);
+    },
+    createPostFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -66,6 +78,9 @@ export const {
   fetchPostsSuccess,
   removePostFailure,
   removePostSuccess,
-  removePostsRequest,
+  removePostRequest,
+  createPostFailure,
+  createPostRequest,
+  createPostSuccess,
 } = postsSlice.actions;
 export default postsSlice.reducer;

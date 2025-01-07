@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserPostsRequest } from "../features/user/userSlice";
 import Posts from "../components/Posts/Posts";
 import { useParams } from "react-router-dom";
+import CreatePostForm from "../components/Posts/CreatePostForm";
 
 export default function PostsPage() {
   const { userId } = useParams();
@@ -21,6 +22,7 @@ export default function PostsPage() {
   return (
     <Box>
       <ProfileInfo userId={userId} />
+      <CreatePostForm />
       <Posts
         posts={posts}
         hasMorePosts={hasMorePosts}
