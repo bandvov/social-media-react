@@ -117,7 +117,7 @@ export default function ProfileInfo({ userId }) {
               <MenuItem onClick={handleMenuClose}>
                 <Link
                   component={RouterLink}
-                  to={`/user/${userId}/edit-profile`}
+                  to={`/user/${userId}/edit`}
                 >
                   Edit profile
                 </Link>
