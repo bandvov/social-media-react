@@ -11,6 +11,7 @@ function* handleLogin(action) {
   try {
     // clear error message
     const user = yield call(login, action.payload);
+    localStorage.setItem("userId", JSON.stringify(user?.data?.id));
     yield put(success(user?.data));
   } catch (error) {
     yield put(failure(error.message));

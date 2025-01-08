@@ -15,8 +15,8 @@ import { createPost, fetchPosts, removePost } from "./postsApi";
 function* handleFetchPosts(action) {
   try {
     // clear error message
-    const posts = yield call(fetchPosts, action.payload);
-    yield put(fetchPostsSuccess(posts.data));
+    const res = yield call(fetchPosts, action.payload);
+    yield put(fetchPostsSuccess({ posts: res.data }));
   } catch (error) {
     yield put(fetchPostsFailure(error.message));
   }

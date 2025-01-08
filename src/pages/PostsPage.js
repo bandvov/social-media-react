@@ -18,10 +18,13 @@ export default function PostsPage() {
     dispatch(fetchUserPostsRequest(userId, { page }));
   };
   return (
-    <Posts
-      posts={posts}
-      hasMorePosts={hasMorePosts}
-      loadMorePosts={loadMorePosts}
-    />
+    <>
+      <CreatePostForm />
+      <Posts
+        posts={posts}
+        hasMorePosts={hasMorePosts}
+        loadMorePosts={loadMorePosts}
+      />
+    </>
   );
 }

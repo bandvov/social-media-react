@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -30,6 +30,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../features/theme/themeSlice";
 import { Link as RouterLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { success } from "../features/auth/authSlice";
 
 const Layout = ({ children }) => {
   const { t, i18n } = useTranslation();
@@ -41,6 +42,14 @@ const Layout = ({ children }) => {
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.theme.darkMode);
   const user = useSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    // Check localStorage for userId
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId && !user?.id) {
+      dispatch(success({ id: +storedUserId }));
+    }
+  }, []);
 
   const handleThemeChange = () => {
     dispatch(toggleTheme());
