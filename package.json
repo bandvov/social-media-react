@@ -27,7 +27,8 @@
     "build": "webpack --node-env=production --config webpack/webpack.prod.js",
     "start:prod": "webpack serve --open",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "generate:certs": "openssl req -x509 -newkey rsa:4096 -keyout certs/key.pem -out certs/cert.pem -days 365 -nodes"
   },
   "eslintConfig": {
     "extends": [

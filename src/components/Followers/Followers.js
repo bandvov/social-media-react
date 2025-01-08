@@ -6,36 +6,36 @@ import { fetchFollowersRequest } from "../../features/followers/followersSlice";
 import FollowerCard from "./FollowerCard";
 import { useTranslation } from "react-i18next";
 
-const Followers = ({ userId }) => {
+const Followers = () => {
   const { t } = useTranslation();
   const [hovered, setHovered] = useState(false);
 
   const dispatch = useDispatch();
   const { data, isLoading, hasMore } = useSelector((state) => state.followers);
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.user.profile);
 
   useEffect(() => {
-    if (data.length === 0) {
-      dispatch(fetchFollowersRequest(userId));
+    if (data?.length === 0 && user?.id) {
+      dispatch(fetchFollowersRequest({ userId: user?.id }));
     }
-  }, [dispatch, data, userId]);
+  }, [dispatch, data, user?.id]);
 
   const fetchMoreFollowers = () => {
     if (!isLoading && hasMore) {
-      dispatch(fetchFollowersRequest(userId));
+      dispatch(fetchFollowersRequest({ userId: user?.id }));
     }
   };
 
   return (
     <Container maxWidth="md">
       <InfiniteScroll
-        dataLength={data.length}
+        dataLength={data?.length}
         next={fetchMoreFollowers}
         hasMore={hasMore}
         loader={<CircularProgress />}
         endMessage={<Typography align="center">No more followers</Typography>}
       >
-        {data.map((o) => {
+        {data?.map((o) => {
           const isFollowing = user?.id === o?.id;
           return (
             <FollowerCard

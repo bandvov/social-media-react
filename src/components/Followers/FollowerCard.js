@@ -12,7 +12,6 @@ export default function FollowerCard({ user, action, key }) {
   return (
     <Paper key={key}>
       <Card
-        key={user?.id}
         variant="outlined"
         sx={{
           mb: 2,

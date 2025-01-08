@@ -9,12 +9,12 @@ import { fetchFollowees } from "./followeesApi";
 function* handleFetchFollowees(action) {
   try {
     const { page } = yield select((state) => state.followers);
-    const data = yield call(fetchFollowees, { page, ...action.payload });
+    const res = yield call(fetchFollowees, { page, ...action.payload });
     yield put(
       fetchFolloweesSuccess({
-        followers: data.followers,
+        data: res.data,
         nextPage: page + 1,
-        hasMore: data.hasMore,
+        hasMore: res.hasMore,
       })
     );
   } catch (error) {

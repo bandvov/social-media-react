@@ -133,7 +133,7 @@ const Layout = ({ children }) => {
           >
             {user?.id && (
               <MenuItem onClick={handleProfileMenuClose}>
-                <Link component={RouterLink} to={`/user/${user?.id}/profile`}>
+                <Link component={RouterLink} to={`/user/${user?.id}`}>
                   {t("Profile")}
                 </Link>
               </MenuItem>
