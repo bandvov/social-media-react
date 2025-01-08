@@ -115,22 +115,22 @@ export default function ProfileInfo({ userId }) {
           >
             {user?.id === profile.id && (
               <MenuItem onClick={handleMenuClose}>
-                <Link
-                  component={RouterLink}
-                  to={`/user/${userId}/edit`}
-                >
+                <Link component={RouterLink} to={`/user/${userId}/edit`}>
                   Edit profile
                 </Link>
               </MenuItem>
             )}
-            {profile.is_followee ? (
+            {profile.is_follower && (
               <MenuItem onClick={handleRemoveFollower}>
                 {t("unfollow")}
               </MenuItem>
-            ) : (
-              <MenuItem onClick={handleMenuClose}>{t("follow")}</MenuItem>
             )}
-            {profile.is_follower && (
+            {!profile.is_followee &&
+              !profile.is_follower &&
+              user?.id !== profile.id && (
+                <MenuItem onClick={handleMenuClose}>{t("follow")}</MenuItem>
+              )}
+            {profile.is_followee && (
               <MenuItem onClick={handleMenuClose}>{t("remove")}</MenuItem>
             )}
           </Menu>
