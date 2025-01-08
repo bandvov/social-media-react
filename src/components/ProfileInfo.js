@@ -123,8 +123,16 @@ export default function ProfileInfo({ userId }) {
                 </Link>
               </MenuItem>
             )}
-            <MenuItem onClick={handleMenuClose}>{t("follow")}</MenuItem>
-            <MenuItem onClick={handleRemoveFollower}>{t("unfollow")}</MenuItem>
+            {profile.is_followee ? (
+              <MenuItem onClick={handleRemoveFollower}>
+                {t("unfollow")}
+              </MenuItem>
+            ) : (
+              <MenuItem onClick={handleMenuClose}>{t("follow")}</MenuItem>
+            )}
+            {profile.is_follower && (
+              <MenuItem onClick={handleMenuClose}>{t("remove")}</MenuItem>
+            )}
           </Menu>
         </Box>
         {bio && (
