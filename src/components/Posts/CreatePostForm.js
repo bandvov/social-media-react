@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import {
   Box,
   Typography,
@@ -12,15 +11,11 @@ import {
   Container,
 } from "@mui/material";
 import { createPostRequest } from "../../features/posts/postsSlice";
+import { createPostSchema } from "../../schemas/CreatePostSchema";
 
 const CreatePostForm = () => {
   const dispatch = useDispatch();
   const { loading, message, error } = useSelector((state) => state.post);
-
-  // Form validation schema
-  const validationSchema = Yup.object({
-    content: Yup.string().required("Content is required"),
-  });
 
   // Handle form submission
   const handleSubmit = (values, { resetForm }) => {
@@ -43,7 +38,7 @@ const CreatePostForm = () => {
 
         <Formik
           initialValues={{ content: "" }}
-          validationSchema={validationSchema}
+          validationSchema={createPostSchema}
           onSubmit={handleSubmit}
           validateOnBlur
         >
@@ -58,8 +53,8 @@ const CreatePostForm = () => {
                 margin="normal"
                 multiline
                 rows={4}
-                error={touched.email && !!errors.email}
-                helperText={<ErrorMessage name="email" />}
+                error={touched.content && !!errors.content}
+                helperText={<ErrorMessage name="content" />}
                 style={{
                   marginBottom: "1rem",
                 }}
