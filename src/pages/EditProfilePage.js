@@ -20,7 +20,7 @@ const EditProfilePage = () => {
   }, [dispatch, userId]);
 
   const handleSubmit = (values) => {
-    dispatch(updateUserRequest(profile.id, values));
+    dispatch(updateUserRequest({ userId: profile.id, data: values }));
   };
   return (
     <Container maxWidth="md">

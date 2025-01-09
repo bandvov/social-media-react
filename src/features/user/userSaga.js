@@ -8,13 +8,11 @@ import {
   fetchUserProfileSuccess,
   updateUserFailure,
   updateUserRequest,
-  updateUserSuccess,
 } from "./userSlice";
 import { fetchUserPosts, fetchUserProfile, updateUser } from "./userApi";
 
 function* handleFetchUserPfofile(action) {
   try {
-    // clear error message
     const user = yield call(fetchUserProfile, action.payload);
     yield put(fetchUserProfileSuccess(user?.data));
   } catch (error) {
@@ -23,16 +21,14 @@ function* handleFetchUserPfofile(action) {
 }
 function* handleUpdateUser(action) {
   try {
-    // clear error message
-    const user = yield call(updateUser, action.payload);
-    yield put(updateUserSuccess(user?.data));
+    yield call(updateUser, action.payload);
+    yield put(fetchUserProfileRequest(action.payload.userId));
   } catch (error) {
     yield put(updateUserFailure(error.message));
   }
 }
 function* handleFetchUserPosts(action) {
   try {
-    // clear error message
     const user = yield call(fetchUserPosts, action.payload);
     yield put(fetchUserPostsSuccess(user?.data));
   } catch (error) {

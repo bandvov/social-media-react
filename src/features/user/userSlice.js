@@ -78,11 +78,8 @@ const profileSlice = createSlice({
     updateUserRequest: (state) => {
       state.loading = true;
     },
-    updateUserSuccess: (state, action) => {
+    updateUserSuccess: (state) => {
       state.loading = false;
-      state.posts = [...state.posts, ...action.payload.posts];
-      state.hasMorePosts = action.payload.hasMore;
-      state.page += 1;
     },
     updateUserFailure: (state, action) => {
       state.loading = false;

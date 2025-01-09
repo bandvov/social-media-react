@@ -16,7 +16,6 @@ const fields = [
 
 const ProfileForm = ({ profile, loading, error, handleSubmit }) => {
   const [edit, setEdit] = useState(false);
-  const dispatch = useDispatch();
 
   return (
     <Box>
