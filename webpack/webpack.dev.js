@@ -1,7 +1,10 @@
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
 const fs = require("fs");
-const { LoaderOptionsPlugin } = require("webpack");
+const { LoaderOptionsPlugin, HotModuleReplacementPlugin } = require("webpack");
+const ESLintWebpackPlugin = require("eslint-webpack-plugin");
+const ErrorOverlayPlugin = require("error-overlay-webpack-plugin");
+const path = require("path");
 
 module.exports = merge(common, {
   // Set mode to development for unoptimized build
@@ -37,5 +40,17 @@ module.exports = merge(common, {
         },
       },
     }),
+    new ESLintWebpackPlugin({
+      files: "src/**/*.(js|jsx|ts|tsx)",
+      extensions: [".js", ".jsx", ".ts", ".tsx"],
+      overrideConfigFile: path.resolve(__dirname, "../eslintrc.json"),
+      lintDirtyModulesOnly: true,
+      emitError: true,
+      emitWarning: true,
+      failOnError: false,
+      failOnWarning: false,
+    }),
+    new ErrorOverlayPlugin(),
+    new HotModuleReplacementPlugin({}),
   ],
 });
