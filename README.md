@@ -2,6 +2,7 @@
 
 ## application structure
 
+```
 src/
 ├── components/
 │ └── LoginForm.js
@@ -21,7 +22,7 @@ src/
 ├── App.js
 ├── index.js
 └── store.js
-
+```
 ## Generate ssl certificates
 
 run in the terminal
