@@ -28,6 +28,8 @@
     "start:prod": "webpack serve --open",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "prettier --write .",
     "generate:certs": "openssl req -x509 -newkey rsa:4096 -keyout certs/key.pem -out certs/cert.pem -days 365 -nodes"
   },
   "eslintConfig": {
@@ -50,12 +52,17 @@
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.3",
     "babel-loader": "^9.2.1",
     "dotenv-webpack": "^8.1.0",
+    "error-overlay-webpack-plugin": "^1.1.1",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-webpack-plugin": "^4.2.0",
     "html-webpack-plugin": "^5.6.3",
     "prettier": "^3.4.2",
+    "querystring": "^0.2.1",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1"
   },

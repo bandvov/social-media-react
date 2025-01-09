@@ -29,7 +29,7 @@ const Followees = () => {
         dataLength={data?.length}
         next={fetchMoreFollowees}
         hasMore={hasMore}
-        loader={<CircularProgress />}
+        loader={isLoading && <CircularProgress />}
         endMessage={<Typography align="center">No more followees</Typography>}
       >
         {data?.map((followee) => (

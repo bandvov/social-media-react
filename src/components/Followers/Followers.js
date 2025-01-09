@@ -32,7 +32,7 @@ const Followers = () => {
         dataLength={data?.length}
         next={fetchMoreFollowers}
         hasMore={hasMore}
-        loader={<CircularProgress />}
+        loader={isLoading && <CircularProgress />}
         endMessage={<Typography align="center">No more followers</Typography>}
       >
         {data?.map((o) => {

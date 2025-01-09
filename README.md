@@ -1,32 +1,31 @@
 # Social media frontend
 
-
 ## application structure
 
 src/
 ├── components/
-│   └── LoginForm.js
+│ └── LoginForm.js
 ├── features/
-│   ├── auth/
-│   │   ├── authSlice.js
-│   │   ├── authSaga.js
-│   │   └── authApi.js
+│ ├── auth/
+│ │ ├── authSlice.js
+│ │ ├── authSaga.js
+│ │ └── authApi.js
 ├── i18n/
-│   └── index.js
+│ └── index.js
 ├── schemas/
-│   └── loginSchema.js
+│ └── loginSchema.js
 ├── styles/
-│   └── theme.js
+│ └── theme.js
 ├── pages/
-│   └── LoginPage.js
+│ └── LoginPage.js
 ├── App.js
 ├── index.js
 └── store.js
 
-
 ## Generate ssl certificates
 
-run in the terminal 
+run in the terminal
+
 ```bash
 openssl req -x509 -newkey rsa:4096 -keyout certs/key.pem -out certs/cert.pem -days 365 -nodes
 
