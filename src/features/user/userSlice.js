@@ -16,6 +16,9 @@ const profileSlice = createSlice({
     },
   },
   reducers: {
+    setInitialUserState: (state) => {
+      state.profile = {};
+    },
     fetchUserProfileRequest: (state) => {
       state.loading = true;
       state.error = false;
@@ -48,5 +51,6 @@ export const {
   updateUserFailure,
   updateUserRequest,
   updateUserSuccess,
+  setInitialUserState
 } = profileSlice.actions;
 export default profileSlice.reducer;

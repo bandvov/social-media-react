@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  data: [],
+  page: 1,
+  isLoading: false,
+  hasMore: true,
+  error: null,
+};
 const followeesSlice = createSlice({
   name: "followees",
-  initialState: {
-    data: [],
-    page: 1,
-    isLoading: false,
-    hasMore: true,
-    error: null,
-  },
+  initialState,
   reducers: {
+    setInitialFolloweesState: (state) => {
+      state = initialState;
+    },
     fetchFolloweesRequest: (state) => {
       state.isLoading = true;
       state.error = "";
@@ -33,6 +37,7 @@ export const {
   fetchFolloweesRequest,
   fetchFolloweesSuccess,
   fetchFolloweesFailure,
+  setInitialFolloweesState
 } = followeesSlice.actions;
 
 export default followeesSlice.reducer;

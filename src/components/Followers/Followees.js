@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Typography, CircularProgress, Button, Container } from "@mui/material";
 import FollowerCard from "./FollowerCard";
-import { fetchFolloweesRequest } from "../../features/followees/followeesSlice";
+import {
+  fetchFolloweesRequest,
+  setInitialFolloweesState,
+} from "../../features/followees/followeesSlice";
 import { useTranslation } from "react-i18next";
 
 const Followees = () => {
@@ -14,6 +17,7 @@ const Followees = () => {
 
   useEffect(() => {
     if (data?.length === 0 && user?.id) {
+      dispatch(setInitialFolloweesState());
       dispatch(fetchFolloweesRequest({ userId: user?.id }));
     }
   }, [dispatch, data, user?.id]);

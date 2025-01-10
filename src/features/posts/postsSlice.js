@@ -1,5 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  data: [],
+  page: 1,
+  isLoading: false,
+  hasMore: true,
+  error: null,
+};
+
 const postsSlice = createSlice({
   name: "post",
   initialState: {
@@ -40,6 +48,9 @@ const postsSlice = createSlice({
     ],
   },
   reducers: {
+    setInitialPostsState: (state) => {
+      state = initialState;
+    },
     fetchPostsRequest: (state) => {
       state.loading = true;
       state.error = false;
@@ -112,5 +123,6 @@ export const {
   createPostFailure,
   createPostRequest,
   createPostSuccess,
+  setInitialPostsState,
 } = postsSlice.actions;
 export default postsSlice.reducer;
