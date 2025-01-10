@@ -10,7 +10,10 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserProfileRequest } from "../features/user/userSlice";
+import {
+  fetchUserProfileRequest,
+  setInitialUserState,
+} from "../features/user/userSlice";
 import { Link as RouterLink } from "react-router-dom";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useTranslation } from "react-i18next";
@@ -36,6 +39,7 @@ export default function ProfileInfo({ userId }) {
 
   useEffect(() => {
     if (userId) {
+      dispatch(setInitialUserState());
       dispatch(fetchUserProfileRequest(userId));
     }
   }, [dispatch, userId]);

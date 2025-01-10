@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Typography, CircularProgress, Button, Container } from "@mui/material";
-import { fetchFollowersRequest } from "../../features/followers/followersSlice";
+import { fetchFollowersRequest, setInitialFollowersState } from "../../features/followers/followersSlice";
 import FollowerCard from "./FollowerCard";
 import { useTranslation } from "react-i18next";
 
@@ -16,6 +16,7 @@ const Followers = () => {
 
   useEffect(() => {
     if (data?.length === 0 && user?.id) {
+      dispatch(setInitialFollowersState())
       dispatch(fetchFollowersRequest({ userId: user?.id }));
     }
   }, [dispatch, data, user?.id]);
