@@ -49,7 +49,7 @@ const Layout = ({ children }) => {
     if (storedUserId && !user?.id) {
       dispatch(success({ id: +storedUserId }));
     }
-  }, []);
+  }, [dispatch, user?.id]);
 
   const handleThemeChange = () => {
     dispatch(toggleTheme());

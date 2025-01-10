@@ -1,6 +1,5 @@
 // src/components/EditProfile.js
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { TextField } from "@mui/material";
 import { Button, CircularProgress, Box, Typography } from "@mui/material";

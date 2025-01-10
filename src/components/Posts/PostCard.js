@@ -5,6 +5,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Divider,
   IconButton,
   Menu,
   MenuItem,
@@ -15,6 +16,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { removePostRequest } from "../../features/posts/postsSlice";
 import { useTranslation } from "react-i18next";
+import Reactions from "../Reactions";
 
 export default function BasicCard({ post }) {
   const { t } = useTranslation();
@@ -83,19 +85,16 @@ export default function BasicCard({ post }) {
           p: 2,
         }}
       >
-        <Typography variant="body2" color="text.primary">
-          {post.reactions_count} reactions
-        </Typography>
-
+        <Reactions reactions={post.reactions} />
         <Box
           display="grid"
           gap={2}
           gridTemplateColumns="1fr auto"
           alignSelf="end"
         >
-          {post.comments_count && (
+          {post.total_comments_count && (
             <Typography variant="body2" color="text.primary">
-              {post.comments_count} comments
+              {post.total_comments_count} comments
             </Typography>
           )}
           {post.share_count && (
@@ -105,6 +104,7 @@ export default function BasicCard({ post }) {
           )}
         </Box>
       </CardActions>
+      <Divider />
       <CardActions>
         <Button>{t("addReaction")}</Button>
         <Button>{t("addComment")}</Button>

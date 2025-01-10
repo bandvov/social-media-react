@@ -21,8 +21,13 @@ const profileSlice = createSlice({
           "test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test",
         author_name: "test test",
         created_at: Date.now(),
-        reactions_count: 44,
-        comments_count: 8,
+        reactions: [
+          { reaction_type: "Love", count: 1 },
+          { reaction_type: "Dislike", count: 33 },
+          { reaction_type: "Angry", count: 22 },
+        ],
+        total_reactions_count: 44,
+        total_comments_count: 8,
         share_count: 33,
       },
       {
@@ -30,7 +35,7 @@ const profileSlice = createSlice({
         content: "test",
         author_name: "test",
         created_at: Date.now(),
-        comments_count: 8,
+        total_comments_count: 8,
       },
       {
         id: 3,
@@ -44,7 +49,7 @@ const profileSlice = createSlice({
         content: "test",
         author_name: "test",
         created_at: Date.now(),
-        reactions_count: 44,
+        total_reactions_count: 44,
       },
     ],
   },

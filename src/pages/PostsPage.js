@@ -12,7 +12,7 @@ export default function PostsPage() {
 
   useEffect(() => {
     dispatch(fetchUserPostsRequest(userId, { page: 1 }));
-  }, []);
+  }, [dispatch, userId]);
 
   const loadMorePosts = () => {
     dispatch(fetchUserPostsRequest(userId, { page }));

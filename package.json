@@ -29,7 +29,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "lint:fix": "prettier --write .",
+    "lint:fix": "eslint . --fix",
     "generate:certs": "openssl req -x509 -newkey rsa:4096 -keyout certs/key.pem -out certs/cert.pem -days 365 -nodes"
   },
   "eslintConfig": {
@@ -58,6 +58,7 @@
     "babel-loader": "^9.2.1",
     "dotenv-webpack": "^8.1.0",
     "error-overlay-webpack-plugin": "^1.1.1",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-webpack-plugin": "^4.2.0",
     "html-webpack-plugin": "^5.6.3",
