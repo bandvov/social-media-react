@@ -1,5 +1,8 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import {
+  fetchUserPostsFailure,
+  fetchUserPostsRequest,
+  fetchUserPostsSuccess,
   fetchPostsFailure,
   fetchPostsRequest,
   fetchPostsSuccess,
@@ -10,7 +13,7 @@ import {
   createPostRequest,
   createPostSuccess,
 } from "./postsSlice";
-import { createPost, fetchPosts, removePost } from "./postsApi";
+import { createPost, fetchPosts, fetchUserPosts, removePost } from "./postsApi";
 
 function* handleFetchPosts(action) {
   try {
@@ -41,8 +44,18 @@ function* handleRemovePost(action) {
   }
 }
 
+function* handleFetchUserPosts(action) {
+  try {
+    const user = yield call(fetchUserPosts, action.payload);
+    yield put(fetchUserPostsSuccess(user?.data));
+  } catch (error) {
+    yield put(fetchUserPostsFailure(error.message));
+  }
+}
+
 export default function* postsSaga() {
   yield takeLatest(fetchPostsRequest.type, handleFetchPosts);
   yield takeLatest(createPostRequest.type, handleCreatePost);
   yield takeLatest(removePostRequest.type, handleRemovePost);
+  yield takeLatest(fetchUserPostsRequest.type, handleFetchUserPosts);
 }

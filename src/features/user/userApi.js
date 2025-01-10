@@ -8,8 +8,3 @@ export async function updateUser({ userId, data }) {
     withCredentials: true,
   });
 }
-export async function fetchUserPosts(userId, data) {
-  return await api.get(`/users/${userId}/posts`, data, {
-    withCredentials: true,
-  });
-}

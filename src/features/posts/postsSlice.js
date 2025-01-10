@@ -15,11 +15,18 @@ const postsSlice = createSlice({
       },
       {
         id: 2,
-        content: "test",
+        content:
+          "test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test",
         author_name: "test",
         created_at: Date.now(),
-        reactions: [{ reaction_type: "Angry", count: 1 }],
-        total_count: 22,
+        reactions: [
+          { reaction_type: "Love", count: 1 },
+          { reaction_type: "Dislike", count: 33 },
+          { reaction_type: "Angry", count: 22 },
+        ],
+        total_reactions_count: 44,
+        total_comments_count: 8,
+        share_count: 33,
       },
       {
         id: 3,
@@ -75,10 +82,27 @@ const postsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    fetchUserPostsRequest: (state) => {
+      state.etchUserPostsLoading = true;
+      state.etchUserPostsError = false;
+    },
+    fetchUserPostsSuccess: (state, action) => {
+      state.etchUserPostsLoading = false;
+      state.posts = [...state.posts, ...action.payload];
+      state.hasMorePosts = action.payload.hasMore;
+      state.page += 1;
+    },
+    fetchUserPostsFailure: (state, action) => {
+      state.etchUserPostsLoading = false;
+      state.etchUserPostsError = action.payload;
+    },
   },
 });
 
 export const {
+  fetchUserPostsFailure,
+  fetchUserPostsRequest,
+  fetchUserPostsSuccess,
   fetchPostsFailure,
   fetchPostsRequest,
   fetchPostsSuccess,
