@@ -14,3 +14,9 @@ export async function removePost(postId) {
     withCredentials: true,
   });
 }
+
+export async function fetchUserPosts(userId, data) {
+  return await api.get(`/users/${userId}/posts`, data, {
+    withCredentials: true,
+  });
+}

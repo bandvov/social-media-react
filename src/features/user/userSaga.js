@@ -1,15 +1,12 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import {
-  fetchUserPostsFailure,
-  fetchUserPostsRequest,
-  fetchUserPostsSuccess,
   fetchUserProfileFailure,
   fetchUserProfileRequest,
   fetchUserProfileSuccess,
   updateUserFailure,
   updateUserRequest,
 } from "./userSlice";
-import { fetchUserPosts, fetchUserProfile, updateUser } from "./userApi";
+import { fetchUserProfile, updateUser } from "./userApi";
 
 function* handleFetchUserPfofile(action) {
   try {
@@ -27,17 +24,8 @@ function* handleUpdateUser(action) {
     yield put(updateUserFailure(error.message));
   }
 }
-function* handleFetchUserPosts(action) {
-  try {
-    const user = yield call(fetchUserPosts, action.payload);
-    yield put(fetchUserPostsSuccess(user?.data));
-  } catch (error) {
-    yield put(fetchUserPostsFailure(error.message));
-  }
-}
 
 export default function* userSaga() {
   yield takeLatest(fetchUserProfileRequest.type, handleFetchUserPfofile);
   yield takeLatest(updateUserRequest.type, handleUpdateUser);
-  yield takeLatest(fetchUserPostsRequest.type, handleFetchUserPosts);
 }
