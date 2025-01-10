@@ -1,7 +1,7 @@
-import React, { useEffect, } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Typography, CircularProgress,  Container } from "@mui/material";
+import { Typography, CircularProgress, Container } from "@mui/material";
 import {
   fetchFollowersRequest,
   removeFollowerRequest,
@@ -45,9 +45,10 @@ const Followers = () => {
               action={
                 <FollowerButton
                   handler={() => {
-                    dispatch(removeFollowerRequest(o.id))
+                    dispatch(removeFollowerRequest(o.id));
                   }}
-                  isFollowedBy={o.is_followed_by}
+                  followedByFollower={o.followed_by_follower}
+                  followsFollower={o.follows_follower}
                 />
               }
             />
