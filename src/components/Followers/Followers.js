@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Typography, CircularProgress, Button, Container } from "@mui/material";
-import { fetchFollowersRequest, setInitialFollowersState } from "../../features/followers/followersSlice";
+import { Typography, CircularProgress,  Container } from "@mui/material";
+import {
+  fetchFollowersRequest,
+  removeFollowerRequest,
+  setInitialFollowersState,
+} from "../../features/followers/followersSlice";
 import FollowerCard from "./FollowerCard";
-import { useTranslation } from "react-i18next";
+import FollowerButton from "./FollowerButton";
 
 const Followers = () => {
-  const { t } = useTranslation();
-  const [hovered, setHovered] = useState(false);
-
   const dispatch = useDispatch();
   const { data, isLoading, hasMore } = useSelector((state) => state.followers);
   const user = useSelector((state) => state.user.profile);
 
   useEffect(() => {
     if (data?.length === 0 && user?.id) {
-      dispatch(setInitialFollowersState())
+      dispatch(setInitialFollowersState());
       dispatch(fetchFollowersRequest({ userId: user?.id }));
     }
   }, [dispatch, data, user?.id]);
@@ -37,28 +38,17 @@ const Followers = () => {
         endMessage={<Typography align="center">No more followers</Typography>}
       >
         {data?.map((o) => {
-          const isFollowing = user?.id === o?.id;
           return (
             <FollowerCard
               key={o.id}
               user={o}
               action={
-                <Button
-                  sx={{
-                    "&:hover": {
-                      backgroundColor: hovered && isFollowing ? "pink" : "",
-                      color: hovered && isFollowing ? "red" : "",
-                    },
+                <FollowerButton
+                  handler={() => {
+                    dispatch(removeFollowerRequest(o.id))
                   }}
-                  onMouseEnter={() => setHovered(true)}
-                  onMouseLeave={() => setHovered(false)}
-                >
-                  {hovered && isFollowing
-                    ? t("unfollow")
-                    : isFollowing
-                      ? t("following")
-                      : t("follow")}
-                </Button>
+                  isFollowedBy={o.is_followed_by}
+                />
               }
             />
           );

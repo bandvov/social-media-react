@@ -27,7 +27,7 @@ function* handleFetchFollowers(action) {
 function* handleRemoveFollower(action) {
   try {
     yield call(removeFollower, action.payload);
-    yield put(removeFollowerSuccess(action.payload));
+    yield put(removeFollowerSuccess());
   } catch (error) {
     yield put(removeFollowerFailure(error.message));
   }

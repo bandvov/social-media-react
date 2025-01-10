@@ -21,7 +21,7 @@ const resources = {
       removePost: "Remove",
       follow: "Follow",
       unfollow: "Unfollow",
-      following: "Unfollowin",
+      following: "Following",
     },
   },
   ua: {

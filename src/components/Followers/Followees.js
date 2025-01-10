@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Typography, CircularProgress, Button, Container } from "@mui/material";
+import { Typography, CircularProgress, Container } from "@mui/material";
 import FollowerCard from "./FollowerCard";
 import {
   fetchFolloweesRequest,
   setInitialFolloweesState,
 } from "../../features/followees/followeesSlice";
-import { useTranslation } from "react-i18next";
+import FollowerButton from "./FollowerButton";
 
 const Followees = () => {
-  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { data, isLoading, hasMore } = useSelector((state) => state.followees);
   const user = useSelector((state) => state.user.profile);
@@ -40,7 +39,7 @@ const Followees = () => {
           <FollowerCard
             key={followee.id}
             user={followee}
-            action={<Button>{t("unfollow")}</Button>}
+            action={<FollowerButton isFollowedBy={followee.is_followed_by} />}
           />
         ))}
       </InfiniteScroll>
