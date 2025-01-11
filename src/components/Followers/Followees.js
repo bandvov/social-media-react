@@ -13,18 +13,19 @@ import FollowerButton from "./FollowerButton";
 const Followees = () => {
   const dispatch = useDispatch();
   const { data, isLoading, hasMore } = useSelector((state) => state.followees);
-  const user = useSelector((state) => state.user.profile);
+  const user = useSelector((state) => state.auth.user);
+  const profile = useSelector((state) => state.user.profile);
 
   useEffect(() => {
-    if (data?.length === 0 && user?.id) {
+    if (data?.length === 0 && profile?.id) {
       dispatch(setInitialFolloweesState());
-      dispatch(fetchFolloweesRequest({ userId: user?.id }));
+      dispatch(fetchFolloweesRequest({ userId: profile?.id }));
     }
-  }, [dispatch, data, user?.id]);
+  }, [dispatch, data, profile?.id]);
 
   const fetchMoreFollowees = () => {
     if (!isLoading && hasMore) {
-      dispatch(fetchFolloweesRequest({ userId: user?.id }));
+      dispatch(fetchFolloweesRequest({ userId: profile?.id }));
     }
   };
   return (
@@ -41,13 +42,15 @@ const Followees = () => {
             key={followee.id}
             user={followee}
             action={
-              <FollowerButton
-                handler={() => {
-                  dispatch(removeFolloweeRequest(followee.id));
-                }}
-                followedByFollower={followee.followed_by_follower}
-                followsFollower={followee.follows_follower}
-              />
+              user.id !== followee.id && (
+                <FollowerButton
+                  handler={() => {
+                    dispatch(removeFolloweeRequest(followee.id));
+                  }}
+                  followedByFollower={followee.followed_by_follower}
+                  followsFollower={followee.follows_follower}
+                />
+              ) 
             }
           />
         ))}

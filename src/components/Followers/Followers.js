@@ -13,18 +13,19 @@ import FollowerButton from "./FollowerButton";
 const Followers = () => {
   const dispatch = useDispatch();
   const { data, isLoading, hasMore } = useSelector((state) => state.followers);
-  const user = useSelector((state) => state.user.profile);
+  const user = useSelector((state) => state.auth.user);
+  const profile = useSelector((state) => state.user.profile);
 
   useEffect(() => {
-    if (data?.length === 0 && user?.id) {
+    if (data?.length === 0 && profile?.id) {
       dispatch(setInitialFollowersState());
-      dispatch(fetchFollowersRequest({ userId: user?.id }));
+      dispatch(fetchFollowersRequest({ userId: profile?.id }));
     }
-  }, [dispatch, data, user?.id]);
+  }, [dispatch, data, profile?.id]);
 
   const fetchMoreFollowers = () => {
     if (!isLoading && hasMore) {
-      dispatch(fetchFollowersRequest({ userId: user?.id }));
+      dispatch(fetchFollowersRequest({ userId: profile?.id }));
     }
   };
 
@@ -37,19 +38,21 @@ const Followers = () => {
         loader={isLoading && <CircularProgress />}
         endMessage={<Typography align="center">No more followers</Typography>}
       >
-        {data?.map((o) => {
+        {data?.map((follower) => {
           return (
             <FollowerCard
-              key={o.id}
-              user={o}
+              key={follower.id}
+              user={follower}
               action={
-                <FollowerButton
-                  handler={() => {
-                    dispatch(removeFollowerRequest(o.id));
-                  }}
-                  followedByFollower={o.followed_by_follower}
-                  followsFollower={o.follows_follower}
-                />
+                user.id !== follower.id && (
+                  <FollowerButton
+                    handler={() => {
+                      dispatch(removeFollowerRequest(follower.id));
+                    }}
+                    followedByFollower={follower.followed_by_follower}
+                    followsFollower={follower.follows_follower}
+                  />
+                )
               }
             />
           );
