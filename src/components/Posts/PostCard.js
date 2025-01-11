@@ -17,11 +17,13 @@ import { useDispatch } from "react-redux";
 import { removePostRequest } from "../../features/posts/postsSlice";
 import { useTranslation } from "react-i18next";
 import Reactions from "../Reactions";
+import DOMPurify from "dompurify";
 
 export default function BasicCard({ post }) {
   const { t } = useTranslation();
   const [menuAnchor, setMenuAnchor] = React.useState(null);
   const dispatch = useDispatch();
+  const sanitizedContent = DOMPurify.sanitize(post.content);
 
   const handleMenuOpen = (event) => {
     setMenuAnchor(event.currentTarget);
@@ -74,9 +76,13 @@ export default function BasicCard({ post }) {
           py: 0,
         }}
       >
-        <Typography color="text.secondary" variant="body2">
-          {post.content}
-        </Typography>
+        <Typography
+          dangerouslySetInnerHTML={{
+            __html: sanitizedContent,
+          }}
+          color="text.secondary"
+          variant="body2"
+        ></Typography>
       </CardContent>
       <CardActions
         sx={{

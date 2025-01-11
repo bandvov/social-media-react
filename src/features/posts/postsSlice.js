@@ -39,7 +39,7 @@ const postsSlice = createSlice({
       {
         id: 3,
         content:
-          "test <image src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Giselle_of_Aespa%2C_July_25%2C_2024_%282%29.png/526px-Giselle_of_Aespa%2C_July_25%2C_2024_%282%29.png' />",
+          "test blabla <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Giselle_of_Aespa%2C_July_25%2C_2024_%282%29.png/526px-Giselle_of_Aespa%2C_July_25%2C_2024_%282%29.png' /> some text bla bla",
         author_name: "test",
         created_at: Date.now(),
         reactions: [{ reaction_type: "Love", count: 1 }],
