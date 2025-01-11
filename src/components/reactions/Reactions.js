@@ -1,14 +1,6 @@
 import React from "react";
 import { Avatar, AvatarGroup, Tooltip, Box, Typography } from "@mui/material";
-
-// Reaction Icons (can be replaced with custom icons)
-const reactionIcons = {
-  Like: "👍",
-  Dislike: "👎",
-  Love: "❤️",
-  Angry: "😡",
-  Wow: "😮",
-};
+import { reactionIcons } from "../../constants";
 
 const Reactions = ({ reactions }) => {
   const total_count = 2;
