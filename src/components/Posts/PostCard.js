@@ -19,6 +19,7 @@ import { useTranslation } from "react-i18next";
 import Reactions from "../reactions/Reactions";
 import DOMPurify from "dompurify";
 import AddReactionMenu from "../reactions/AddReactionMenu";
+import AddCommentModal from "../AddCommentModal";
 
 export default function BasicCard({ post }) {
   const { t } = useTranslation();
@@ -113,7 +114,8 @@ export default function BasicCard({ post }) {
       </CardActions>
       <Divider />
       <CardActions>
-        <AddReactionMenu/>
+        <AddReactionMenu />
+        <AddCommentModal />
         <Button>{t("addComment")}</Button>
         <Button>{t("repost")}</Button>
       </CardActions>
