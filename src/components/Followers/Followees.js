@@ -5,6 +5,7 @@ import { Typography, CircularProgress, Container } from "@mui/material";
 import FollowerCard from "./FollowerCard";
 import {
   fetchFolloweesRequest,
+  removeFolloweeRequest,
   setInitialFolloweesState,
 } from "../../features/followees/followeesSlice";
 import FollowerButton from "./FollowerButton";
@@ -39,7 +40,15 @@ const Followees = () => {
           <FollowerCard
             key={followee.id}
             user={followee}
-            action={<FollowerButton isFollowedBy={followee.is_followed_by} />}
+            action={
+              <FollowerButton
+                handler={() => {
+                  dispatch(removeFolloweeRequest(followee.id));
+                }}
+                followedByFollower={followee.followed_by_follower}
+                followsFollower={followee.follows_follower}
+              />
+            }
           />
         ))}
       </InfiniteScroll>

@@ -31,7 +31,7 @@ export default function FollowerButton({
           : followsFollower
             ? t("following")
             : followedByFollower
-              ? t("isfollowing")
+              ? t("follows")
               : t("follow")}
     </Button>
   );

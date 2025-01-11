@@ -30,6 +30,22 @@ const followeesSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+     removeFolloweeRequest: (state) => {
+      state.loading = true;
+      state.error = false;
+    },
+    removeFolloweeSuccess: (state, action) => {
+      state.loading = false;
+      state.followees = [
+        ...state.followees.filter((f) => {
+          return f.id !== action.payload;
+        }),
+      ];
+    },
+    removeFolloweeFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -37,6 +53,9 @@ export const {
   fetchFolloweesRequest,
   fetchFolloweesSuccess,
   fetchFolloweesFailure,
+  removeFolloweeFailure,
+  removeFolloweeRequest,
+  removeFolloweeSuccess,
   setInitialFolloweesState
 } = followeesSlice.actions;
 
