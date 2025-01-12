@@ -15,9 +15,9 @@ function* handleFetchFollowers(action) {
     const res = yield call(fetchFollowers, { page, ...action.payload });
     yield put(
       fetchFollowersSuccess({
-        data: res.data.data,
+        data: res.data,
         nextPage: page + 1,
-        hasMore: res.data.hasMore,
+        hasMore: res.hasMore,
       })
     );
   } catch (error) {

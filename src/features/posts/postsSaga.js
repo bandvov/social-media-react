@@ -23,9 +23,9 @@ function* handleFetchPosts(action) {
     const res = yield call(fetchPosts, { page, ...action.payload });
     yield put(
       fetchPostsSuccess({
-        data: res.data.data,
+        data: res.data,
         nextPage: page + 1,
-        hasMore: res.data.hasMore,
+        hasMore: res.hasMore||true,
       })
     );
   } catch (error) {

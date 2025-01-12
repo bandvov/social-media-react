@@ -10,25 +10,13 @@ import {
 
 export default function PostsPage() {
   const { userId } = useParams();
-  const dispatch = useDispatch();
-  const { data, hasMorePosts } = useSelector((state) => state.post);
-
-  useEffect(() => {
-    dispatch(setInitialPostsState());
-    dispatch(fetchUserPostsRequest({ userId, limit: 2 }));
-  }, [dispatch, userId]);
-
-  const loadMorePosts = () => {
-    dispatch(fetchUserPostsRequest({ userId, limit: 2 }));
-  };
+ 
   return (
     <>
       <CreatePostForm />
       <Posts
-        posts={data}
-        hasMorePosts={hasMorePosts}
-        loadMorePosts={loadMorePosts}
-      />
+        userId={userId}
+            />
     </>
   );
 }

@@ -11,7 +11,7 @@ const initialState = {
 const postsSlice = createSlice({
   name: "post",
   initialState: {
-    posts: [
+    data: [
       {
         id: 1,
         content:
@@ -58,7 +58,7 @@ const postsSlice = createSlice({
     fetchPostsSuccess: (state, action) => {
       state.loading = false;
       state.data = [...state.data, ...action.payload.data];
-      state.hasMorePosts = action.payload.hasMore;
+      state.hasMore = action.payload.hasMore;
       state.page += 1;
     },
     fetchPostsFailure: (state, action) => {

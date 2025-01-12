@@ -12,9 +12,9 @@ function* handleFetchFollowees(action) {
     const res = yield call(fetchFollowees, { page, ...action.payload });
     yield put(
       fetchFolloweesSuccess({
-        data: res.data.data,
+        data: res.data,
         nextPage: page + 1,
-        hasMore: res.data.hasMore,
+        hasMore: res.hasMore,
       }),
     );
   } catch (error) {
