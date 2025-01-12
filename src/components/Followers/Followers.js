@@ -12,7 +12,7 @@ import FollowerButton from "./FollowerButton";
 
 const Followers = () => {
   const dispatch = useDispatch();
-  const { data, isLoading, hasMore } = useSelector((state) => state.followers);
+  const { data, loading, hasMore } = useSelector((state) => state.followers);
   const user = useSelector((state) => state.auth.user);
   const profile = useSelector((state) => state.user.profile);
 
@@ -24,7 +24,7 @@ const Followers = () => {
   }, [dispatch, data?.length, profile?.id]);
 
   const fetchMoreFollowers = () => {
-    if (!isLoading && hasMore) {
+    if (!loading && hasMore) {
       dispatch(fetchFollowersRequest({ userId: profile?.id, limit: 4 }));
     }
   };
@@ -35,7 +35,7 @@ const Followers = () => {
         dataLength={data?.length}
         next={fetchMoreFollowers}
         hasMore={hasMore}
-        loader={isLoading && <CircularProgress />}
+        loader={loading.fetchFollowers && <CircularProgress />}
         endMessage={<Typography align="center">No more followers</Typography>}
       >
         {data?.map((follower) => {

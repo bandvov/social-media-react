@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Container, Typography } from "@mui/material";
+import { CircularProgress, Container } from "@mui/material";
 import PostCard from "./PostCard";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,9 +8,9 @@ import {
   setInitialPostsState,
 } from "../../features/posts/postsSlice";
 
-export default function Posts({ userId }) {
+export default function Posts() {
   const dispatch = useDispatch();
-  const { data, hasMorePosts } = useSelector((state) => state.post);
+  const { data, loading, hasMore } = useSelector((state) => state.post);
   const profile = useSelector((state) => state.user.profile);
 
   useEffect(() => {
@@ -28,8 +28,8 @@ export default function Posts({ userId }) {
       <InfiniteScroll
         dataLength={data.length}
         next={loadMorePosts}
-        hasMore={hasMorePosts}
-        loader={<Typography>Loading...</Typography>}
+        hasMore={hasMore}
+        loader={loading.fetchUserPosts && <CircularProgress />}
       >
         {data?.map((post) => (
           <PostCard key={post.created_at} post={post} />

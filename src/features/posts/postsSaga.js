@@ -16,16 +16,14 @@ import {
 import { createPost, fetchPosts, fetchUserPosts, removePost } from "./postsApi";
 
 function* handleFetchPosts(action) {
-  console.log({ action });
-
   try {
     const { page } = yield select((state) => state.post);
     const res = yield call(fetchPosts, { page, ...action.payload });
     yield put(
       fetchPostsSuccess({
-        data: res.data,
-        hasMore: res.hasMore || true,
-      }),
+        data: res.data.data,
+        hasMore: res.data.hasMore,
+      })
     );
   } catch (error) {
     yield put(fetchPostsFailure(error.message));
@@ -53,14 +51,13 @@ function* handleRemovePost(action) {
 
 function* handleFetchUserPosts(action) {
   try {
-     const { page } = yield select((state) => state.post);
-     console.log({page});     
+    const { page } = yield select((state) => state.post);
     const res = yield call(fetchUserPosts, { page, ...action.payload });
     yield put(
       fetchUserPostsSuccess({
-        data: res.data,
-        hasMore: res.hasMore,
-      }),
+        data: res.data.data,
+        hasMore: res.data.hasMore,
+      })
     );
   } catch (error) {
     yield put(fetchUserPostsFailure(error.message));

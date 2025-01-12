@@ -14,32 +14,40 @@ const profileSlice = createSlice({
       bio: "bla bla some bio",
       profile_pic: "https://i.mydramalist.com/4Jjdk_5c.jpg",
     },
+    loading:{
+      fetchUserProfile: false,
+      updateUser:false,
+    },
+    errors:{
+      fetchUserProfile: false,
+      updateUser:false,
+    }
   },
   reducers: {
     setInitialUserState: (state) => {
       state.profile = {};
     },
     fetchUserProfileRequest: (state) => {
-      state.loading = true;
-      state.error = false;
+      state.loading.fetchUserProfile = true;
+      state.errors.fetchUserProfile = false;
     },
     fetchUserProfileSuccess: (state, action) => {
-      state.loading = false;
+      state.loading.fetchUserProfile = false;
       state.profile = action.payload;
     },
     fetchUserProfileFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.loading.fetchUserProfile = false;
+      state.errors.fetchUserProfile = action.payload;
     },
     updateUserRequest: (state) => {
-      state.loading = true;
+      state.loading.updateUser = true;
     },
     updateUserSuccess: (state) => {
-      state.loading = false;
+      state.loading.updateUser = false;
     },
     updateUserFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.loading.updateUser = false;
+      state.errors.updateUser = action.payload;
     },
   },
 });

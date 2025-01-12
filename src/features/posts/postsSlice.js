@@ -3,9 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   data: [],
   page: 1,
-  loading: false,
+  loading: {
+    createPost: false,
+    removePost: false,
+    fetchPosts: false,
+    fetchUserPosts: false,
+  },
   hasMore: true,
-  error: null,
+  errors: {
+    createPost: false,
+    removePost: false,
+    fetchPosts: false,
+    fetchUserPosts: false,
+  },
 };
 
 const postsSlice = createSlice({
@@ -16,60 +26,60 @@ const postsSlice = createSlice({
       state = initialState;
     },
     fetchPostsRequest: (state) => {
-      state.loading = true;
-      state.error = false;
+      state.loading.fetchPosts = true;
+      state.errors.fetchPosts = false;
     },
     fetchPostsSuccess: (state, action) => {
-      state.loading = false;
+      state.loading.fetchPosts = false;
       state.data = [...state.data, ...action.payload.data];
       state.hasMore = action.payload.hasMore;
       state.page += 1;
     },
     fetchPostsFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.loading.fetchPosts = false;
+      state.errors.fetchPosts = action.payload;
     },
     removePostRequest: (state) => {
-      state.loading = true;
-      state.error = false;
+      state.loading.removePost = true;
+      state.errors.removePost = false;
     },
     removePostSuccess: (state, action) => {
-      state.loading = false;
-      state.posts = [
-        ...state.posts.filter((post) => {
+      state.loading.removePost = false;
+      state.data = [
+        ...state.data.filter((post) => {
           return post.id !== action.payload;
         }),
       ];
     },
     removePostFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.loading.removePost = false;
+      state.errors.removePost = action.payload;
     },
     createPostRequest: (state) => {
+      state.loading.createPost = true;
+      state.errors.createPost = false;
+    },
+    createPostSuccess: (state, action) => {
+      state.loading.createPost = false;
+      state.data = state.data.unshift(action.payload);
+    },
+    createPostFailure: (state, action) => {
+      state.loading.createPost = false;
+      state.errors.createPost = action.payload;
+    },
+    fetchUserPostsRequest: (state) => {
       state.loading = true;
       state.error = false;
     },
-    createPostSuccess: (state, action) => {
-      state.loading = false;
-      state.posts = state.posts.unshift(action.payload);
-    },
-    createPostFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
-    fetchUserPostsRequest: (state) => {
-      state.loadingoading = true;
-      state.etchUserPostsError = false;
-    },
     fetchUserPostsSuccess: (state, action) => {
-      state.loading = false;
+      state.loading.fetchUserPosts = false;
       state.data = [...state.data, ...action.payload.data];
       state.hasMore = action.payload.hasMore;
       state.page += 1;
     },
     fetchUserPostsFailure: (state, action) => {
-      state.fetchUserPostsLoading = false;
-      state.fetchUserPostsError = action.payload;
+      state.loading.fetchUserPosts = false;
+      state.errors.fetchUserPosts = action.payload;
     },
   },
 });

@@ -3,9 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   data: [],
   page: 1,
-  loading: false,
   hasMore: true,
-  error: null,
+  loading: {
+   fetchFollowers: false,
+    removeFollower:false
+  },
+  errors: {
+    fetchFollowers: false,
+     removeFollower:false
+
+  },
 };
 const followersSlice = createSlice({
   name: "followers",
@@ -15,34 +22,34 @@ const followersSlice = createSlice({
       state = initialState;
     },
     fetchFollowersRequest: (state) => {
-      state.loading = true;
-      state.error = "";
+      state.loading.fetchFollowers = true;
+      state.errors.fetchFollowers = false;
     },
     fetchFollowersSuccess: (state, action) => {
-      state.loading = false;
+      state.loading.fetchFollowers = false;
       state.data = [...state.data, ...action.payload.data];
-      state.page = action.payload.nextPage;
       state.hasMore = action.payload.hasMore;
+      state.page += 1;
     },
     fetchFollowersFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.loading.fetchFollowers = false;
+      state.errors.fetchFollowers = action.payload;
     },
     removeFollowerRequest: (state) => {
-      state.loading = true;
-      state.error = false;
+      state.loading.removeFollower = true;
+      state.errors.removeFollower = false;
     },
     removeFollowerSuccess: (state, action) => {
-      state.loading = false;
-      state.followers = [
-        ...state.followers.filter((f) => {
+      state.loading.removeFollower = false;
+      state.data = [
+        ...state.data.filter((f) => {
           return f.id !== action.payload;
         }),
       ];
     },
     removeFollowerFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
+      state.loading.removeFollower = false;
+      state.errors.removeFollower = action.payload;
     },
   },
 });
