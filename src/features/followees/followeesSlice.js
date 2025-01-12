@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   data: [],
   page: 1,
-  isLoading: false,
+  loading: false,
   hasMore: true,
   error: null,
 };
@@ -15,13 +15,13 @@ const followeesSlice = createSlice({
       state = initialState;
     },
     fetchFolloweesRequest: (state) => {
-      state.isLoading = true;
+      state.loading = true;
       state.error = "";
     },
     fetchFolloweesSuccess: (state, action) => {
       console.log({ action });
 
-      state.isLoading = false;
+      state.loading = false;
       state.data = [...state.data, ...action.payload.data];
       state.page = action.payload.nextPage;
       state.hasMore = action.payload.hasMore;

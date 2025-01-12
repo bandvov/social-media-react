@@ -11,21 +11,21 @@ import {
 export default function PostsPage() {
   const { userId } = useParams();
   const dispatch = useDispatch();
-  const { posts, page, hasMorePosts } = useSelector((state) => state.post);
+  const { data, hasMorePosts } = useSelector((state) => state.post);
 
   useEffect(() => {
     dispatch(setInitialPostsState());
-    dispatch(fetchUserPostsRequest(userId, { page: 1 }));
+    dispatch(fetchUserPostsRequest({ userId, limit: 2 }));
   }, [dispatch, userId]);
 
   const loadMorePosts = () => {
-    dispatch(fetchUserPostsRequest(userId, { page }));
+    dispatch(fetchUserPostsRequest({ userId, limit: 2 }));
   };
   return (
     <>
       <CreatePostForm />
       <Posts
-        posts={posts}
+        posts={data}
         hasMorePosts={hasMorePosts}
         loadMorePosts={loadMorePosts}
       />

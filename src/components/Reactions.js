@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, AvatarGroup, Tooltip, Box, Typography } from "@mui/material";
-import { reactionIcons } from "../../constants";
+import { reactionIcons } from "../constants";
 
 const Reactions = ({ reactions }) => {
   const total_count = 2;

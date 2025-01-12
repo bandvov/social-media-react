@@ -16,10 +16,10 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { removePostRequest } from "../../features/posts/postsSlice";
 import { useTranslation } from "react-i18next";
-import Reactions from "../reactions/Reactions";
+import Reactions from "../Reactions";
 import DOMPurify from "dompurify";
-import AddReactionMenu from "../reactions/AddReactionMenu";
-import AddCommentModal from "../AddCommentModal";
+import AddReactionMenu from "./AddReactionMenu";
+import AddCommentModal from "./AddCommentModal";
 
 export default function BasicCard({ post }) {
   const { t } = useTranslation();
@@ -116,7 +116,6 @@ export default function BasicCard({ post }) {
       <CardActions>
         <AddReactionMenu />
         <AddCommentModal />
-        <Button>{t("addComment")}</Button>
         <Button>{t("repost")}</Button>
       </CardActions>
       <Menu

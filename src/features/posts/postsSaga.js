@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, put, select, takeLatest } from "redux-saga/effects";
 import {
   fetchUserPostsFailure,
   fetchUserPostsRequest,
@@ -16,10 +16,18 @@ import {
 import { createPost, fetchPosts, fetchUserPosts, removePost } from "./postsApi";
 
 function* handleFetchPosts(action) {
+  console.log({ action });
+
   try {
-    // clear error message
-    const res = yield call(fetchPosts, action.payload);
-    yield put(fetchPostsSuccess({ posts: res.data }));
+    const { page } = yield select((state) => state.post);
+    const res = yield call(fetchPosts, { page, ...action.payload });
+    yield put(
+      fetchPostsSuccess({
+        data: res.data.data,
+        nextPage: page + 1,
+        hasMore: res.data.hasMore,
+      })
+    );
   } catch (error) {
     yield put(fetchPostsFailure(error.message));
   }

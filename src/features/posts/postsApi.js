@@ -1,6 +1,8 @@
 import { api } from "../api";
 
-export async function fetchPosts(userId, params) {
+export async function fetchPosts({ userId, ...params }) {
+  console.log({ userId, params });
+
   return await api.get(`/posts/${userId}`, {
     params,
     withCredentials: true,
@@ -15,8 +17,9 @@ export async function removePost(postId) {
   });
 }
 
-export async function fetchUserPosts(userId, data) {
-  return await api.get(`/users/${userId}/posts`, data, {
+export async function fetchUserPosts(userId, params) {
+  return await api.get(`/users/${userId}/posts`, {
+    params,
     withCredentials: true,
   });
 }

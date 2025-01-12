@@ -16,7 +16,7 @@ const resources = {
       haveAccount: "Have account?",
       dontHaveAccount: "Don't have account?",
       addReaction: "Add reaction",
-      addComment: "Comment",
+      addComment: "Add Comment",
       repost: "Repost",
       removePost: "Remove",
       follow: "Follow",

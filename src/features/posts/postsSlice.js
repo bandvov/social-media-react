@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   data: [],
   page: 1,
-  isLoading: false,
+  loading: false,
   hasMore: true,
   error: null,
 };
@@ -57,7 +57,7 @@ const postsSlice = createSlice({
     },
     fetchPostsSuccess: (state, action) => {
       state.loading = false;
-      state.posts = [...state.posts, ...action.payload.posts];
+      state.data = [...state.data, ...action.payload.data];
       state.hasMorePosts = action.payload.hasMore;
       state.page += 1;
     },

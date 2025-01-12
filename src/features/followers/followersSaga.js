@@ -15,10 +15,10 @@ function* handleFetchFollowers(action) {
     const res = yield call(fetchFollowers, { page, ...action.payload });
     yield put(
       fetchFollowersSuccess({
-        data: res.data,
+        data: res.data.data,
         nextPage: page + 1,
-        hasMore: res.hasMore,
-      }),
+        hasMore: res.data.hasMore,
+      })
     );
   } catch (error) {
     yield put(fetchFollowersFailure(error.message));
