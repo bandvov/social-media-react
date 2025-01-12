@@ -5,8 +5,11 @@ import {
   fetchUserProfileSuccess,
   updateUserFailure,
   updateUserRequest,
+  fetchUsersFailure,
+  fetchUsersRequest,
+  fetchUsersSuccess
 } from "./userSlice";
-import { fetchUserProfile, updateUser } from "./userApi";
+import { fetchUserProfile, fetchUsers, updateUser } from "./userApi";
 
 function* handleFetchUserPfofile(action) {
   try {
@@ -24,8 +27,17 @@ function* handleUpdateUser(action) {
     yield put(updateUserFailure(error.message));
   }
 }
+function* handleFetchUsers(action) {
+  try {
+    const response = yield call(fetchUsers, action.payload);
+    yield put(fetchUsersSuccess({ users: response.data, total: response.data.total }));
+  } catch (error) {
+    yield put(fetchUsersFailure(error.message));
+  }
+}
 
 export default function* userSaga() {
   yield takeLatest(fetchUserProfileRequest.type, handleFetchUserPfofile);
+  yield takeLatest(fetchUsersRequest.type, handleFetchUsers)
   yield takeLatest(updateUserRequest.type, handleUpdateUser);
 }

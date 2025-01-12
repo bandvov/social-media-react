@@ -14,12 +14,31 @@ const profileSlice = createSlice({
       bio: "bla bla some bio",
       profile_pic: "https://i.mydramalist.com/4Jjdk_5c.jpg",
     },
+    data:[
+      {
+        id:1,
+        email:"dasdas@ad.asd",
+        username:"adsad"
+      },
+      {
+        id:2,
+        email:"dasdas2@ad.asd",
+        username:"adsad"
+      },
+      {
+        id:3,
+        email:"dasdas3@ad.asd",
+        username:"adsad"
+      },
+    ],
     loading:{
       fetchUserProfile: false,
+      fetchUsers:false,
       updateUser:false,
     },
     errors:{
       fetchUserProfile: false,
+      fetchUsers:false,
       updateUser:false,
     }
   },
@@ -49,6 +68,19 @@ const profileSlice = createSlice({
       state.loading.updateUser = false;
       state.errors.updateUser = action.payload;
     },
+      fetchUsersRequest: (state) => {
+      state.loading.fetchUsers = true;
+      state.errors.fetchUsers = null;
+    },
+    fetchUsersSuccess: (state, action) => {
+      state.loading.fetchUsers = false;
+      state.users = action.payload.users;
+      state.total = action.payload.total;
+    },
+    fetchUsersFailure: (state, action) => {
+      state.loading.fetchUsers = false;
+      state.errors.fetchUsers = action.payload;
+    },
   },
 });
 
@@ -59,6 +91,9 @@ export const {
   updateUserFailure,
   updateUserRequest,
   updateUserSuccess,
+  fetchUsersFailure,
+  fetchUsersRequest,
+  fetchUsersSuccess,
   setInitialUserState,
 } = profileSlice.actions;
 export default profileSlice.reducer;

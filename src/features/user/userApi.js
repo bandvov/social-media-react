@@ -8,3 +8,10 @@ export async function updateUser({ userId, data }) {
     withCredentials: true,
   });
 }
+
+export async function fetchUsers(params) {
+  return await api.get("/users", {
+    params,
+    withCredentials: true,
+  });
+}
