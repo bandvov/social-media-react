@@ -19,7 +19,7 @@ const store = configureStore({
     post: postReducer,
     followers: followersReducer,
     followees: followeesReducer,
-    comments: commentsReducer
+    comments: commentsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),

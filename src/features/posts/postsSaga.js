@@ -25,8 +25,8 @@ function* handleFetchPosts(action) {
       fetchPostsSuccess({
         data: res.data,
         nextPage: page + 1,
-        hasMore: res.hasMore||true,
-      })
+        hasMore: res.hasMore || true,
+      }),
     );
   } catch (error) {
     yield put(fetchPostsFailure(error.message));

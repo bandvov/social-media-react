@@ -19,13 +19,13 @@ const Followees = () => {
   useEffect(() => {
     if (data?.length === 0 && profile?.id) {
       dispatch(setInitialFolloweesState());
-      dispatch(fetchFolloweesRequest({ userId: profile?.id,limit:4 }));
+      dispatch(fetchFolloweesRequest({ userId: profile?.id, limit: 4 }));
     }
   }, [dispatch, data, profile?.id]);
 
   const fetchMoreFollowees = () => {
     if (!isLoading && hasMore) {
-      dispatch(fetchFolloweesRequest({ userId: profile?.id,limit:4 }));
+      dispatch(fetchFolloweesRequest({ userId: profile?.id, limit: 4 }));
     }
   };
   return (
@@ -50,7 +50,7 @@ const Followees = () => {
                   followedByFollower={followee.followed_by_follower}
                   followsFollower={followee.follows_follower}
                 />
-              ) 
+              )
             }
           />
         ))}

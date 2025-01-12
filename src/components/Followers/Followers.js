@@ -19,13 +19,13 @@ const Followers = () => {
   useEffect(() => {
     if (data?.length === 0 && profile?.id) {
       dispatch(setInitialFollowersState());
-      dispatch(fetchFollowersRequest({ userId: profile?.id, limit:4 }));
+      dispatch(fetchFollowersRequest({ userId: profile?.id, limit: 4 }));
     }
   }, [dispatch, data, profile?.id]);
 
   const fetchMoreFollowers = () => {
     if (!isLoading && hasMore) {
-      dispatch(fetchFollowersRequest({ userId: profile?.id, limit:4 }));
+      dispatch(fetchFollowersRequest({ userId: profile?.id, limit: 4 }));
     }
   };
 

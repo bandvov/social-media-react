@@ -3,10 +3,13 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Container, Typography } from "@mui/material";
 import PostCard from "./PostCard";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserPostsRequest, setInitialPostsState } from "../../features/posts/postsSlice";
+import {
+  fetchUserPostsRequest,
+  setInitialPostsState,
+} from "../../features/posts/postsSlice";
 
-export default function Posts({userId }) {
-   const dispatch = useDispatch();
+export default function Posts({ userId }) {
+  const dispatch = useDispatch();
   const { data, hasMorePosts } = useSelector((state) => state.post);
   const profile = useSelector((state) => state.user.profile);
 

@@ -18,7 +18,7 @@ function* handleFetchFollowers(action) {
         data: res.data,
         nextPage: page + 1,
         hasMore: res.hasMore,
-      })
+      }),
     );
   } catch (error) {
     yield put(fetchFollowersFailure(error.message));

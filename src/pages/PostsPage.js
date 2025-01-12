@@ -10,13 +10,11 @@ import {
 
 export default function PostsPage() {
   const { userId } = useParams();
- 
+
   return (
     <>
       <CreatePostForm />
-      <Posts
-        userId={userId}
-            />
+      <Posts userId={userId} />
     </>
   );
 }

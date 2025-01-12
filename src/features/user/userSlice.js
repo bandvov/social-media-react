@@ -51,6 +51,6 @@ export const {
   updateUserFailure,
   updateUserRequest,
   updateUserSuccess,
-  setInitialUserState
+  setInitialUserState,
 } = profileSlice.actions;
 export default profileSlice.reducer;

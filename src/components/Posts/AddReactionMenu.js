@@ -3,10 +3,9 @@ import { Menu, MenuItem, Button, Typography, Box } from "@mui/material";
 import { reactionIcons } from "../../constants";
 import { useTranslation } from "react-i18next";
 
-
 const AddReactionMenu = () => {
-    const { t } = useTranslation();
-  
+  const { t } = useTranslation();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedReaction, setSelectedReaction] = useState("");
 
@@ -25,11 +24,8 @@ const AddReactionMenu = () => {
 
   return (
     <div>
-      <Button
-        color="primary"
-        onClick={handleOpenMenu}
-      >
-       {t("addReaction")}
+      <Button color="primary" onClick={handleOpenMenu}>
+        {t("addReaction")}
       </Button>
 
       <Menu

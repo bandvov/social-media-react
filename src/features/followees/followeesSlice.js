@@ -30,7 +30,7 @@ const followeesSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-     removeFolloweeRequest: (state) => {
+    removeFolloweeRequest: (state) => {
       state.loading = true;
       state.error = false;
     },
@@ -56,7 +56,7 @@ export const {
   removeFolloweeFailure,
   removeFolloweeRequest,
   removeFolloweeSuccess,
-  setInitialFolloweesState
+  setInitialFolloweesState,
 } = followeesSlice.actions;
 
 export default followeesSlice.reducer;
