@@ -21,7 +21,7 @@ const Followers = () => {
       dispatch(setInitialFollowersState());
       dispatch(fetchFollowersRequest({ userId: profile?.id, limit: 4 }));
     }
-  }, [dispatch, data, profile?.id]);
+  }, [dispatch, data?.length, profile?.id]);
 
   const fetchMoreFollowers = () => {
     if (!isLoading && hasMore) {

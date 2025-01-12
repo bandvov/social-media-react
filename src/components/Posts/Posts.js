@@ -14,9 +14,11 @@ export default function Posts({ userId }) {
   const profile = useSelector((state) => state.user.profile);
 
   useEffect(() => {
-    dispatch(setInitialPostsState());
-    dispatch(fetchUserPostsRequest({ userId: profile?.id, limit: 2 }));
-  }, [dispatch, profile?.id]);
+    if (data?.length === 0 && profile?.id){
+      dispatch(setInitialPostsState());
+      dispatch(fetchUserPostsRequest({ userId: profile?.id, limit: 2 }));
+    }
+  }, [dispatch,data?.length, profile?.id]);
 
   const loadMorePosts = () => {
     dispatch(fetchUserPostsRequest({ userId: profile?.id, limit: 2 }));

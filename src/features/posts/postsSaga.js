@@ -24,7 +24,6 @@ function* handleFetchPosts(action) {
     yield put(
       fetchPostsSuccess({
         data: res.data,
-        nextPage: page + 1,
         hasMore: res.hasMore || true,
       }),
     );
@@ -54,8 +53,15 @@ function* handleRemovePost(action) {
 
 function* handleFetchUserPosts(action) {
   try {
-    const user = yield call(fetchUserPosts, action.payload);
-    yield put(fetchUserPostsSuccess(user?.data));
+     const { page } = yield select((state) => state.post);
+     console.log({page});     
+    const res = yield call(fetchUserPosts, { page, ...action.payload });
+    yield put(
+      fetchUserPostsSuccess({
+        data: res.data,
+        hasMore: res.hasMore,
+      }),
+    );
   } catch (error) {
     yield put(fetchUserPostsFailure(error.message));
   }
