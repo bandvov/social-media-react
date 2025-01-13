@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 const EditProfilePage = () => {
   const { userId } = useParams();
   const dispatch = useDispatch();
-  const { profile, loading, error } = useSelector((state) => state.user);
+  const { profile, loading, errors } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (userId) {
@@ -27,7 +27,7 @@ const EditProfilePage = () => {
       <ProfileForm
         profile={profile}
         loading={loading}
-        error={error}
+        errors={errors}
         handleSubmit={handleSubmit}
       />
     </Container>

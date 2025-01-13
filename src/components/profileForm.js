@@ -13,7 +13,7 @@ const fields = [
   { name: "password", type: "password" },
 ];
 
-const ProfileForm = ({ profile, loading, error, handleSubmit }) => {
+const ProfileForm = ({ profile, loading, errors, handleSubmit }) => {
   const [edit, setEdit] = useState(false);
 
   return (
@@ -64,16 +64,16 @@ const ProfileForm = ({ profile, loading, error, handleSubmit }) => {
                   color="primary"
                   disabled={isSubmitting}
                 >
-                  {loading ? <CircularProgress size={24} /> : "Save Changes"}
+                  {loading.updateUser ? <CircularProgress size={24} /> : "Save Changes"}
                 </Button>
               </Box>
             </Box>
           </Form>
         )}
       </Formik>
-      {loading && <div>loading...</div>}
+      {loading.updateUser && <div>loading...</div>}
       {/* Display error message */}
-      {error && <Typography color="error">{error}</Typography>}
+      {errors.updateUser && <Typography color="error">{errors.updateUser}</Typography>}
     </Box>
   );
 };

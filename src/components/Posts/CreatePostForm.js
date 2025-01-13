@@ -15,7 +15,7 @@ import { createPostSchema } from "../../schemas/CreatePostSchema";
 
 const CreatePostForm = () => {
   const dispatch = useDispatch();
-  const { loading, message, error } = useSelector((state) => state.post);
+  const { loading, message, errors } = useSelector((state) => state.post);
 
   // Handle form submission
   const handleSubmit = (values, { resetForm }) => {
@@ -32,9 +32,9 @@ const CreatePostForm = () => {
           Create a New Post
         </Typography>
 
-        {loading && <CircularProgress />}
+        {loading.createPost && <CircularProgress />}
         {message && <Alert severity="success">{message}</Alert>}
-        {error && <Alert severity="error">{error}</Alert>}
+        {errors.createPost && <Alert severity="error">{errors.createPost}</Alert>}
 
         <Formik
           initialValues={{ content: "" }}

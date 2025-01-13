@@ -14,6 +14,7 @@ import PostsPage from "./pages/PostsPage";
 import EditProfilePage from "./pages/EditProfilePage";
 import UserPage from "./pages/UserPage";
 import PostDetailPage from "./pages/PostDetailPage";
+import SearchPage from "./pages/SearchPage";
 
 const App = () => {
   const darkMode = useSelector((state) => state.theme.darkMode);
@@ -26,6 +27,8 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
+            <Route path="/search" element={<SearchPage />} />
+            
             <Route path="/user/:userId" element={<UserPage />}>
               <Route path="posts" element={<PostsPage />} />
               <Route path="posts/:postId" element={<PostDetailPage />} />
