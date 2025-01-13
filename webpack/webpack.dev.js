@@ -45,6 +45,7 @@ module.exports = merge(common, {
       extensions: [".js", ".jsx", ".ts", ".tsx"],
       overrideConfigFile: path.resolve(__dirname, "../eslintrc.json"),
       lintDirtyModulesOnly: true,
+      fix: true,
       emitError: true,
       emitWarning: true,
       failOnError: false,

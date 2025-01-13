@@ -59,6 +59,7 @@
     "babel-loader": "^9.2.1",
     "dotenv-webpack": "^8.1.0",
     "error-overlay-webpack-plugin": "^1.1.1",
+    "eslint": "^9.18.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-webpack-plugin": "^4.2.0",

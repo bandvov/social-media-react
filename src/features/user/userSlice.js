@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const profileSlice = createSlice({
   name: "user",
   initialState: {
+    total:100,
     profile: {
       id: 19879,
       first_name: "",
@@ -14,33 +15,45 @@ const profileSlice = createSlice({
       bio: "bla bla some bio",
       profile_pic: "https://i.mydramalist.com/4Jjdk_5c.jpg",
     },
-    data:[
+    data: [
       {
-        id:1,
-        email:"dasdas@ad.asd",
-        username:"adsad"
+        id: 1,
+        email: "dasdas@ad.asd",
+        username: "adsad",
+        role: "user",
+        created_at: new Date().toLocaleDateString(),
+        updated_at: new Date().toLocaleDateString(),
+        status: "active"
       },
       {
-        id:2,
-        email:"dasdas2@ad.asd",
-        username:"adsad"
+        id: 2,
+        email: "dasdas2@ad.asd",
+        username: "adsad",
+        role: "user",
+        created_at: new Date().toLocaleDateString(),
+        updated_at: new Date().toLocaleDateString(),
+        status: "active"
       },
       {
-        id:3,
-        email:"dasdas3@ad.asd",
-        username:"adsad"
+        id: 3,
+        email: "dasdas3@ad.asd",
+        username: "adsad",
+        role: "admin",
+        created_at: new Date().toLocaleDateString(),
+        updated_at: new Date().toLocaleDateString(),
+        status: "active"
       },
     ],
-    loading:{
+    loading: {
       fetchUserProfile: false,
-      fetchUsers:false,
-      updateUser:false,
+      fetchUsers: false,
+      updateUser: false,
     },
-    errors:{
+    errors: {
       fetchUserProfile: false,
-      fetchUsers:false,
-      updateUser:false,
-    }
+      fetchUsers: false,
+      updateUser: false,
+    },
   },
   reducers: {
     setInitialUserState: (state) => {
@@ -68,7 +81,7 @@ const profileSlice = createSlice({
       state.loading.updateUser = false;
       state.errors.updateUser = action.payload;
     },
-      fetchUsersRequest: (state) => {
+    fetchUsersRequest: (state) => {
       state.loading.fetchUsers = true;
       state.errors.fetchUsers = null;
     },
