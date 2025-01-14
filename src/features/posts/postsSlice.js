@@ -68,8 +68,8 @@ const postsSlice = createSlice({
       state.errors.createPost = action.payload;
     },
     fetchUserPostsRequest: (state) => {
-      state.loading = true;
-      state.error = false;
+      state.loading.fetchUserPosts = true;
+      state.errors.fetchUserPosts = false;
     },
     fetchUserPostsSuccess: (state, action) => {
       state.loading.fetchUserPosts = false;

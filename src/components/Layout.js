@@ -80,7 +80,6 @@ const Layout = ({ children }) => {
         backgroundColor: "background.default",
         display: "flex",
         height: "100vh",
-        overflowY: "scroll",
       }}
     >
       {/* Top Navigation */}
@@ -208,6 +207,9 @@ const Layout = ({ children }) => {
         }}
       >
         {children}
+      </Box>
+      <Box>
+        Footer
       </Box>
     </Box>
   );

@@ -4,17 +4,7 @@ const profileSlice = createSlice({
   name: "user",
   initialState: {
     total:100,
-    profile: {
-      id: 19879,
-      first_name: "",
-      created_at: Date.now(),
-      email: "bla@bla.test",
-      followers_count: 122,
-      followees_count: 342,
-      posts_count: 88,
-      bio: "bla bla some bio",
-      profile_pic: "https://i.mydramalist.com/4Jjdk_5c.jpg",
-    },
+    profile: {},
     data: [
       {
         id: 1,
