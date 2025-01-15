@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dialog, DialogTitle, DialogContent, Button, Box } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, Button, Box, DialogActions } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
@@ -59,9 +59,20 @@ const AddCommentDialog = () => {
                         marginBottom: "1rem",
                       }}
                     />
+                    <DialogActions>
+                    <Button
+                      onClick={() => {
+                        setDialogOpen(false);
+                      }}
+                      variant="contained"
+                      color="primary"
+                      >
+                      {t("cancel")}
+                    </Button>
                     <Button type="submit" variant="contained" color="primary">
                       {t("submit")}
                     </Button>
+                      </DialogActions>
                   </Box>
                 </Form>
               );
