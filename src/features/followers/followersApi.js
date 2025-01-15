@@ -9,6 +9,6 @@ export const fetchFollowers = async ({ userId, ...params }) => {
 
 export async function removeFollower(followeeId) {
   return await api.delete(`/followers/${followeeId}`, {
-    mwithCredentials: true,
+    withCredentials: true,
   });
 }
