@@ -2,9 +2,7 @@ import React from "react";
 import { Avatar, AvatarGroup, Tooltip, Box, Typography } from "@mui/material";
 import { reactionIcons } from "../constants";
 
-const Reactions = ({ reactions }) => {
-  const total_count = 2;
-
+const Reactions = ({ reactions, totalCount }) => {
   return (
     <Box display="flex" alignItems="center">
       <AvatarGroup max={5} sx={{ mr: 2, gap: 0.5 }}>
@@ -27,7 +25,7 @@ const Reactions = ({ reactions }) => {
         ))}
       </AvatarGroup>
       <Typography variant="body2" color="text.primary">
-        reactions: {total_count}
+        reactions: {totalCount}
       </Typography>
     </Box>
   );

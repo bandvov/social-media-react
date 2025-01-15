@@ -58,6 +58,7 @@ export default function BasicCard({ post }) {
             alignItems="center"
             gap={2}
           >
+            <Typography>{post.id}</Typography>
             <Typography color="text.secondary" variant="subtitle2">
               Author: {post.author_name}
             </Typography>
@@ -93,7 +94,10 @@ export default function BasicCard({ post }) {
           p: 2,
         }}
       >
-        <Reactions reactions={post.reactions} />
+        <Reactions
+          reactions={post.reactions}
+          totalCount={post.total_reactions_count}
+        />
         <Box
           display="grid"
           gap={2}
