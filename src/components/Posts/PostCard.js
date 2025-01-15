@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removePostRequest } from "../../features/posts/postsSlice";
 import { useTranslation } from "react-i18next";
 import Reactions from "../Reactions";
@@ -25,6 +25,8 @@ export default function BasicCard({ post }) {
   const { t } = useTranslation();
   const [menuAnchor, setMenuAnchor] = React.useState(null);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+
   const sanitizedContent = DOMPurify.sanitize(post.content);
 
   const handleMenuOpen = (event) => {
@@ -119,7 +121,7 @@ export default function BasicCard({ post }) {
       <Divider />
       <CardActions>
         <AddReactionMenu />
-        <AddCommentModal />
+        <AddCommentModal entity_id={post?.id} author_id={user?.id} />
         <Button>{t("repost")}</Button>
       </CardActions>
       <Menu

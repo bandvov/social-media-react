@@ -1,5 +1,5 @@
 import { api } from "../api";
 
-export const addComment = (data) => {
-  return api.post("/comments", data, { withCredentials: true });
+export const addComment = async (data) => {
+  return await api.post("/comments", data, { withCredentials: true });
 };

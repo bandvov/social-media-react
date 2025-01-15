@@ -1,12 +1,19 @@
 import React, { useState } from "react";
-import { Dialog, DialogTitle, DialogContent, Button, Box, DialogActions } from "@mui/material";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Button,
+  Box,
+  DialogActions,
+} from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { TextField } from "@mui/material";
 import { addCommentRequest } from "../../features/comments/commentsSlice";
 import { useTranslation } from "react-i18next";
-const AddCommentDialog = () => {
+const AddCommentDialog = ({ entity_id, author_id }) => {
   const { t } = useTranslation();
 
   const [isDialogOpen, setDialogOpen] = useState(false);
@@ -24,7 +31,9 @@ const AddCommentDialog = () => {
   });
 
   const handleSubmit = (values) => {
-    dispatch(addCommentRequest(values));
+    dispatch(
+      addCommentRequest({ entity_id, author_id, content: values?.content })
+    );
     handleClose();
   };
 
@@ -60,19 +69,19 @@ const AddCommentDialog = () => {
                       }}
                     />
                     <DialogActions>
-                    <Button
-                      onClick={() => {
-                        setDialogOpen(false);
-                      }}
-                      variant="contained"
-                      color="primary"
+                      <Button
+                        onClick={() => {
+                          setDialogOpen(false);
+                        }}
+                        variant="contained"
+                        color="primary"
                       >
-                      {t("cancel")}
-                    </Button>
-                    <Button type="submit" variant="contained" color="primary">
-                      {t("submit")}
-                    </Button>
-                      </DialogActions>
+                        {t("cancel")}
+                      </Button>
+                      <Button type="submit" variant="contained" color="primary">
+                        {t("submit")}
+                      </Button>
+                    </DialogActions>
                   </Box>
                 </Form>
               );
