@@ -6,7 +6,7 @@ export async function fetchPosts( params) {
   });
 }
 export async function createPost(postData) {
-  return await api.post("/posts", postData);
+  return await api.post("/posts", {data:postData});
 }
 export async function removePost(postId) {
   return await api.delete(`/posts/${postId}`);
