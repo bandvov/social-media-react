@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { TextField } from "@mui/material";
 import { addCommentRequest } from "../../features/comments/commentsSlice";
 import { useTranslation } from "react-i18next";
-const AddCommentDialog = ({ entity_id, author_id }) => {
+const AddCommentDialog = ({ entity_id, author_id, entity_type }) => {
   const { t } = useTranslation();
 
   const [isDialogOpen, setDialogOpen] = useState(false);
@@ -32,7 +32,7 @@ const AddCommentDialog = ({ entity_id, author_id }) => {
 
   const handleSubmit = (values) => {
     dispatch(
-      addCommentRequest({ entity_id, author_id, content: values?.content })
+      addCommentRequest({ entity_id, author_id,entity_type, content: values?.content })
     );
     handleClose();
   };

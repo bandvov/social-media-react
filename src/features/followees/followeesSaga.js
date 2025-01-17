@@ -3,8 +3,9 @@ import {
   fetchFolloweesFailure,
   fetchFolloweesRequest,
   fetchFolloweesSuccess,
+  removeFolloweeFailure,removeFolloweeRequest,removeFolloweeSuccess
 } from "./followeesSlice";
-import { fetchFollowees } from "./followeesApi";
+import { fetchFollowees, removeFollowee } from "./followeesApi";
 
 function* handleFetchFollowees(action) {
   try {
@@ -22,6 +23,16 @@ function* handleFetchFollowees(action) {
   }
 }
 
+function* handleRemoveFollowee(action) {
+  try {
+    yield call(removeFollowee, action.payload);
+    yield put(removeFolloweeSuccess(action.payload));
+  } catch (error) {
+    yield put(removeFolloweeFailure(error.message));
+  }
+}
+
 export default function* followeesSaga() {
   yield takeLatest(fetchFolloweesRequest.type, handleFetchFollowees);
+  yield takeLatest(removeFolloweeRequest.type, handleRemoveFollowee);
 }

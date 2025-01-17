@@ -63,7 +63,7 @@ const CreatePostForm = () => {
                 type="submit"
                 variant="contained"
                 color="primary"
-                disabled={loading}
+                disabled={loading.createPost}
               >
                 Submit
               </Button>

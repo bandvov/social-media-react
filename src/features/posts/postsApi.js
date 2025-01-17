@@ -3,21 +3,17 @@ import { api } from "../api";
 export async function fetchPosts( params) {
   return await api.get(`/posts`, {
     params,
-    withCredentials: true,
   });
 }
 export async function createPost(postData) {
-  return await api.post("/posts", postData, { withCredentials: true });
+  return await api.post("/posts", postData);
 }
 export async function removePost(postId) {
-  return await api.delete(`/posts/${postId}`, {
-    withCredentials: true,
-  });
+  return await api.delete(`/posts/${postId}`);
 }
 
 export async function fetchUserPosts({userId, ...params}) {
   return await api.get(`/users/${userId}/posts`, {
     params,
-    withCredentials: true,
   });
 }
