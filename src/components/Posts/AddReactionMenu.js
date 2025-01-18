@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Menu, MenuItem, Button, Typography, Box } from "@mui/material";
+import { Menu, MenuItem, Button, Typography } from "@mui/material";
 import { reactionIcons } from "../../constants";
 import { useTranslation } from "react-i18next";
 
-const AddReactionMenu = () => {
+const AddReactionMenu = ({userReaction}) => {
   const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedReaction, setSelectedReaction] = useState("");
+  const [selectedReaction, setSelectedReaction] = useState(userReaction); // Track the selected reaction
 
   const handleOpenMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -18,14 +18,16 @@ const AddReactionMenu = () => {
   };
 
   const handleReactionClick = (reaction) => {
-    setSelectedReaction(reaction);
+    setSelectedReaction(reaction); // Set the selected reaction
     handleCloseMenu();
   };
 
   return (
     <div>
-      <Button color="primary" onClick={handleOpenMenu}>
-        {t("addReaction")}
+      {/* Update button to show selected reaction */}
+      <Button color="primary" onClick={handleOpenMenu} 
+      startIcon={reactionIcons[selectedReaction]}>
+        {selectedReaction ? t(selectedReaction) : t("addReaction")}
       </Button>
 
       <Menu
@@ -57,14 +59,6 @@ const AddReactionMenu = () => {
           </MenuItem>
         ))}
       </Menu>
-
-      {selectedReaction && (
-        <Box sx={{ mt: 2 }}>
-          <Typography variant="body1">
-            You selected: <strong>{selectedReaction}</strong>
-          </Typography>
-        </Box>
-      )}
     </div>
   );
 };
