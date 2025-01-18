@@ -23,6 +23,7 @@ const resources = {
       unfollow: "Unfollow",
       following: "Following",
       follows: "Follows me",
+      createPost: "Create a New Post",
     },
   },
   ua: {
@@ -46,6 +47,7 @@ const resources = {
       unfollow: "Відписатися",
       following: "Підписаний",
       follows: "Підписаний на мене",
+      createPost: "Створити пост",
     },
   },
 };

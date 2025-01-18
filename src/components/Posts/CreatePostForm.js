@@ -12,9 +12,12 @@ import {
 } from "@mui/material";
 import { createPostRequest } from "../../features/posts/postsSlice";
 import { createPostSchema } from "../../schemas/CreatePostSchema";
+import { useTranslation } from "react-i18next";
 
 const CreatePostForm = () => {
   const dispatch = useDispatch();
+    const { t } = useTranslation();
+  
   const { loading, message, errors } = useSelector((state) => state.post);
 
   // Handle form submission
@@ -29,9 +32,8 @@ const CreatePostForm = () => {
     <Container maxWidth="md">
       <Box sx={{ mb: 4 }}>
         <Typography variant="h6" gutterBottom>
-          Create a New Post
+          {t('createPost')}
         </Typography>
-
         {loading.createPost && <CircularProgress />}
         {message && <Alert severity="success">{message}</Alert>}
         {errors.createPost && <Alert severity="error">{errors.createPost}</Alert>}
@@ -65,7 +67,7 @@ const CreatePostForm = () => {
                 color="primary"
                 disabled={loading.createPost}
               >
-                Submit
+               {t('submit')}
               </Button>
             </Form>
           )}
