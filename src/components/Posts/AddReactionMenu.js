@@ -3,7 +3,7 @@ import { Menu, MenuItem, Button, Typography } from "@mui/material";
 import { reactionIcons } from "../../constants";
 import { useTranslation } from "react-i18next";
 
-const AddReactionMenu = ({userReaction}) => {
+const AddReactionMenu = ({ userReaction }) => {
   const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -25,8 +25,11 @@ const AddReactionMenu = ({userReaction}) => {
   return (
     <div>
       {/* Update button to show selected reaction */}
-      <Button color="primary" onClick={handleOpenMenu} 
-      startIcon={reactionIcons[selectedReaction]}>
+      <Button
+        color="primary"
+        onClick={handleOpenMenu}
+        startIcon={reactionIcons[selectedReaction]}
+      >
         {selectedReaction ? t(selectedReaction) : t("addReaction")}
       </Button>
 
@@ -55,7 +58,12 @@ const AddReactionMenu = ({userReaction}) => {
             }}
           >
             <span>{icon}</span>
-            <Typography variant="body1">{name}</Typography>
+            <Typography
+              variant="body1"
+              color={selectedReaction == name && "primary.main"}
+            >
+              {name}
+            </Typography>
           </MenuItem>
         ))}
       </Menu>
