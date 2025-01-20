@@ -79,7 +79,6 @@ const Layout = ({ children }) => {
       sx={{
         backgroundColor: "background.default",
         display: "flex",
-        height: "100vh",
       }}
     >
       {/* Top Navigation */}

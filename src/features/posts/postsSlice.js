@@ -8,6 +8,8 @@ const initialState = {
     removePost: false,
     fetchPosts: false,
     fetchUserPosts: false,
+    addReaction: false,
+    removeReaction: false,
   },
   hasMore: true,
   errors: {
@@ -15,6 +17,8 @@ const initialState = {
     removePost: false,
     fetchPosts: false,
     fetchUserPosts: false,
+    addReaction: false,
+    removeReaction: false,
   },
 };
 
@@ -81,6 +85,36 @@ const postsSlice = createSlice({
       state.loading.fetchUserPosts = false;
       state.errors.fetchUserPosts = action.payload;
     },
+    addReactionRequest: (state) => {
+      state.loading.addReaction = true;
+    },
+    addReactionSuccess: (state, action) => {
+      state.loading.addReaction = false;
+      const { entity_id, reaction } = action.payload;
+      const post = state.data.find((post) => post.id === entity_id);
+      if (post) {
+        post.user_reaction = reaction;
+      }
+    },
+    addReactionFailure: (state, action) => {
+      state.loading.addReaction = false;
+      state.errors.addReaction = action.payload;
+    },
+    removeReactionRequest: (state) => {
+      state.loading.removeReaction = true;
+    },
+    removeReactionSuccess: (state, action) => {
+      state.loading.removeReaction = false;
+      const { entity_id } = action.payload;
+      const post = state.data.find((post) => post.id === entity_id);
+      if (post) {
+        post.user_reaction = "";
+      }
+    },
+    removeReactionFailure: (state, action) => {
+      state.loading.removeReaction = false;
+      state.errors.removeReaction = action.payload;
+    },
   },
 });
 
@@ -97,6 +131,12 @@ export const {
   createPostFailure,
   createPostRequest,
   createPostSuccess,
+  addReactionFailure,
+  addReactionRequest,
+  addReactionSuccess,
+  removeReactionFailure,
+  removeReactionRequest,
+  removeReactionSuccess,
   setInitialPostsState,
 } = postsSlice.actions;
 export default postsSlice.reducer;

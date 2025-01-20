@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import { Menu, MenuItem, Button, Typography } from "@mui/material";
 import { reactionIcons } from "../../constants";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import {
+  addReactionRequest,
+  removeReactionRequest,
+} from "../../features/posts/postsSlice";
 
-const AddReactionMenu = ({ userReaction }) => {
+const AddReactionMenu = ({ entity_id, userReaction }) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedReaction, setSelectedReaction] = useState(userReaction); // Track the selected reaction
@@ -19,6 +25,11 @@ const AddReactionMenu = ({ userReaction }) => {
 
   const handleReactionClick = (reaction) => {
     setSelectedReaction(reaction); // Set the selected reaction
+    if (reaction === selectedReaction) {
+      dispatch(removeReactionRequest({ entity_id }));
+    } else {
+      dispatch(addReactionRequest({ entity_id, reaction }));
+    }
     handleCloseMenu();
   };
 
