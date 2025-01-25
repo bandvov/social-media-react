@@ -121,7 +121,7 @@ export default function BasicCard({ post }) {
       <Divider />
       <CardActions>
         <AddReactionMenu userReaction={post?.user_reaction} entity_id={post.id} />
-        <AddCommentModal entity_id={post?.id} author_id={user?.id} entity_type="post" />
+        <AddCommentModal entity_id={post?.id} author_id={user?.id} entity_type="comment" />
         <Button>{t("repost")}</Button>
       </CardActions>
       <Menu
