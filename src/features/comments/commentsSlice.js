@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const commentsSlice = createSlice({
   name: "comments",
   initialState: {
+    page:1,
     data: {},
     loading: {
       addComment: false,

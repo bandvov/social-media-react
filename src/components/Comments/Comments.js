@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchCommentsRequest } from "../../features/comments/commentsSlice";
+import CommentCard from "./CommentCard";
+import { Alert, Container } from "@mui/material";
 
 const Comments = ({ postId }) => {
   const dispatch = useDispatch();
@@ -37,8 +39,10 @@ const Comments = ({ postId }) => {
 
   if (loading.fetchComments) return "loading...";
   return (
-    <div>
-      {errors.fetchComments && <div>Error: {errors.fetchComments}</div>}
+    <Container maxWidth="md">
+      {errors.fetchComments && (
+        <Alert severity="error">{errors.fetchComments}</Alert>
+      )}
 
       <InfiniteScroll
         dataLength={(data[+postId] || []).length} // This should be the length of your comments array
@@ -49,7 +53,7 @@ const Comments = ({ postId }) => {
       >
         {(data[+postId] || []).map((comment) => (
           <div key={comment?.id}>
-            <p>{comment?.content}</p>
+            <CommentCard comment={comment} />
             {/* Render replies if any */}
             {/* {comment.replies && comment.replies.length > 0 && (
               <div style={{ marginLeft: '20px' }}>
@@ -63,7 +67,7 @@ const Comments = ({ postId }) => {
       </InfiniteScroll>
 
       {/* Add a button for adding a new comment if needed */}
-    </div>
+    </Container>
   );
 };
 

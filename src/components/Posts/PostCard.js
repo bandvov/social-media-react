@@ -60,7 +60,6 @@ export default function BasicCard({ post }) {
             alignItems="center"
             gap={2}
           >
-            <Typography>{post.id}</Typography>
             <Typography color="text.secondary" variant="subtitle2">
               Author: {post.author_name}
             </Typography>
