@@ -9,7 +9,7 @@ const Reactions = ({ reactions, totalCount }) => {
         {reactions?.map((reaction, index) => (
           <Tooltip
             key={index}
-            title={`${reaction.count} ${reaction.reaction_type}`}
+            title={`${reaction.count} ${reaction.reaction_type_id}`}
           >
             <Avatar
               sx={{
@@ -19,7 +19,7 @@ const Reactions = ({ reactions, totalCount }) => {
                 color: "#000", // Text color
               }}
             >
-              {reactionIcons[reaction.reaction_type]}
+              {reactionIcons[reaction.reaction_type_id]}
             </Avatar>
           </Tooltip>
         ))}

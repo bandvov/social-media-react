@@ -27,7 +27,7 @@ export default function BasicCard({ post }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
 
-  const sanitizedContent = DOMPurify.sanitize(post.content);
+  const sanitizedContent = DOMPurify.sanitize(post?.content);
 
   const handleMenuOpen = (event) => {
     setMenuAnchor(event.currentTarget);
@@ -61,10 +61,10 @@ export default function BasicCard({ post }) {
             gap={2}
           >
             <Typography color="text.secondary" variant="subtitle2">
-              Author: {post.author_name}
+              Author: {post?.author_name}
             </Typography>
             <Typography color="text.secondary" variant="subtitle2">
-              {new Date(post.created_at).toLocaleDateString()}
+              {new Date(post?.created_at).toLocaleDateString()}
             </Typography>
           </Box>
         }
@@ -96,8 +96,8 @@ export default function BasicCard({ post }) {
         }}
       >
         <Reactions
-          reactions={post.reactions}
-          totalCount={post.total_reactions_count}
+          reactions={post?.reactions}
+          totalCount={post?.total_reactions_count}
         />
         <Box
           display="grid"
@@ -105,21 +105,21 @@ export default function BasicCard({ post }) {
           gridTemplateColumns="1fr auto"
           alignSelf="end"
         >
-          {post.total_comments_count && (
+          {post?.total_comments_count && (
             <Typography variant="body2" color="text.primary">
-              {post.total_comments_count} comments
+              {post?.total_comments_count} comments
             </Typography>
           )}
-          {post.share_count && (
+          {post?.share_count && (
             <Typography variant="body2" color="text.primary">
-              {post.share_count} shares
+              {post?.share_count} shares
             </Typography>
           )}
         </Box>
       </CardActions>
       <Divider />
       <CardActions>
-        <AddReactionMenu userReaction={post?.user_reaction} entity_id={post.id} />
+        <AddReactionMenu userReaction={post?.user_reaction} entity_id={post?.id} />
         <AddCommentModal entity_id={post?.id} author_id={user?.id} entity_type="comment" />
         <Button>{t("repost")}</Button>
       </CardActions>
