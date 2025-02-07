@@ -1,10 +1,10 @@
 import React from "react";
-import SSENotification from "../components/Notifications";
+import Notifications from "../components/Notifications/Notifications";
 
 export default function HomePage() {
   return <div>
     
     HomePage
-    <SSENotification/>
+    <Notifications/>
     </div>;
 }
