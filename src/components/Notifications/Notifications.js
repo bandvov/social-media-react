@@ -25,8 +25,10 @@ const Notifications = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchNotificationsStart());
-  }, [dispatch]);
+   if( data?.length === 0){
+     dispatch(fetchNotificationsStart({user_id:user?.id}));
+    }
+  }, [dispatch, data?.length]);
 
   useEffect(() => {
     // Initialize EventSource to listen for SSE from the server

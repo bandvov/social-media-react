@@ -12,10 +12,9 @@ function* handleFetchNotifications(action) {
   
   try {
      const { page } = yield select((state) => state.notifications);
-     const user = yield select((state) => state.auth);
+     const user = yield select((state) => state.auth.user);
 
-       const res = yield call(fetchNotifications, { page,user_id: user?.id??1, ...action.payload });
-     console.log({res});
+       const res = yield call(fetchNotifications, { page,user_id: user?.id, ...action.payload });
      
        yield put(
          fetchNotificationsSuccess({
