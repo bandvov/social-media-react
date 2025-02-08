@@ -1,5 +1,5 @@
 // src/sagas.js
-import { takeEvery, put, call } from "redux-saga/effects";
+import { takeEvery, put, call, select } from "redux-saga/effects";
 import {
   fetchNotificationsStart,
   fetchNotificationsSuccess,
@@ -7,18 +7,24 @@ import {
 } from "./notificationsSlice";
 import { fetchNotifications } from "./notificationsApi";
 
-function* handleFetchNotifications() {
+function* handleFetchNotifications(action) {
+  console.log("here");
+  
   try {
      const { page } = yield select((state) => state.notifications);
-       const res = yield call(fetchNotifications, { page, ...action.payload });
+     const user = yield select((state) => state.auth);
+
+       const res = yield call(fetchNotifications, { page,user_id: user?.id??1, ...action.payload });
+     console.log({res});
+     
        yield put(
          fetchNotificationsSuccess({
-           data: res.data,
-           hasMore: res.hasMore,
+           data: res.data.data,
+           hasMore: res.data.hasMore,
          }),
        );
   } catch (error) {
-    yield put(fetchNotificationsFailure());
+    yield put(fetchNotificationsFailure(error.message));
   }
 }
 

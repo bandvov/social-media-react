@@ -1,12 +1,25 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { List, ListItem, ListItemAvatar, ListItemText, Avatar, CircularProgress, Box } from '@mui/material';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { fetchNotificationsStart } from '../../features/notifications/notificationsSlice';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Avatar,
+  CircularProgress,
+  Box,
+  AvatarGroup,
+  Container,
+} from "@mui/material";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchNotificationsStart } from "../../features/notifications/notificationsSlice";
+import { Link } from "react-router-dom";
 
 const Notifications = () => {
   const dispatch = useDispatch();
-  const { data, hasMore, loading } = useSelector((state) => state.notifications);
+  const { data, hasMore, loading } = useSelector(
+    (state) => state.notifications
+  );
 
   useEffect(() => {
     dispatch(fetchNotificationsStart());
@@ -19,29 +32,47 @@ const Notifications = () => {
   };
 
   return (
-    <Box>
+    <Container maxWidth="sm">
       <InfiniteScroll
-        dataLength={notifications.length}
+        dataLength={data.length}
         next={loadMoreNotifications}
         hasMore={hasMore}
-        loader={<CircularProgress />}
+        loader={
+          <Box display="flex" justifyContent="center" my={2}>
+            <CircularProgress />
+          </Box>
+        }
         scrollThreshold={0.9}
       >
         <List>
           {data.map((notification, index) => (
-            <ListItem key={index}>
-              <ListItemAvatar>
-                <Avatar alt={notification.username} src={notification.profilePic} />
-              </ListItemAvatar>
+            <ListItem
+              key={notification.id || index}
+              sx={{ borderBottom: "1px solid black", mb: 2 }}
+            >
               <ListItemText
-                primary={notification.username}
-                secondary="Followed you"
+                primary={
+                  <Box display="flex" sx={{ mb: 2 }}>
+                    <AvatarGroup max={4}>
+                      {notification?.actor_ids?.map((actorId) => (
+                        <Link to={`/user/${actorId}`}>
+                          <Avatar
+                            key={actorId}
+                            alt={`User ${actorId}`}
+                            src={`/static/images/avatar/${actorId}.jpg`}
+                          />
+                        </Link>
+                      ))}
+                    </AvatarGroup>
+                  </Box>
+                }
+                secondary={notification?.message}
               />
             </ListItem>
           ))}
         </List>
       </InfiniteScroll>
-    </Box>
+    </Container>
   );
 };
 

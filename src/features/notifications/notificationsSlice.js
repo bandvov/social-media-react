@@ -15,7 +15,7 @@ export const notificationsSlice = createSlice({
       state.loading = true;
     },
     fetchNotificationsSuccess: (state, action) => {
-      state.data.push(...action.payload.data);
+      state.data = [...state.data, ...action.payload.data];
       state.hasMore = action.payload.hasMore;
       state.loading = false;
     },
