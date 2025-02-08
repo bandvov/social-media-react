@@ -12,7 +12,10 @@ import {
   Container,
 } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { fetchNotificationsStart } from "../../features/notifications/notificationsSlice";
+import {
+  fetchNotificationsStart,
+  fetchNotificationsSuccess,
+} from "../../features/notifications/notificationsSlice";
 import { Link } from "react-router-dom";
 
 const Notifications = () => {
@@ -24,6 +27,31 @@ const Notifications = () => {
   useEffect(() => {
     dispatch(fetchNotificationsStart());
   }, [dispatch]);
+
+  useEffect(() => {
+    // Initialize EventSource to listen for SSE from the server
+    const eventSource = new EventSource(
+      "http://localhost:8081/listen?user_id=1"
+    ); // Replace with your SSE endpoint
+
+    // Handle incoming messages
+    eventSource.onmessage = (event) => {
+      const newNotification = JSON.parse(event.data); // Assuming the data is JSON
+      dispatch(
+        fetchNotificationsSuccess({ data: [newNotification], hasMore: false })
+      );
+    };
+
+    // Handle errors (if needed)
+    eventSource.onerror = (error) => {
+      console.error("SSE error:", JSON.stringify(error, null, 2));
+    };
+
+    // Clean up when the component is unmounted
+    return () => {
+      eventSource.close();
+    };
+  }, []);
 
   const loadMoreNotifications = () => {
     if (hasMore && !loading) {
