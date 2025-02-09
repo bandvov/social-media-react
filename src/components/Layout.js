@@ -111,16 +111,12 @@ const Layout = ({ children }) => {
               }
             />
           </Box>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={checked}
-                color="primar"
-                onChange={handleLanguageChange}
-                icon={<Typography variant="body2">EN</Typography>}
-                checkedIcon={<Typography variant="body2">UA</Typography>}
-              />
-            }
+          <Switch
+            checked={checked}
+            color="primar"
+            onChange={handleLanguageChange}
+            icon={<Typography variant="body2">EN</Typography>}
+            checkedIcon={<Typography variant="body2">UA</Typography>}
           />
           <Switch
             checked={darkMode}
@@ -207,9 +203,7 @@ const Layout = ({ children }) => {
       >
         {children}
       </Box>
-      <Box>
-        Footer
-      </Box>
+      <Box>Footer</Box>
     </Box>
   );
 };

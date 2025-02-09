@@ -16,6 +16,7 @@ import UserPage from "./pages/UserPage";
 import PostDetailPage from "./pages/PostDetailPage";
 import SearchPage from "./pages/SearchPage";
 import AdminUsersProfilePage from "./pages/AdminUsersProfilePage";
+import NotificationsPage from "./pages/NotificationsPage";
 
 const App = () => {
   const darkMode = useSelector((state) => state.theme.darkMode);
@@ -34,6 +35,7 @@ const App = () => {
             
             <Route path="/user/:userId" element={<UserPage />}>
               <Route path="posts" element={<PostsPage />} />
+              <Route path="notifications" element={<NotificationsPage />} />
               <Route path="posts/:postId" element={<PostDetailPage />} />
               <Route path="edit" element={<EditProfilePage />} />
               <Route path="followers" element={<FollowersPage />} />

@@ -8,20 +8,20 @@ import {
 import { fetchNotifications } from "./notificationsApi";
 
 function* handleFetchNotifications(action) {
-  console.log("here");
-  
   try {
-     const { page } = yield select((state) => state.notifications);
-     const user = yield select((state) => state.auth.user);
+    const { page } = yield select((state) => state.notifications);
 
-       const res = yield call(fetchNotifications, { page,user_id: user?.id, ...action.payload });
-     
-       yield put(
-         fetchNotificationsSuccess({
-           data: res.data.data,
-           hasMore: res.data.hasMore,
-         }),
-       );
+    const res = yield call(fetchNotifications, {
+      page,
+      ...action.payload,
+    });
+
+    yield put(
+      fetchNotificationsSuccess({
+        data: res.data.data,
+        hasMore: res.data.hasMore,
+      })
+    );
   } catch (error) {
     yield put(fetchNotificationsFailure(error.message));
   }

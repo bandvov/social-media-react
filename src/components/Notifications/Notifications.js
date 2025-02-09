@@ -10,6 +10,7 @@ import {
   Box,
   AvatarGroup,
   Container,
+  Typography,
 } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {
@@ -19,21 +20,22 @@ import {
 import { Link } from "react-router-dom";
 
 const Notifications = () => {
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const { data, hasMore, loading } = useSelector(
     (state) => state.notifications
   );
 
   useEffect(() => {
-   if( data?.length === 0){
-     dispatch(fetchNotificationsStart({user_id:user?.id}));
+    if (data?.length === 0) {
+      dispatch(fetchNotificationsStart({ user_id: user?.id }));
     }
-  }, [dispatch, data?.length]);
+  }, [dispatch, data?.length, user]);
 
   useEffect(() => {
     // Initialize EventSource to listen for SSE from the server
     const eventSource = new EventSource(
-      "http://localhost:8081/listen?user_id=1"
+      `http://localhost:8081/listen?user_id=${user?.id}`
     ); // Replace with your SSE endpoint
 
     // Handle incoming messages
@@ -53,16 +55,17 @@ const Notifications = () => {
     return () => {
       eventSource.close();
     };
-  }, []);
+  }, [user]);
 
   const loadMoreNotifications = () => {
     if (hasMore && !loading) {
-      dispatch(fetchNotificationsStart());
+      dispatch(fetchNotificationsStart({ user_id: user?.id }));
     }
   };
 
   return (
     <Container maxWidth="sm">
+      <Typography variant="h1">Notifications</Typography>
       <InfiniteScroll
         dataLength={data.length}
         next={loadMoreNotifications}

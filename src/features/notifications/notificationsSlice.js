@@ -1,14 +1,15 @@
 // src/features/notificationsSlice.js
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const notificationsSlice = createSlice({
-  name: 'notifications',
+  name: "notifications",
   initialState: {
     data: [],
-    page:1,
+    page: 1,
+    unread_count: 0,
     hasMore: true,
     loading: false,
-    error: false
+    error: false,
   },
   reducers: {
     fetchNotificationsStart: (state) => {
@@ -18,10 +19,11 @@ export const notificationsSlice = createSlice({
       state.data = [...state.data, ...action.payload.data];
       state.hasMore = action.payload.hasMore;
       state.loading = false;
+      state.unread_count = state.unread_count + action.payload.data?.length;
     },
-    fetchNotificationsFailure: (state,action) => {
+    fetchNotificationsFailure: (state, action) => {
       state.loading = false;
-      state.error = action.payload
+      state.error = action.payload;
     },
   },
 });
