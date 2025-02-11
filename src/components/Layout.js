@@ -121,9 +121,9 @@ const Layout = ({ children }) => {
               badgeContent={notifications?.unread_count}
             >
               <Link
-              sx={{
-                color:'white'
-              }}
+                sx={{
+                  color: "white",
+                }}
                 component={RouterLink}
                 to={`/user/${user?.id}/notifications`}
               >
@@ -214,6 +214,8 @@ const Layout = ({ children }) => {
 
       {/* Main Content */}
       <Box
+        display="flex"
+        flexDirection="column"
         component="main"
         sx={{
           flexGrow: 1,
@@ -222,8 +224,15 @@ const Layout = ({ children }) => {
         }}
       >
         {children}
+        <Box
+          sx={{
+            p: 4,
+            backgroundColor: "primary.main",
+          }}
+        >
+          Footer
+        </Box>
       </Box>
-      <Box>Footer</Box>
     </Box>
   );
 };
