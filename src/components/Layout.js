@@ -15,7 +15,7 @@ import {
   Avatar,
   Switch,
   Link,
-  FormControlLabel,
+  Badge,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -25,12 +25,14 @@ import {
   Person2,
   Home,
   PostAdd,
+  Notifications,
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../features/theme/themeSlice";
 import { Link as RouterLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { success } from "../features/auth/authSlice";
+import Footer from "./Footer";
 
 const Layout = ({ children }) => {
   const { t, i18n } = useTranslation();
@@ -42,6 +44,7 @@ const Layout = ({ children }) => {
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.theme.darkMode);
   const user = useSelector((state) => state.auth.user);
+  const notifications = useSelector((state) => state.notifications);
 
   useEffect(() => {
     // Check localStorage for userId
@@ -111,24 +114,38 @@ const Layout = ({ children }) => {
               }
             />
           </Box>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={checked}
-                color="primar"
-                onChange={handleLanguageChange}
-                icon={<Typography variant="body2">EN</Typography>}
-                checkedIcon={<Typography variant="body2">UA</Typography>}
-              />
-            }
-          />
-          <Switch
-            checked={darkMode}
-            color="secondary"
-            onChange={handleThemeChange}
-            icon={<Brightness7 />} // Icon for light mode
-            checkedIcon={<Brightness4 />} // Icon for dark mode
-          />
+          <Box>
+            <Badge
+              sx={{
+                m: 1,
+              }}
+              badgeContent={notifications?.unread_count}
+            >
+              <Link
+                sx={{
+                  color: "white",
+                }}
+                component={RouterLink}
+                to={`/user/${user?.id}/notifications`}
+              >
+                <Notifications />
+              </Link>
+            </Badge>
+            <Switch
+              checked={checked}
+              color="primar"
+              onChange={handleLanguageChange}
+              icon={<Typography variant="body2">EN</Typography>}
+              checkedIcon={<Typography variant="body2">UA</Typography>}
+            />
+            <Switch
+              checked={darkMode}
+              color="secondary"
+              onChange={handleThemeChange}
+              icon={<Brightness7 />} // Icon for light mode
+              checkedIcon={<Brightness4 />} // Icon for dark mode
+            />
+          </Box>
           {/* Profile Menu */}
           <IconButton color="inherit" onClick={handleProfileMenuOpen}>
             <Avatar alt="User Avatar" src={user?.profile_pic} />
@@ -198,6 +215,8 @@ const Layout = ({ children }) => {
 
       {/* Main Content */}
       <Box
+        display="flex"
+        flexDirection="column"
         component="main"
         sx={{
           flexGrow: 1,
@@ -206,9 +225,7 @@ const Layout = ({ children }) => {
         }}
       >
         {children}
-      </Box>
-      <Box>
-        Footer
+       <Footer/>
       </Box>
     </Box>
   );

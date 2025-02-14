@@ -36,7 +36,7 @@ function* handleFetchComments(action) {
   }
 }
 
-export function* commentsSaga() {
+export default function* commentsSaga() {
   yield takeLatest(addCommentRequest.type, handleAddComment);
   yield takeLatest(fetchCommentsRequest.type, handleFetchComments);
 }

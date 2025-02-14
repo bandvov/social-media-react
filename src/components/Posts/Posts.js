@@ -7,6 +7,7 @@ import {
   fetchUserPostsRequest,
   setInitialPostsState,
 } from "../../features/posts/postsSlice";
+import CardWrapper from "./CardWrapper";
 
 export default function Posts() {
   const dispatch = useDispatch();
@@ -14,32 +15,31 @@ export default function Posts() {
   const profile = useSelector((state) => state.user.profile);
 
   useEffect(() => {
-    if (data?.length === 0 && profile?.id){
+    if (data?.length === 0 && profile?.id) {
       dispatch(setInitialPostsState());
       dispatch(fetchUserPostsRequest({ userId: profile?.id, limit: 8 }));
     }
-  }, [dispatch,data?.length, profile?.id]);
+  }, [dispatch, data?.length, profile?.id]);
 
   const loadMorePosts = () => {
     dispatch(fetchUserPostsRequest({ userId: profile?.id, limit: 8 }));
   };
   return (
-    <Container maxWidth="md" sx={{
-       overflowY: "auto"
-    }}>
+    <Container
+      maxWidth="md"
+      sx={{
+        overflowY: "auto",
+      }}
+    >
       <InfiniteScroll
         dataLength={data.length}
         next={loadMorePosts}
         hasMore={hasMore}
         loader={loading.fetchUserPosts && <CircularProgress />}
-        endMessage={
-          <Typography textAlign='center'>
-            No more posts
-          </Typography>
-        }
+        endMessage={<Typography textAlign="center">No more posts</Typography>}
       >
         {data?.map((post) => (
-          <PostCard key={post.id} post={post} />
+          <CardWrapper {...post} />
         ))}
       </InfiniteScroll>
     </Container>

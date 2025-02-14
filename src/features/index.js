@@ -4,7 +4,8 @@ import userSaga from "./user/userSaga";
 import postsSaga from "./posts/postsSaga";
 import followersSaga from "./followers/followersSaga";
 import followeesSaga from "./followees/followeesSaga";
-import { commentsSaga } from "./comments/commentsSaga";
+import notificationsSaga from "./notifications/notificationsSaga";
+import commentsSaga from "./comments/commentsSaga";
 
 export default function* rootSaga() {
   yield all([
@@ -14,5 +15,6 @@ export default function* rootSaga() {
     followersSaga(),
     followeesSaga(),
     commentsSaga(),
+    notificationsSaga()
   ]);
 }
