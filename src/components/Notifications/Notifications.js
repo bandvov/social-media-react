@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -75,7 +76,6 @@ const Notifications = () => {
             <CircularProgress />
           </Box>
         }
-        scrollThreshold={0.9}
       >
         <List>
           {data.map((notification, index) => (
