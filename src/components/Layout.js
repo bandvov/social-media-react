@@ -32,6 +32,7 @@ import { toggleTheme } from "../features/theme/themeSlice";
 import { Link as RouterLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { success } from "../features/auth/authSlice";
+import Footer from "./Footer";
 
 const Layout = ({ children }) => {
   const { t, i18n } = useTranslation();
@@ -224,14 +225,7 @@ const Layout = ({ children }) => {
         }}
       >
         {children}
-        <Box
-          sx={{
-            p: 4,
-            backgroundColor: "primary.main",
-          }}
-        >
-          Footer
-        </Box>
+       <Footer/>
       </Box>
     </Box>
   );
