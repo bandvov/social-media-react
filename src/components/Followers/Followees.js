@@ -1,38 +1,24 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import InfiniteScroll from "react-infinite-scroll-component";
+import React from "react";
 import { Typography, CircularProgress, Container } from "@mui/material";
+import InfiniteScroll from "react-infinite-scroll-component";
 import FollowerCard from "./FollowerCard";
-import {
-  fetchFolloweesRequest,
-  removeFolloweeRequest,
-  setInitialFolloweesState,
-} from "../../features/followees/followeesSlice";
 import FollowerButton from "./FollowerButton";
+import useFollowData from "../../hooks/useFollowData"; // Import the custom hook
 
 const Followees = () => {
-  const dispatch = useDispatch();
-  const { data, loading, hasMore } = useSelector((state) => state.followees);
-  const user = useSelector((state) => state.auth.user);
   const profile = useSelector((state) => state.user.profile);
+  const authenticatedUser = useSelector((state) => state.auth.user);
 
-  useEffect(() => {
-    if (data?.length === 0 && profile?.id) {
-      dispatch(setInitialFolloweesState());
-      dispatch(fetchFolloweesRequest({ userId: profile?.id, limit: 4 }));
-    }
-  }, [dispatch, data, profile?.id]);
+  const { data, loading, hasMore, fetchMore } = useFollowData(
+    "followees",
+    profile?.id
+  );
 
-  const fetchMoreFollowees = () => {
-    if (!loading && hasMore) {
-      dispatch(fetchFolloweesRequest({ userId: profile?.id, limit: 4 }));
-    }
-  };
   return (
     <Container maxWidth="md">
       <InfiniteScroll
         dataLength={data?.length}
-        next={fetchMoreFollowees}
+        next={fetchMore}
         hasMore={hasMore}
         loader={loading.fetchFollowees && <CircularProgress />}
         endMessage={<Typography align="center">No more followees</Typography>}
@@ -42,7 +28,7 @@ const Followees = () => {
             key={followee.id}
             user={followee}
             action={
-              user.id !== followee.id && (
+              authenticatedUser.id !== followee.id && (
                 <FollowerButton
                   handler={() => {
                     dispatch(removeFolloweeRequest(followee.id));

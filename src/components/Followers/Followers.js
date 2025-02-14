@@ -1,62 +1,45 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import InfiniteScroll from "react-infinite-scroll-component";
+import React from "react";
 import { Typography, CircularProgress, Container } from "@mui/material";
-import {
-  fetchFollowersRequest,
-  removeFollowerRequest,
-  setInitialFollowersState,
-} from "../../features/followers/followersSlice";
+import InfiniteScroll from "react-infinite-scroll-component";
 import FollowerCard from "./FollowerCard";
 import FollowerButton from "./FollowerButton";
+import useFollowData from "../../hooks/useFollowData"; // Import the custom hook
 
 const Followers = () => {
-  const dispatch = useDispatch();
-  const { data, loading, hasMore } = useSelector((state) => state.followers);
-  const user = useSelector((state) => state.auth.user);
   const profile = useSelector((state) => state.user.profile);
+  const authenticatedUser = useSelector((state) => state.auth.user);
 
-  useEffect(() => {
-    if (data?.length === 0 && profile?.id) {
-      dispatch(setInitialFollowersState());
-      dispatch(fetchFollowersRequest({ userId: profile?.id, limit: 4 }));
-    }
-  }, [dispatch, data?.length, profile?.id]);
-
-  const fetchMoreFollowers = () => {
-    if (!loading && hasMore) {
-      dispatch(fetchFollowersRequest({ userId: profile?.id, limit: 4 }));
-    }
-  };
+  const { data, loading, hasMore, fetchMore } = useFollowData(
+    "followers",
+    profile?.id
+  );
 
   return (
     <Container maxWidth="md">
       <InfiniteScroll
         dataLength={data?.length}
-        next={fetchMoreFollowers}
+        next={fetchMore}
         hasMore={hasMore}
         loader={loading.fetchFollowers && <CircularProgress />}
         endMessage={<Typography align="center">No more followers</Typography>}
       >
-        {data?.map((follower) => {
-          return (
-            <FollowerCard
-              key={follower.id}
-              user={follower}
-              action={
-                user.id !== follower.id && (
-                  <FollowerButton
-                    handler={() => {
-                      dispatch(removeFollowerRequest(follower.id));
-                    }}
-                    followedByFollower={follower.followed_by_follower}
-                    followsFollower={follower.follows_follower}
-                  />
-                )
-              }
-            />
-          );
-        })}
+        {data?.map((follower) => (
+          <FollowerCard
+            key={follower.id}
+            user={follower}
+            action={
+              authenticatedUser.id !== follower.id && (
+                <FollowerButton
+                  handler={() => {
+                    dispatch(removeFollowerRequest(follower.id));
+                  }}
+                  followedByFollower={follower.followed_by_follower}
+                  followsFollower={follower.follows_follower}
+                />
+              )
+            }
+          />
+        ))}
       </InfiniteScroll>
     </Container>
   );
