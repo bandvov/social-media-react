@@ -1,18 +1,28 @@
 import React from "react";
-import { Typography, CircularProgress, Container } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Typography, CircularProgress, Container } from "@mui/material";
 import FollowerCard from "./FollowerCard";
 import FollowerButton from "./FollowerButton";
-import useFollowData from "../../hooks/useFollowData"; // Import the custom hook
+import {
+  fetchFolloweesRequest,
+  removeFolloweeRequest,
+  setInitialFolloweesState,
+} from "../../features/followees/followeesSlice";
+import useUserData from "../../hooks/useUserData";
 
 const Followees = () => {
   const profile = useSelector((state) => state.user.profile);
   const authenticatedUser = useSelector((state) => state.auth.user);
 
-  const { data, loading, hasMore, fetchMore } = useFollowData(
-    "followees",
-    profile?.id
-  );
+  const { data, loading, hasMore, fetchMore } = useUserData({
+    type: "followees",
+    userId: profile?.id,
+    actions: {
+      fetchRequest: () =>
+        fetchFolloweesRequest({ userId: profile?.id, limit: 4 }),
+      setInitialState: setInitialFolloweesState,
+    },
+  });
 
   return (
     <Container maxWidth="md">
@@ -20,7 +30,7 @@ const Followees = () => {
         dataLength={data?.length}
         next={fetchMore}
         hasMore={hasMore}
-        loader={loading.fetchFollowees && <CircularProgress />}
+        loader={loading?.fetchFollowees && <CircularProgress />}
         endMessage={<Typography align="center">No more followees</Typography>}
       >
         {data?.map((followee) => (
