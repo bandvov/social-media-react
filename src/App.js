@@ -16,6 +16,9 @@ import UserPage from "./pages/UserPage";
 import PostDetailPage from "./pages/PostDetailPage";
 import SearchPage from "./pages/SearchPage";
 import AdminUsersProfilePage from "./pages/AdminUsersProfilePage";
+import NotificationsPage from "./pages/NotificationsPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import TermsOfServicePage from "./pages/TermsOfServicePage";
 
 const App = () => {
   const darkMode = useSelector((state) => state.theme.darkMode);
@@ -25,15 +28,18 @@ const App = () => {
       <Router>
         <Layout>
           <Routes>
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms-of-service" element={<TermsOfServicePage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/admin/users" element={<AdminUsersProfilePage />} />
             <Route path="/registration" element={<RegistrationPage />} />
-            
+
             <Route path="/search" element={<SearchPage />} />
-            
+
             <Route path="/user/:userId" element={<UserPage />}>
               <Route path="posts" element={<PostsPage />} />
+              <Route path="notifications" element={<NotificationsPage />} />
               <Route path="posts/:postId" element={<PostDetailPage />} />
               <Route path="edit" element={<EditProfilePage />} />
               <Route path="followers" element={<FollowersPage />} />
