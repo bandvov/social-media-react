@@ -30,7 +30,7 @@ export function* handleUpdateUser(action) {
 export function* handleFetchUsers(action) {
   try {
     const response = yield call(fetchUsers, action.payload);
-    yield put(fetchUsersSuccess({ data: response.data, total: response.data.total }));
+    yield put(fetchUsersSuccess({ data: response.data.data, total: response.data.total }));
   } catch (error) {
     yield put(fetchUsersFailure(error.message));
   }
