@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const profileSlice = createSlice({
   name: "user",
   initialState: {
-    total:100,
+    total: 0,
     profile: {},
     data: [
       {
@@ -13,7 +13,7 @@ const profileSlice = createSlice({
         role: "user",
         created_at: new Date().toLocaleDateString(),
         updated_at: new Date().toLocaleDateString(),
-        status: "active"
+        status: "active",
       },
       {
         id: 2,
@@ -22,7 +22,7 @@ const profileSlice = createSlice({
         role: "user",
         created_at: new Date().toLocaleDateString(),
         updated_at: new Date().toLocaleDateString(),
-        status: "active"
+        status: "active",
       },
       {
         id: 3,
@@ -31,7 +31,7 @@ const profileSlice = createSlice({
         role: "admin",
         created_at: new Date().toLocaleDateString(),
         updated_at: new Date().toLocaleDateString(),
-        status: "active"
+        status: "active",
       },
     ],
     loading: {
@@ -77,7 +77,7 @@ const profileSlice = createSlice({
     },
     fetchUsersSuccess: (state, action) => {
       state.loading.fetchUsers = false;
-      state.users = action.payload.users;
+      state.data = [...state.data, ...action.payload.data];
       state.total = action.payload.total;
     },
     fetchUsersFailure: (state, action) => {

@@ -11,7 +11,7 @@ import {
 } from "./userSlice";
 import { fetchUserProfile, fetchUsers, updateUser } from "./userApi";
 
-function* handleFetchUserPfofile(action) {
+export function* handleFetchUserProfile(action) {
   try {
     const user = yield call(fetchUserProfile, action.payload);
     yield put(fetchUserProfileSuccess(user?.data));
@@ -19,7 +19,7 @@ function* handleFetchUserPfofile(action) {
     yield put(fetchUserProfileFailure(error.message));
   }
 }
-function* handleUpdateUser(action) {
+export function* handleUpdateUser(action) {
   try {
     yield call(updateUser, action.payload);
     yield put(fetchUserProfileRequest(action.payload.userId));
@@ -27,17 +27,17 @@ function* handleUpdateUser(action) {
     yield put(updateUserFailure(error.message));
   }
 }
-function* handleFetchUsers(action) {
+export function* handleFetchUsers(action) {
   try {
     const response = yield call(fetchUsers, action.payload);
-    yield put(fetchUsersSuccess({ users: response.data, total: response.data.total }));
+    yield put(fetchUsersSuccess({ data: response.data, total: response.data.total }));
   } catch (error) {
     yield put(fetchUsersFailure(error.message));
   }
 }
 
 export default function* userSaga() {
-  yield takeLatest(fetchUserProfileRequest.type, handleFetchUserPfofile);
+  yield takeLatest(fetchUserProfileRequest.type, handleFetchUserProfile);
   yield takeLatest(fetchUsersRequest.type, handleFetchUsers)
   yield takeLatest(updateUserRequest.type, handleUpdateUser);
 }
