@@ -34,8 +34,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "generate:certs": "openssl req -x509 -newkey rsa:4096 -keyout certs/key.pem -out certs/cert.pem -days 365 -nodes",
-    "coverage":"jest . -- --coverage"
-
+    "coverage": "jest . -- --coverage"
   },
   "eslintConfig": {
     "extends": [
@@ -64,6 +63,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@types/jest": "^29.5.14",
+    "axios-mock-adapter": "^2.1.0",
     "babel-loader": "^9.2.1",
     "dotenv-webpack": "^8.1.0",
     "error-overlay-webpack-plugin": "^1.1.1",
