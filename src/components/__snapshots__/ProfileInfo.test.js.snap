@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfileInfo Component renders user profile data correctly 1`] = `
+<div>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthMd css-u4uvlt-MuiContainer-root"
+  >
+    <div
+      class="MuiBox-root css-1fkybvm"
+    >
+      <div
+        class="MuiBox-root css-cmyu5s"
+      >
+        <div
+          class="MuiBox-root css-70qvj9"
+        >
+          <div
+            class="MuiAvatar-root MuiAvatar-circular css-yjdvsz-MuiAvatar-root"
+          >
+            <img
+              alt="test@example.com"
+              class="MuiAvatar-img css-1su80sj-MuiAvatar-img"
+              src="https://via.placeholder.com/64"
+            />
+          </div>
+          <div
+            class="MuiBox-root css-0"
+          >
+            <h6
+              class="MuiTypography-root MuiTypography-h6 css-vvtk0a-MuiTypography-root"
+            >
+              test@example.com
+            </h6>
+            <p
+              class="MuiTypography-root MuiTypography-body2 css-1yrr6qh-MuiTypography-root"
+            >
+              Joined: 
+              01.01.2024
+            </p>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root css-thflsa"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-1yrr6qh-MuiTypography-root"
+          >
+            <div>
+              <strong>
+                5
+              </strong>
+               Posts
+            </div>
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-1yrr6qh-MuiTypography-root"
+          >
+            <div>
+              <strong>
+                8
+              </strong>
+               Followers
+            </div>
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body2 css-1yrr6qh-MuiTypography-root"
+          >
+            <div>
+              <strong>
+                10
+              </strong>
+               Following
+            </div>
+          </p>
+        </div>
+        <button
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-aixiz9-MuiButtonBase-root-MuiIconButton-root"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root"
+            data-testid="MoreVertIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2m0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        class="MuiBox-root css-1ebnygn"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-4leci6-MuiTypography-root"
+        >
+          Bio: 
+          Test Bio
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
