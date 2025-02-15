@@ -7,7 +7,7 @@ import {
   logoutRequest,
 } from "./authSlice";
 import { login, Logout, registration } from "./authApi";
-function* handleLogin(action) {
+export function* handleLogin(action) {
   try {
     // clear error message
     const user = yield call(login, action.payload);
@@ -17,16 +17,14 @@ function* handleLogin(action) {
     yield put(failure(error.message));
   }
 }
-function* handleRegistration(action) {
+export function* handleRegistration(action) {
   try {
-    // clear error message
-    yield put(failure(""));
     yield call(registration, action.payload);
   } catch (error) {
     yield put(failure(error.message));
   }
 }
-function* handleLogout(action) {
+export function* handleLogout(action) {
   try {
     // clear error message
     yield call(Logout);

@@ -14,9 +14,11 @@ const authSlice = createSlice({
     },
     registrationRequest: (state) => {
       state.loading = true;
+      state.error = false;
     },
     logoutRequest: (state) => {
       state.loading = true;
+      state.error = false;
     },
     success: (state, action) => {
       state.loading = false;
