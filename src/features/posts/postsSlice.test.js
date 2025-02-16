@@ -76,10 +76,11 @@ describe("postsSlice", () => {
   });
 
   it("should handle createPostSuccess", () => {
-    const mockPayload = { content: "New post" };
+    const mockPayload = { id: 2, content: "New post" };
     const nextState = postsReducer(initialState, createPostSuccess(mockPayload));
     expect(nextState.loading.createPost).toBe(false);
-    expect(nextState.data).toEqual([mockPayload]);
+    // Ensure new post is added to the beginning of the array (unshift effect)
+    expect(nextState.data[0]).toEqual(mockPayload);
   });
 
   it("should handle createPostFailure", () => {

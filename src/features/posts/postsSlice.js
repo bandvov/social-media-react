@@ -66,7 +66,7 @@ const postsSlice = createSlice({
     },
     createPostSuccess: (state, action) => {
       state.loading.createPost = false;
-      state.data = state.data.unshift(action.payload);
+      state.data = [action.payload, ...state.data];
     },
     createPostFailure: (state, action) => {
       state.loading.createPost = false;
