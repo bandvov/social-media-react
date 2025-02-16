@@ -9,7 +9,7 @@ import {
 } from "./followersSlice";
 import { fetchFollowers, removeFollower } from "./followersApi";
 
-function* handleFetchFollowers(action) {
+export function* handleFetchFollowers(action) {
   try {
     const { page } = yield select((state) => state.followers);
     const res = yield call(fetchFollowers, { page, ...action.payload });
@@ -23,7 +23,7 @@ function* handleFetchFollowers(action) {
     yield put(fetchFollowersFailure(error.message));
   }
 }
-function* handleRemoveFollower(action) {
+export function* handleRemoveFollower(action) {
   try {
     yield call(removeFollower, action.payload);
     yield put(removeFollowerSuccess());
