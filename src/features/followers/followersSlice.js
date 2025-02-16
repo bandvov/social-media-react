@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+export const initialState = {
   data: [],
   page: 1,
   hasMore: true,
