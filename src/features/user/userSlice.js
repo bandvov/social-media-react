@@ -1,50 +1,51 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export const initialState = {
+  total: 0,
+  profile: {},
+  data: [
+    {
+      id: 1,
+      email: "dasdas@ad.asd",
+      username: "adsad",
+      role: "user",
+      created_at: new Date().toLocaleDateString(),
+      updated_at: new Date().toLocaleDateString(),
+      status: "active",
+    },
+    {
+      id: 2,
+      email: "dasdas2@ad.asd",
+      username: "adsad",
+      role: "user",
+      created_at: new Date().toLocaleDateString(),
+      updated_at: new Date().toLocaleDateString(),
+      status: "active",
+    },
+    {
+      id: 3,
+      email: "dasdas3@ad.asd",
+      username: "adsad",
+      role: "admin",
+      created_at: new Date().toLocaleDateString(),
+      updated_at: new Date().toLocaleDateString(),
+      status: "active",
+    },
+  ],
+  loading: {
+    fetchUserProfile: false,
+    fetchUsers: false,
+    updateUser: false,
+  },
+  errors: {
+    fetchUserProfile: false,
+    fetchUsers: false,
+    updateUser: false,
+  },
+};
 const profileSlice = createSlice({
   name: "user",
-  initialState: {
-    total: 0,
-    profile: {},
-    data: [
-      {
-        id: 1,
-        email: "dasdas@ad.asd",
-        username: "adsad",
-        role: "user",
-        created_at: new Date().toLocaleDateString(),
-        updated_at: new Date().toLocaleDateString(),
-        status: "active",
-      },
-      {
-        id: 2,
-        email: "dasdas2@ad.asd",
-        username: "adsad",
-        role: "user",
-        created_at: new Date().toLocaleDateString(),
-        updated_at: new Date().toLocaleDateString(),
-        status: "active",
-      },
-      {
-        id: 3,
-        email: "dasdas3@ad.asd",
-        username: "adsad",
-        role: "admin",
-        created_at: new Date().toLocaleDateString(),
-        updated_at: new Date().toLocaleDateString(),
-        status: "active",
-      },
-    ],
-    loading: {
-      fetchUserProfile: false,
-      fetchUsers: false,
-      updateUser: false,
-    },
-    errors: {
-      fetchUserProfile: false,
-      fetchUsers: false,
-      updateUser: false,
-    },
-  },
+  initialState: initialState,
   reducers: {
     setInitialUserState: (state) => {
       state.profile = {};
