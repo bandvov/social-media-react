@@ -8,7 +8,7 @@ jest.mock("../api", () => ({
   },
 }));
 
-describe("API functions", () => {
+describe("users API functions", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
