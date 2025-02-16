@@ -28,7 +28,7 @@ import {
   removeReaction,
 } from "./postsApi";
 
-function* handleFetchPosts(action) {
+export function* handleFetchPosts(action) {
   try {
     const { page } = yield select((state) => state.post);
     const res = yield call(fetchPosts, { page, ...action.payload });
@@ -43,7 +43,7 @@ function* handleFetchPosts(action) {
   }
 }
 
-function* handleCreatePost(action) {
+export function* handleCreatePost(action) {
   try {
     // clear error message
     yield call(createPost, action.payload);
@@ -52,7 +52,7 @@ function* handleCreatePost(action) {
     yield put(createPostFailure(error.message));
   }
 }
-function* handleRemovePost(action) {
+export function* handleRemovePost(action) {
   try {
     // clear error message
     yield call(removePost, action.payload);
@@ -62,7 +62,7 @@ function* handleRemovePost(action) {
   }
 }
 
-function* handleFetchUserPosts(action) {
+export function* handleFetchUserPosts(action) {
   try {
     const { page } = yield select((state) => state.post);
     const res = yield call(fetchUserPosts, { page, ...action.payload });
@@ -77,20 +77,20 @@ function* handleFetchUserPosts(action) {
   }
 }
 
-function* handleAddReaction(action) {
+export function* handleAddReaction(action) {
   try {
     yield call(addReaction, action.payload);
     yield put(addReactionRequest(action.payload));
   } catch (error) {
-    yield put(addReactionFailure());
+    yield put(addReactionFailure(error.message));
   }
 }
-function* handleRemoveReaction(action) {
+export function* handleRemoveReaction(action) {
   try {
     yield call(removeReaction, action.payload);
     yield put(removeReactionSuccess(action.payload));
   } catch (error) {
-    yield put(removeReactionFailure());
+    yield put(removeReactionFailure(error.message));
   }
 }
 
