@@ -1,13 +1,14 @@
 import { runSaga } from 'redux-saga';
-import { fetchFollowersRequest, fetchFollowersSuccess, fetchFollowersFailure } from './followersSlice';
-import { fetchFollowers } from './followersApi';
-import { handleFetchFollowers } from './followersSaga';
+import { fetchFollowersRequest, fetchFollowersSuccess, fetchFollowersFailure, removeFollowerRequest, removeFollowerSuccess, removeFollowerFailure } from './followersSlice';
+import { fetchFollowers,removeFollower } from './followersApi';
+import { handleFetchFollowers, handleRemoveFollower } from './followersSaga';
 
 // Mock the API call and select the state
 jest.mock('./followersApi');
 const mockFetchFollowers = fetchFollowers;
+const mockRemoveFollower = removeFollower;
 
-describe('handleFetchFollowers', () => {
+ describe('handleFetchFollowers', () => {
   it('should dispatch fetchFollowersSuccess when API call is successful', async () => {
     const mockResponse = { data: ['follower1', 'follower2'], hasMore: true };
     mockFetchFollowers.mockResolvedValue(mockResponse);
@@ -50,5 +51,52 @@ describe('handleFetchFollowers', () => {
     ).toPromise();
 
     expect(dispatched).toContainEqual(fetchFollowersFailure(mockError.message));
+  });
+});
+
+
+describe('handleRemoveFollower', () => {
+  it('should dispatch removeFollowerSuccess when API call is successful', async () => {
+    const mockResponse = { };
+    mockRemoveFollower.mockResolvedValue(mockResponse);
+
+    const dispatched = [];
+    const fakeStore = {
+      followers: { page: 1 },
+    };
+    const action = removeFollowerRequest({id:1});
+
+    await runSaga(
+      {
+        dispatch: (action) => dispatched.push(action),
+        getState: () => fakeStore,
+      },
+      handleRemoveFollower,
+      action
+    ).toPromise();
+
+    expect(dispatched).toContainEqual(removeFollowerSuccess());
+  });
+
+  it('should dispatch removeFollowerFailure when API call fails', async () => {
+    const mockError = new Error('API error');
+    mockRemoveFollower.mockRejectedValue(mockError);
+
+    const dispatched = [];
+    const fakeStore = {
+      followers: { page: 1 },
+    };
+    const action = removeFollowerRequest({ id:1 });
+
+    await runSaga(
+      {
+        dispatch: (action) => dispatched.push(action),
+        getState: () => fakeStore,
+      },
+      handleRemoveFollower,
+      action
+    ).toPromise();
+
+    expect(dispatched).toContainEqual(removeFollowerFailure(mockError.message));
   });
 });
